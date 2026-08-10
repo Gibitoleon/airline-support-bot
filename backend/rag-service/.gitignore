@@ -1,0 +1,5 @@
+# Ignore all data files
+data/*
+
+# Keep the data directory visible in Git
+!data/.gitkeep
