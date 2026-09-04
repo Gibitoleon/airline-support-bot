@@ -31,3 +31,14 @@ class MiniLMReranker(Reranker):
             chunk["reranked_rank"] = rank
 
         return reranked_chunks[:top_k]
+
+    def score_relevance(self, query, retrieved_chunks):
+
+        pairs = [[query, chunk["content"]] for chunk in retrieved_chunks]
+
+        scores = self.reranker.predict(pairs)
+
+        for chunk, score in zip(retrieved_chunks, scores):
+            chunk["relevance_score"] = float(score)
+
+        return retrieved_chunks
