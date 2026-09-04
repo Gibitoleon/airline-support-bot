@@ -1,3 +1,6 @@
-from .sentence_transformer import SentenceTransformerEmbeddingManager
+from .embedding_factory import EmbeddingFactory
 
-embedding_manager = SentenceTransformerEmbeddingManager("all-MiniLM-L6-v2")
+
+embedding_manager = EmbeddingFactory.create_embedding_model("gemini")
+
+##embedding_manager = EmbeddingFactory.create_embedding_model("all-MiniLM-L6-v2")

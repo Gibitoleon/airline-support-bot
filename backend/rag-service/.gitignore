@@ -3,3 +3,8 @@ data/*
 
 # Keep the data directory visible in Git
 !data/.gitkeep
+
+__pycache__/
+*.py[cod]cs
+
+.env
