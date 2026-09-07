@@ -1,5 +1,5 @@
 'use strict';
-
+// Migration script to create the 'queries' table in the database
 export default {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable('queries', {
