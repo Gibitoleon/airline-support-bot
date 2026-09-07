@@ -1,5 +1,3 @@
-'use strict';
-
 // Seeder script to populate the 'permissions' table with initial data
 export default {
     async up(queryInterface) {
