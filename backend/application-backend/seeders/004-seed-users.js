@@ -1,5 +1,3 @@
-
-'use strict';
 // Seeder script to populate the 'users' table with initial data
 import bcrypt from 'bcrypt';
 

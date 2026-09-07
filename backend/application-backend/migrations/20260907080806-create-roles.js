@@ -1,5 +1,6 @@
 
 'use strict';
+// Migration script to create the 'roles' table in the database
 export default {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable('roles', {
