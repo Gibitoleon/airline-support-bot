@@ -1,6 +1,6 @@
 
 'use strict';
-
+// Migration script to create the 'user_groups' table in the database
 export default {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable('user_groups', {

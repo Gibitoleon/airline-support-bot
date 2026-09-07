@@ -1,5 +1,5 @@
 'use strict';
-
+// Migration script to create the 'group_permissions' table in the database
 export default {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable('group_permissions', {
