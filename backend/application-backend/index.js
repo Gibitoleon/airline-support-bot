@@ -1,11 +1,12 @@
 import 'dotenv/config';
 import express from 'express';
-import sequelize from './database/database.config.js';
+import db from './models/index.js'; 
 import redisClient from './redis/redis.config.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+// server startup function to ensure Redis and database connections are established before starting the server
 async function startServer() {
     try {
 
@@ -14,7 +15,7 @@ async function startServer() {
 
        console.log('Redis connected successfully');
         // Test database connection
-        await sequelize.authenticate();
+        await db.sequelize.authenticate();
 
         console.log('Database connected successfully');
 
