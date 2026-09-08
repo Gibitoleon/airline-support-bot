@@ -2,9 +2,13 @@ import 'dotenv/config';
 import express from 'express';
 import db from './models/index.js'; 
 import redisClient from './redis/redis.config.js';
+import sessionService from './services/ExpressSessionService.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// middleware for session management using Redis
+app.use(sessionService.createSessionMiddleware(redisClient));
 
 // server startup function to ensure Redis and database connections are established before starting the server
 async function startServer() {
