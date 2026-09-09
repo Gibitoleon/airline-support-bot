@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt';
 import db from '../models/index.js';
+import AuthenticationError from '../errors/Authenticationerror.js';
+import { StatusCodes } from 'http-status-codes';
 const { User } = db;
 
  export default class AuthenticationService {
@@ -14,11 +16,11 @@ const { User } = db;
   static async authenticateUser(email, password) {
     const user = await this.findUser(email);
     if (!user) {
-      throw new Error('Invalid credentials');
+      throw new AuthenticationError('Invalid credentials', StatusCodes.UNAUTHORIZED);
     }
     const isMatch = await this.verifyPassword(user, password);
     if (!isMatch) {
-      throw new Error('Invalid credentials');
+      throw new AuthenticationError('Invalid credentials', StatusCodes.UNAUTHORIZED);
     }
     return user;
   }
