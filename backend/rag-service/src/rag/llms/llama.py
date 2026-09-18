@@ -20,7 +20,8 @@ Question:
 """
 
         response = self.client.chat.completions.create(
-            model="Llama-3.2-3B-Instruct",
+            ## model="Llama-3.2-3B-Instruct",
+            model="hugging-quants/Llama-3.2-3B-Instruct-Q4_K_M-GGUF:Q4_K_M",
             messages=[
                 {
                     "role": "system",
