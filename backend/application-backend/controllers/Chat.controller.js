@@ -4,7 +4,7 @@
    const { query } = req.body;
    const userId = req.user.userId;
    const sessionId = req.sessionID;
-   const conversationContext = req.session.conversationContext ?? [];
+   //const conversationContext = req.session.conversationContext ?? [];
    const createdQuery =await ChatService.createChatQuery(userId, query,sessionId);
    const {response} = await ChatService.sendChatQuery(createdQuery.question)
    
