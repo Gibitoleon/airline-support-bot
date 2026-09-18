@@ -89,10 +89,9 @@ export default class AuthorizationService {
             return [];
         }
 
-        return group.permissions.map(permission => ({
-            id: permission.id,
-            name: permission.name
-        }));
+        return group.permissions.map(permission => (
+             permission.name
+        ));
     }
 
 
