@@ -1,5 +1,8 @@
+
 import db from '../models/index.js';
 import { apiRequest } from "../utils/apiRequest.js";
+import ForbiddenError from '../errors/Forbiddenerror.js';
+import { StatusCodes } from 'http-status-codes';
 import "dotenv/config"
 
 const {Query} = db
@@ -14,17 +17,28 @@ export default class ChatService {
         });
     }
 
-   static async sendChatQuery(query) {
-    const responseData = await apiRequest({
-        url: "/retrieve",
-        method: "POST",
-        data: {
-            query
-        },
-        baseURL: process.env.RAG_SERVICE_URL
-    });
+    static async sendChatQuery(query, permissions) {
+    try {
+        const responseData = await apiRequest({
+            url: "/retrieve",
+            method: "POST",
+            data: {
+                query,
+                permissions
+            },
+            baseURL: process.env.RAG_SERVICE_URL
+        });
 
-    return responseData;
-}
+        return responseData;
+    } catch (error) {
+            if (error.response?.status === StatusCodes.FORBIDDEN) {
+                throw new ForbiddenError(
+                    "Not authorized to access this info."
+                );
+            }
+
+        throw error;
+    }
+    }
     static async getChats(userId) {}
 }

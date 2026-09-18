@@ -19,15 +19,26 @@ retrievalService = RetrievalService(
 @app.route("/retrieve", methods=["POST"])
 def retrieve():
     data = request.get_json()
-    query = data.get("query")
-    print(f"{query}")
-    topResult = retrievalService.retrieve(query)
-    print("topResult:", topResult)
-    print("type:", type(topResult))
-    content = topResult.get("content")
-    response = llm.generate_response(query=query, context=content)
 
-    return jsonify({"query": query, "response": response})
+    query = data.get("query")
+    permissions = data.get("permissions")
+
+    print(f"query: {query}")
+    print(f"permissions: {permissions}")
+
+    result = retrievalService.retrieve(query=query, permissions=permissions)
+
+    if result["status"] == "ACCESS_DENIED":
+        return jsonify(
+            {
+                "status": "ACCESS_DENIED",
+                "message": "Sorry, you do not have access to this information.",
+            }
+        ), 403
+
+    response = llm.generate_response(query=query, context=result["content"])
+
+    return jsonify({"status": "SUCCESS", "query": query, "response": response}), 200
 
 
 if __name__ == "__main__":

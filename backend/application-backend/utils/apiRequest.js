@@ -9,7 +9,7 @@ import axios from "axios";
     headers = {},
     withCredentials = true
 }) => {
-    try {
+    
         const response = await axios({
             url,
             method,
@@ -24,15 +24,7 @@ import axios from "axios";
 
         return response.data;
 
-    } catch (error) {
-        if (error.response) {
-            throw new Error(
-                error.response.data?.message || "Request failed"
-            );
-        }
-
-        throw error;
+    
     }
-};
 
 
