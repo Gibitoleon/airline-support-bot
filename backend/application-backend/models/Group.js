@@ -26,13 +26,20 @@ export default (sequelize) => {
     );
 
     Group.associate = (models) => {
-        Group.belongsToMany(models.Permission, {
-            through: models.GroupPermission,
-            foreignKey: "group_id",
-            otherKey: "permission_id",
-            as: "permissions"
-        });
-    };
+    Group.belongsToMany(models.User, {
+        through: models.UserGroup,
+        foreignKey: "group_id",
+        otherKey: "user_id",
+        as: "users"
+    });
+
+    Group.belongsToMany(models.Permission, {
+        through: models.GroupPermission,
+        foreignKey: "group_id",
+        otherKey: "permission_id",
+        as: "permissions"
+    });
+};
 
     return Group;
 };

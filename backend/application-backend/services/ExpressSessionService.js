@@ -27,13 +27,26 @@ export default class SessionService {
             }
         });
     }
-
-    static createAuthenticatedSession(req, user) {
-        req.session.userId = user.id;
-        req.session.roleId = user.role_id;
+    static hasNoSessionData(req) {
+        return (
+            req.session.userId === undefined &&
+            req.session.role === undefined &&
+            req.session.group === undefined &&
+            req.session.permissions === undefined
+        );
     }
+    static createAuthenticatedSession(req, user, authorization) {
+        req.session.userId = user.id;
+        req.session.role = authorization.role.name;
+        req.session.group = authorization.group?.name ?? null;
+        req.session.permissions = authorization.permissions;
+     }
     static createAnonymousSession(req) {
         req.session.userId = null;
+        req.session.role = "CUSTOMER";
+        req.session.group = null
+        req.session.permissions = ["VIEW_CUSTOMER_DOCUMENTS"]
+        
     }
    
     static destroySession(req) {

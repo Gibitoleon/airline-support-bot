@@ -36,10 +36,21 @@ export default (sequelize) => {
     );
     
     User.associate = (models) => {
-    User.hasMany(models.Query, {
-        foreignKey: 'user_id',
-        as: 'queries'
-    });
+    
+        User.belongsTo(models.Role, {
+            foreignKey: "role_id",
+            as: "role"
+        });
+        User.hasMany(models.Query, {
+            foreignKey: 'user_id',
+            as: 'queries'
+        });
+        User.belongsToMany(models.Group, {
+            through: models.UserGroup,
+            foreignKey: "user_id",
+            otherKey: "group_id",
+            as: "groups"
+        });
     };
 
     return User;
