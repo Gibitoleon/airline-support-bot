@@ -32,7 +32,10 @@ export default class SessionService {
         req.session.userId = user.id;
         req.session.roleId = user.role_id;
     }
-
+    static createAnonymousSession(req) {
+        req.session.userId = null;
+    }
+   
     static destroySession(req) {
         return new Promise((resolve, reject) => {
             req.session.destroy((error) => {

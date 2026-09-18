@@ -34,6 +34,13 @@ export default (sequelize) => {
             updatedAt: 'updated_at'
         }
     );
+    
+    User.associate = (models) => {
+    User.hasMany(models.Query, {
+        foreignKey: 'user_id',
+        as: 'queries'
+    });
+    };
 
     return User;
 };
