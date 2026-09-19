@@ -16,7 +16,21 @@ export default class ChatService {
             status: 'pending'
         });
     }
+   static async updateChatQuery(queryId, response) {
+    await Query.update(
+        {
+            response,
+            status: "answered"
+        },
+        {
+            where: {
+                id: queryId
+            }
+        }
+    );
 
+    return await Query.findByPk(queryId);
+}
     static async sendChatQuery(query, permissions) {
     try {
         const responseData = await apiRequest({
