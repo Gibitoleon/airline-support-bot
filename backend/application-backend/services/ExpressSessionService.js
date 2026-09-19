@@ -40,14 +40,27 @@ export default class SessionService {
         req.session.role = authorization.role.name;
         req.session.group = authorization.group?.name ?? null;
         req.session.permissions = authorization.permissions;
+        req.session.conversationContext = []
      }
     static createAnonymousSession(req) {
         req.session.userId = null;
         req.session.role = "CUSTOMER";
         req.session.group = null
         req.session.permissions = ["VIEW_CUSTOMER_DOCUMENTS"]
+        req.session.conversationContext = []
+
         
     }
+    static addConversationContext(req,context,question, response) {
+        context.push({
+            question,
+            response
+        });
+
+        req.session.conversationContext = context;
+    }
+
+    
    
     static destroySession(req) {
         return new Promise((resolve, reject) => {

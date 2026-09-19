@@ -10,7 +10,8 @@ export const getSessionData = (req, res, next) => {
         userId: req.session.userId,
         userRole: req.session.role,
         userGroup: req.session.group,
-        userPermissions: req.session.permissions
+        userPermissions: req.session.permissions,
+        conversationContext:req.session.conversationContext
     };
 
     next();
