@@ -8,7 +8,7 @@ export const getSessionData = (req, res, next) => {
 
     req.user = {
         userId: req.session.userId,
-        userRole: req.session.role,
+        role: req.session.role,
         userGroup: req.session.group,
         userPermissions: req.session.permissions,
         conversationContext:req.session.conversationContext

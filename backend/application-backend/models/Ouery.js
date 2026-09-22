@@ -54,6 +54,10 @@ export default (sequelize) => {
             foreignKey: 'user_id',
             as: 'user'
         });
+        Query.hasOne(models.Feedback, {
+            foreignKey: "query_id",
+            as: "feedback"
+        });
     };
 
     return Query;

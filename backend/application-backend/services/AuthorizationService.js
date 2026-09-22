@@ -74,6 +74,10 @@ export default class AuthorizationService {
         return user.role || null;
     }
 
+    static checkIsRole(role,user){
+     return role == this.getRole(user).name
+    }
+
 
     // Get the user's group
     static getPrimaryGroup(user) {
