@@ -4,7 +4,7 @@ import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 
 //import sequelize instance
-import sequelize from '../database/database.config.js';
+import sequelize from '../config/database/database.config.js';
 
 // Get the current files location and directory name
 const __filename = fileURLToPath(import.meta.url);
