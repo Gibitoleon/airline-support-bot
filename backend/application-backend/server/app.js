@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
-import redisClient from '../redis/redis.config.js';
+import redisClient from '../config/redis/redis.config.js';
 import sessionService from '../services/ExpressSessionService.js';
 import authRoutes from '../routes/Auth.routes.js';  
 import chatRoutes from '../routes/Chat.routes.js';
