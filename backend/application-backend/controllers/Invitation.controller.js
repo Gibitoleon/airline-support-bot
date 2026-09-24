@@ -1,6 +1,9 @@
+
 import InvitationService from "../services/InvitationService.js";
+import AuthenticationService from "../services/AuthenticationService.js";
 import { StatusCodes } from "http-status-codes";
-  const sendInvitation = async (req, res) => {
+
+const sendInvitation = async (req, res) => {
     const { email, role, name } = req.body;
 
     const invitation = await InvitationService.sendInvitation(
@@ -8,11 +11,36 @@ import { StatusCodes } from "http-status-codes";
         role,
         name
     );
-    
+
     return res.status(StatusCodes.CREATED).json({
         message: "Invitation created successfully",
         invitation
     });
-}
+};
 
-export {sendInvitation}
+const acceptInvitation = async (req, res) => {
+    const { token, password } = req.body;
+
+    const invitation =
+        await InvitationService.validateInvitation(token);
+
+    const user = await AuthenticationService.createUser({
+        email: invitation.email,
+        password,
+        roleId: invitation.role_id
+    });
+
+    await InvitationService.markInvitationAsAccepted(
+        invitation.id
+    );
+
+    return res.status(StatusCodes.CREATED).json({
+        message: "Staff account created successfully"
+    });
+};
+
+export {
+    sendInvitation,
+    acceptInvitation
+};
+

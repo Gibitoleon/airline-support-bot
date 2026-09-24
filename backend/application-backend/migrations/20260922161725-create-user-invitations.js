@@ -25,6 +25,11 @@ export default {
                 onUpdate: "CASCADE",
                 onDelete: "RESTRICT"
             },
+            token_selector: {
+                type: Sequelize.STRING,
+                allowNull: false,
+                unique: true
+             },
 
             token_hash: {
                 type: Sequelize.STRING,
