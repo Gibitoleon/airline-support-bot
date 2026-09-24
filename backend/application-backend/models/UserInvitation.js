@@ -19,7 +19,11 @@ export default (sequelize) => {
                 type: DataTypes.INTEGER,
                 allowNull: false
             },
-
+            token_selector: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: true
+            },
             token_hash: {
                 type: DataTypes.STRING,
                 allowNull: false

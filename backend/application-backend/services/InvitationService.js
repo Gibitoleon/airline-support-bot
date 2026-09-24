@@ -10,28 +10,33 @@ import {
 } from "../utils/token.js";
 
 import { generateInvitationUrl } from "../utils/url.js";
-import { calculateExpiry } from "../utils/date.js";
+import { calculateExpiry, isExpired } from "../utils/date.js";
 import { isValidEmail } from "../utils/email.js";
 
 const { UserInvitation } = db;
 
 export default class InvitationService {
 
-    static generateInvitationToken() {
-        return generateToken();
+    static generateInvitationSelector() {
+        return generateToken(16);
     }
 
-    static async hashInvitationToken(token) {
-        return await hashToken(token);
+    static generateInvitationSecret() {
+        return generateToken(32);
     }
 
-    static async verifyInvitationToken(token, hashedToken) {
-        return await verifyToken(token, hashedToken);
+    static async hashInvitationToken(secret) {
+        return await hashToken(secret);
+    }
+
+    static async verifyInvitationToken(secret, hashedToken) {
+        return await verifyToken(secret, hashedToken);
     }
 
     static async createUserInvitation(
         email,
         roleId,
+        tokenSelector,
         hashedToken,
         expiresAt,
         status = "PENDING"
@@ -39,47 +44,109 @@ export default class InvitationService {
         return await UserInvitation.create({
             email,
             role_id: roleId,
+            token_selector: tokenSelector,
             token_hash: hashedToken,
             expires_at: expiresAt,
             status
         });
     }
 
+    static splitInvitationToken(token) {
+        const [selector, secret] = token.split(".");
+
+        return {
+            selector,
+            secret
+        };
+    }
+
+    static async findInvitationByToken(token) {
+        const { selector } = this.splitInvitationToken(token);
+
+        return await UserInvitation.findOne({
+            where: {
+                token_selector: selector,
+                status: "PENDING"
+            }
+        });
+    }
+
+    static async validateInvitation(token) {
+        const { secret } = this.splitInvitationToken(token);
+
+        const invitation = await this.findInvitationByToken(token);
+
+        if (!invitation) {
+            throw new BadRequestError(
+                "Invalid or already accepted invitation"
+            );
+        }
+
+        if (isExpired(invitation.expires_at)) {
+            throw new BadRequestError(
+                "Invitation has expired"
+            );
+        }
+
+        const isValidToken = await this.verifyInvitationToken(
+            secret,
+            invitation.token_hash
+        );
+
+        if (!isValidToken) {
+            throw new BadRequestError(
+                "Invalid invitation token"
+            );
+        }
+
+        return invitation;
+    }
+
+    static async markInvitationAsAccepted(invitationId) {
+        return await UserInvitation.update(
+            {
+                status: "ACCEPTED"
+            },
+            {
+                where: {
+                    id: invitationId
+                }
+            }
+        );
+    }
+
     static async sendInvitation(email, roleName, name) {
 
-        // Validate the email before doing any invitation work.
         if (!isValidEmail(email)) {
             throw new BadRequestError("Invalid email address");
         }
 
-        // Resolve the role name to the actual Role record.
         const role = await RoleService.getRoleByName(roleName);
 
         if (!role) {
             throw new BadRequestError("Invalid role");
         }
 
-        // Generate the raw token that will be sent to the staff member.
-        const token = this.generateInvitationToken();
+        const selector = this.generateInvitationSelector();
 
-        // Store only the hashed version in the database.
-        const hashedToken = await this.hashInvitationToken(token);
+        const secret = this.generateInvitationSecret();
 
-        // Invitation remains valid for 24 hours.
+        const hashedToken = await this.hashInvitationToken(secret);
+
         const expiresAt = calculateExpiry(24);
 
-        // Save the invitation using the role's database ID.
         const invitation = await this.createUserInvitation(
             email,
             role.id,
+            selector,
             hashedToken,
             expiresAt
         );
 
-        // Generate the URL containing the raw token.
+        const token = `${selector}.${secret}`;
+
         const invitationLink = generateInvitationUrl(token);
 
-        // Queue the email for the worker to process.
         await emailQueue.add("send-invitation", {
             to: email,
             name,
