@@ -5,8 +5,9 @@ import sessionService from '../services/ExpressSessionService.js';
 import authRoutes from '../routes/Auth.routes.js';  
 import chatRoutes from '../routes/Chat.routes.js';
 import feedbackRoutes from "../routes/Feedback.routes.js"
+import invitationRoutes from "../routes/Invitation.routes.js"
 import errorHandler from "../middleware/Errorhandler.js";
-import  {getSessionData} from "../middleware/Session.middleware.js";
+import  {getCustomerSession,getSessionData} from "../middleware/Session.middleware.js";
 
 const app = express();
 
@@ -17,15 +18,18 @@ app.use(express.json());
 app.use(sessionService.createSessionMiddleware(redisClient));
 
 
-//authenitcation routes
+//authentication routes
 app.use('/api/v1/auth', authRoutes); 
 
 
 //chat routes
-app.use('/api/v1/chat', getSessionData, chatRoutes);
+app.use('/api/v1/chat', getCustomerSession, chatRoutes);
 
-//Feedback routes
-app.use('/api/v1/feedback',getSessionData,feedbackRoutes)
+//feedback routes
+app.use('/api/v1/feedback', getSessionData ,feedbackRoutes)
+
+// invitation routes
+app.use('/api/v1/invitation', getSessionData , invitationRoutes)
 
 // global error handler
 app.use(errorHandler); 

@@ -70,12 +70,12 @@ export default class AuthorizationService {
 
     // Get the user's role
     static getRole(user) {
-
+     console.log(typeof(user.role))
         return user.role || null;
     }
 
     static checkIsRole(role,user){
-     return role == this.getRole(user).name
+     return role == this.getRole(user)
     }
 
 
