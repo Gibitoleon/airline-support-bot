@@ -3,6 +3,16 @@ import { RedisStore } from 'connect-redis';
 import 'dotenv/config';
 
 export default class SessionService {
+    
+    static setUserFromSession(req) {
+        req.user = {
+            userId: req.session.userId,
+            role: req.session.role,
+            userGroup: req.session.group,
+            userPermissions: req.session.permissions,
+            conversationContext: req.session.conversationContext 
+        };
+    }
 
     static createSessionMiddleware(redisClient) {
         const store = new RedisStore({

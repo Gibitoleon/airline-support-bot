@@ -5,7 +5,7 @@ const generateToken = (bytes = 32) => {
     return crypto.randomBytes(bytes).toString("hex");
 };
 
-const hashToken = async (token) => {
+const hashToken = async (token) => { 
     return await bcrypt.hash(token, 10);
 };
 
