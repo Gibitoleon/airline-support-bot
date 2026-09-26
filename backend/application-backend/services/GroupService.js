@@ -18,6 +18,16 @@ export default class GroupService {
         });
     }
 
+    static async getGroupById(groupId) {
+        const group = await Group.findByPk(groupId);
+
+        if (!group) {
+            throw new NotFoundError("Group not found");
+        }
+
+        return group;
+    }
+    
     static async updateGroup(groupId, name) {
         const group = await Group.findByPk(groupId);
 
