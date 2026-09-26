@@ -17,7 +17,15 @@ const sendInvitation = async (req, res) => {
         invitation
     });
 };
+const getAllInvitations = async (req,res) => {
+     const invitations =  await InvitationService.getAllInvitations()
+      return res.status(StatusCodes.OK).json({
+        success:true,
+        message: "Invitations fetched successfully",
+        invitations
+    });
 
+}
 const acceptInvitation = async (req, res) => {
     const { token, password } = req.body;
 
@@ -41,6 +49,7 @@ const acceptInvitation = async (req, res) => {
 
 export {
     sendInvitation,
-    acceptInvitation
+    acceptInvitation,
+    getAllInvitations
 };
 
