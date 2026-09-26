@@ -155,4 +155,10 @@ export default class InvitationService {
 
         return invitation;
     }
+    
+    static async getAllInvitations() {
+    return await UserInvitation.findAll({
+        order: [["created_at", "DESC"]]
+    });
+}
 }
