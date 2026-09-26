@@ -7,6 +7,7 @@ import chatRoutes from '../routes/Chat.routes.js';
 import feedbackRoutes from "../routes/Feedback.routes.js"
 import invitationRoutes from "../routes/Invitation.routes.js"
 import groupRoutes from "../routes/Group.routes.js"
+import permissionRoutes from "../routes/Permission.routes.js"
 import errorHandler from "../middleware/Errorhandler.js";
 import { checkisAdmin } from '../middleware/Verification.guard.js';
 import  {getCustomerSession,getSessionData} from "../middleware/Session.middleware.js";
@@ -24,10 +25,10 @@ app.use(sessionService.createSessionMiddleware(redisClient));
 app.use('/api/v1/auth', authRoutes); 
 
 
-//chat routes
+// chat routes
 app.use('/api/v1/chat', getCustomerSession, chatRoutes);
 
-//feedback routes
+// feedback routes
 app.use('/api/v1/feedback', getSessionData ,feedbackRoutes)
 
 // invitation routes
@@ -35,6 +36,10 @@ app.use('/api/v1/invitation', getSessionData , invitationRoutes)
 
 // group routes
 app.use('/api/v1/group',getSessionData, checkisAdmin, groupRoutes)
+
+
+// permission routes
+app.use('/api/v1/permission',getSessionData,checkisAdmin,permissionRoutes)
 
 // global error handler
 app.use(errorHandler); 
