@@ -10,6 +10,18 @@ export default class PermissionService {
             name
         });
     }
+    
+    static async getPermissionById(permissionId) {
+    const permission = await Permission.findByPk(permissionId);
+
+    if (!permission) {
+        throw new NotFoundError("Permission not found");
+    }
+
+    return permission;
+}
+
+
 
     static async getAllPermissions() {
         return await Permission.findAll({
