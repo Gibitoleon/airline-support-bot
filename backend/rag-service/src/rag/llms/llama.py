@@ -12,12 +12,12 @@ class LlamaManager(LLMManager):
     def generate_response(self, query: str, context: str) -> str:
 
         prompt = f"""
-Context:
-{context}
+                    Context:
+                    {context}
 
-Question:
-{query}
-"""
+                    Question:
+                    {query}
+                    """
 
         response = self.client.chat.completions.create(
             ## model="Llama-3.2-3B-Instruct",
