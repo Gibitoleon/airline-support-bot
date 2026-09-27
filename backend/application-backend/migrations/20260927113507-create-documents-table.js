@@ -61,6 +61,16 @@ export default {
                 allowNull: false
             },
 
+            file_name: {
+                type: Sequelize.STRING,
+                allowNull: false
+            },
+
+            file_path: {
+                type: Sequelize.STRING,
+                allowNull: false
+            },
+
             created_at: {
                 type: Sequelize.DATE,
                 allowNull: false,
