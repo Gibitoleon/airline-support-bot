@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server/index.js",
-    "worker":"node workers/email.worker.js",
+    "worker": "node workers/email.worker.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "prisma skills sync || exit 0",
     "contract:emit": "prisma contract emit"
@@ -24,8 +24,10 @@
     "ejs": "^6.0.1",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
+    "form-data": "^4.0.6",
     "http-status-codes": "^2.3.0",
     "ioredis": "^6.0.0",
+    "multer": "^2.4.0",
     "nodemailer": "^10.0.10",
     "pg": "^8.23.0",
     "redis": "^6.2.1",

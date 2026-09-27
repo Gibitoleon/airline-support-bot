@@ -11,6 +11,7 @@ import groupRoutes from "../routes/Group.routes.js"
 import permissionRoutes from "../routes/Permission.routes.js"
 import group_permission_Routes from "../routes/Group_Permission.routes.js"
 import user_group_Routes from "../routes/User_Group.routes.js"
+import documentRoutes from "../routes/Document.routes.js"
 import errorHandler from "../middleware/Errorhandler.js";
 import { checkisAdmin } from '../middleware/Verification.guard.js';
 import  {getCustomerSession,getSessionData} from "../middleware/Session.middleware.js";
@@ -51,6 +52,9 @@ app.use('/api/v1/group',getSessionData,checkisAdmin, group_permission_Routes)
 
 // user_group routes
 app.use('/api/v1/usergroups',getSessionData,checkisAdmin,user_group_Routes)
+
+// document routes
+app.use('/api/v1/document',getSessionData,checkisAdmin,documentRoutes)
 
 // global error handler
 app.use(errorHandler); 

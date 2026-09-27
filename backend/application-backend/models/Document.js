@@ -60,7 +60,17 @@ export default (sequelize) => {
             language: {
                 type: DataTypes.STRING,
                 allowNull: false
-            }
+            },
+
+            file_name: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+
+           file_path: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
         },
         {
             tableName: "documents",

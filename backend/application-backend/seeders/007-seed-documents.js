@@ -15,7 +15,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "lounge_services.md",
+                file_path: "data/raw/airport_services/lounge_services.md"
             },
 
             {
@@ -28,7 +30,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "baggage_allowance.md",
+                file_path: "data/raw/baggage/baggage_allowance.md"
             },
 
             {
@@ -41,7 +45,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "baggage_restrictions.md",
+                file_path: "data/raw/baggage/baggage_restrictions.md"
             },
 
             {
@@ -54,7 +60,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "damaged_baggage.md",
+                file_path: "data/raw/baggage/damaged_baggage.md"
             },
 
             {
@@ -67,7 +75,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "hand_baggage.md",
+                file_path: "data/raw/baggage/hand_baggage.md"
             },
 
             {
@@ -80,7 +90,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "special_baggage.md",
+                file_path: "data/raw/baggage/special_baggage.md"
             },
 
             {
@@ -93,7 +105,9 @@ export default {
                 applicable_to: ["CUSTOMER_SERVICE_AGENT"],
                 access: "INTERNAL",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "baggage_service_desk_procedure.md",
+                file_path: "data/raw/baggage/baggage_service_desk_procedure.md"
             },
 
             {
@@ -106,7 +120,9 @@ export default {
                 applicable_to: ["CUSTOMER_SERVICE_AGENT"],
                 access: "INTERNAL",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "baggage_claims.md",
+                file_path: "data/raw/baggage/baggage_claims.md"
             },
 
             {
@@ -119,7 +135,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "book_flight.md",
+                file_path: "data/raw/bookings/book_flight.md"
             },
 
             {
@@ -132,7 +150,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "flight_upgrades.md",
+                file_path: "data/raw/bookings/flight_upgrades.md"
             },
 
             {
@@ -145,7 +165,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "payment_options.md",
+                file_path: "data/raw/bookings/payment_options.md"
             },
 
             {
@@ -158,7 +180,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "refunds.md",
+                file_path: "data/raw/bookings/refunds.md"
             },
 
             {
@@ -171,7 +195,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "seat_selection.md",
+                file_path: "data/raw/bookings/seat_selection.md"
             },
 
             {
@@ -184,7 +210,9 @@ export default {
                 applicable_to: ["CUSTOMER_SERVICE_AGENT"],
                 access: "INTERNAL",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "booking_handling_procedure.md",
+                file_path: "data/raw/bookings/booking_handling_procedure.md"
             },
 
             {
@@ -197,7 +225,9 @@ export default {
                 applicable_to: ["CUSTOMER_SERVICE_AGENT"],
                 access: "INTERNAL",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "booking_management.md",
+                file_path: "data/raw/bookings/booking_management.md"
             },
 
             {
@@ -210,7 +240,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "baggage_dropoff.md",
+                file_path: "data/raw/check_in/baggage_dropoff.md"
             },
 
             {
@@ -223,7 +255,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "check_in_process.md",
+                file_path: "data/raw/check_in/check_in_process.md"
             },
 
             {
@@ -236,7 +270,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "self-service_check_in.md",
+                file_path: "data/raw/check_in/self-service_check_in.md"
             },
 
             {
@@ -249,7 +285,9 @@ export default {
                 applicable_to: ["CUSTOMER_SERVICE_AGENT"],
                 access: "INTERNAL",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "board_in_pass_support_procedure.md",
+                file_path: "data/raw/check_in/board_in_pass_support_procedure.md"
             },
 
             {
@@ -262,7 +300,9 @@ export default {
                 applicable_to: ["CUSTOMER_SERVICE_AGENT"],
                 access: "INTERNAL",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "check_in_support_procedure.md",
+                file_path: "data/raw/check_in/check_in_support_procedure.md"
             },
 
             {
@@ -275,7 +315,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "flight_disruptions.md",
+                file_path: "data/raw/flight_disruptions/flight_disruptions.md"
             },
 
             {
@@ -288,7 +330,9 @@ export default {
                 applicable_to: ["CUSTOMER_SERVICE_AGENT"],
                 access: "INTERNAL",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "flight_disruptions_service_procedure.md",
+                file_path: "data/raw/flight_disruptions/flight_disruptions_service_procedure.md"
             },
 
             {
@@ -301,7 +345,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "disabled_passengers.md",
+                file_path: "data/raw/special_assistance/disabled_passengers.md"
             },
 
             {
@@ -314,7 +360,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "pregnancy_travel.md",
+                file_path: "data/raw/special_assistance/pregnancy_travel.md"
             },
 
             {
@@ -327,7 +375,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "infant_toddler_travel.md",
+                file_path: "data/raw/special_assistance/infant_toddler_travel.md"
             },
 
             {
@@ -340,7 +390,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "medical_needs.md",
+                file_path: "data/raw/special_assistance/medical_needs.md"
             },
 
             {
@@ -353,7 +405,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "unaccompanied_minor.md",
+                file_path: "data/raw/special_assistance/unaccompanied_minor.md"
             },
 
             {
@@ -366,7 +420,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "class_of_service.md",
+                file_path: "data/raw/travel_services/class_of_service.md"
             },
 
             {
@@ -379,7 +435,9 @@ export default {
                 applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
                 access: "PUBLIC",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "meals.md",
+                file_path: "data/raw/travel_services/meals.md"
             },
 
             {
@@ -392,7 +450,9 @@ export default {
                 applicable_to: ["CUSTOMER_SERVICE_AGENT"],
                 access: "INTERNAL",
                 status: "ACTIVE",
-                language: "EN"
+                language: "EN",
+                file_name: "travel_service_procedure.md",
+                file_path: "data/raw/travel_services/travel_service_procedure.md"
             }
         ];
 
@@ -444,5 +504,4 @@ export default {
         });
     }
 };
-
 
