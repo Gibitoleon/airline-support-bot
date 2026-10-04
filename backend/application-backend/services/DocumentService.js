@@ -42,7 +42,12 @@ export default class DocumentService {
 
         const response = await apiRequest({
             url: `/documents/${documentId}/content`,
-            method: "GET",
+            method: "POST",
+            data : {
+                domain: document.domain,
+                filename: document.file_name
+            },
+
             baseURL: process.env.RAG_SERVICE_URL
         });
 
@@ -187,10 +192,9 @@ export default class DocumentService {
         return document;
 
     } catch (error) {
-      console.log(error)
-        //throw new BadRequestError(
-       //     "Unable to upload document"
-       // );
+        throw new BadRequestError(
+            "Unable to upload document"
+        );
     }
 }
 

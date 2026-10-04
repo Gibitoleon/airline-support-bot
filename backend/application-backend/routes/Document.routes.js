@@ -2,7 +2,7 @@ import express from "express";
 import multer from "multer"
 
 import {
-    getAllDocuments,uploadDocument
+    getAllDocuments,uploadDocument,getDocumentContent
 } from "../controllers/Document.controller.js";
 
 const router = express.Router();
@@ -20,6 +20,11 @@ router.post(
     "/uploaddocuments",
     upload.single("file"),
     uploadDocument
+);
+
+router.get(
+    "/getdocumentcontent/:documentId",
+    getDocumentContent
 );
 
 export default router;
