@@ -25,7 +25,17 @@ const uploadDocument = async (req, res) => {
     });
 };
 
+const getDocumentContent = async (req, res) => {
+
+    const documentId = req.params.documentId;
+    const { document, content } = await DocumentService.getDocumentContent(documentId);
+
+    return res.status(StatusCodes.OK).json({
+        document,
+        content
+    });
+};
 
 export {
-    getAllDocuments,uploadDocument
+    getAllDocuments,uploadDocument,getDocumentContent
 };
