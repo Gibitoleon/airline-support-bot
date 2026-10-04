@@ -2,7 +2,7 @@ import express from "express";
 import multer from "multer"
 
 import {
-    getAllDocuments,uploadDocument,getDocumentContent
+    getAllDocuments,uploadDocument,getDocumentContent,deleteDocument
 } from "../controllers/Document.controller.js";
 
 const router = express.Router();
@@ -26,5 +26,8 @@ router.get(
     "/getdocumentcontent/:documentId",
     getDocumentContent
 );
-
+router.delete(
+    "/deletedocument/:documentId",
+    deleteDocument
+);
 export default router;

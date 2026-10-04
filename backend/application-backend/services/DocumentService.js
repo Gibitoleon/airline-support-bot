@@ -274,9 +274,13 @@ export default class DocumentService {
 
         try {
 
-            await apiRequest({
+          const responseData = await apiRequest({
                 url: `/documents/${documentId}`,
                 method: "DELETE",
+                data : {
+                    domain: document.domain,
+                    filename: document.file_name
+                },
                 baseURL: process.env.RAG_SERVICE_URL
             });
 
@@ -284,7 +288,7 @@ export default class DocumentService {
             await document.destroy();
 
             return {
-                message: "Document deleted successfully"
+                message: responseData.message
             };
 
         } catch (error) {
