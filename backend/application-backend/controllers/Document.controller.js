@@ -36,6 +36,15 @@ const getDocumentContent = async (req, res) => {
     });
 };
 
+const deleteDocument = async (req, res) => {
+
+    const documentId = req.params.documentId;
+    const response = await DocumentService.deleteDocument(documentId);
+    return res.status(StatusCodes.OK).json({
+        message: response.message
+    });
+
+}
 export {
-    getAllDocuments,uploadDocument,getDocumentContent
+    getAllDocuments,uploadDocument,getDocumentContent,deleteDocument
 };
