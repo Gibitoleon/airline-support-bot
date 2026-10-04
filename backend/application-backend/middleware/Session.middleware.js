@@ -15,7 +15,7 @@ import SessionService from "../services/ExpressSessionService.js";
         SessionService.createAnonymousSession(req);
     }
 
-    setUserFromSession(req);
+    SessionService.setUserFromSession(req);
 
     next();
 };

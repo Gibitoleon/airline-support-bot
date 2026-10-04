@@ -41,7 +41,7 @@ class Contextualizer:
         - Focus on the meaning and context of the TARGET CHUNK.
         """
 
-        return self.llm.generate_response(prompt)
+        return self.llm.generate_context(prompt)
 
     def enrich_chunk(self, chunk, previous_chunk=None, next_chunk=None):
         context = self.contextualize(chunk, previous_chunk, next_chunk)

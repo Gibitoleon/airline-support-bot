@@ -1,3 +1,5 @@
+from urllib import response
+
 from openai import OpenAI
 from .interface import LLMManager
 
@@ -9,7 +11,7 @@ class LlamaManager(LLMManager):
     def load_llm(self):
         return OpenAI(base_url="http://localhost:8080/v1", api_key="sk-no-key-required")
 
-    def generate_response(self, query: str, context: str) -> str:
+    def generate_response(self, query: str, context: str = "") -> str:
 
         prompt = f"""
                     Context:
@@ -48,6 +50,30 @@ class LlamaManager(LLMManager):
             ],
             temperature=0.1,
             max_tokens=512,
+        )
+
+        return response.choices[0].message.content
+
+    def generate_context(self, prompt: str) -> str:
+        response = self.client.chat.completions.create(
+            model="hugging-quants/Llama-3.2-3B-Instruct-Q4_K_M-GGUF:Q4_K_M",
+            messages=[
+                {
+                    "role": "system",
+                    "content": """
+                You are helping prepare document chunks for a
+                Retrieval-Augmented Generation (RAG) system.
+
+                Follow the instructions provided in the user prompt.
+
+                Do not invent or assume information.
+                Return only the requested contextual description.
+                """,
+                },
+                {"role": "user", "content": prompt},
+            ],
+            temperature=0.1,
+            max_tokens=256,
         )
 
         return response.choices[0].message.content
