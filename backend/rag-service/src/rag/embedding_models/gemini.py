@@ -74,17 +74,17 @@ class GeminiEmbeddingManager(EmbeddingManager):
 
         return all_embeddings
 
-    def create_query_embedding(self, queries):
-        contents = [types.Content(parts=[types.Part(text=query)]) for query in queries]
+    def create_query_embedding(self, query):
+        content = types.Content(parts=[types.Part(text=query)])
         response = self.client.models.embed_content(
             model="gemini-embedding-2",
-            contents=contents,
+            contents=content,
         )
-        ### return response.embeddings[0].values
+        return response.embeddings[0].values
         """
         Embed a list of query strings.
         Returns embeddings in the same order as the input list.
-        """
+        
         all_embeddings = []
         batch_size = 100
 
@@ -111,3 +111,4 @@ class GeminiEmbeddingManager(EmbeddingManager):
                 time.sleep(65)
 
         return all_embeddings
+            """

@@ -1,15 +1,14 @@
 import json
 
-from flask import Flask, request, jsonify
-
+from flask import Flask, jsonify, request
+from queues.ingestion_queue import ingestion_queue
 from rag.embedding_models.embedding_factory import EmbeddingFactory
-from rag.rerankers.cross_encoder import MiniLMReranker
-from rag.vector_store.chroma_store import ChromaVectorStore
-from rag.retrieval import RetrievalService
 from rag.llms.llama import LlamaManager
-
+from rag.rerankers.cross_encoder import MiniLMReranker
+from rag.retrieval import RetrievalService
+from rag.vector_store.chroma_store import ChromaVectorStore
 from services.documentservice import DocumentService
-
+from jobs.document_jobs import ingest_document
 
 app = Flask(__name__)
 
@@ -74,6 +73,7 @@ def upload_document():
     }
 
     result = DocumentService.upload_document(file, document_metadata)
+    ingestion_queue.enqueue(ingest_document, file_path=result["file_path"])
 
     return jsonify(result), 201
 
