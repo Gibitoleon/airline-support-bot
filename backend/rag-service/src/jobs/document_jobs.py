@@ -29,3 +29,11 @@ def ingest_document(file_path):
     print("[INGESTION] Document ingestion completed successfully.")
 
     return result
+
+
+def delete_document_vectors(document_id):
+    print(f"[DELETION] Deleting vectors for document: {document_id}")
+
+    vector_store.delete_by_document_id(document_id)
+
+    print(f"[DELETION] Successfully deleted vectors for document: {document_id}")

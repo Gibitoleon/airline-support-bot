@@ -1,6 +1,9 @@
 import json
 
 from flask import Flask, jsonify, request
+from jobs.document_jobs import ingest_document
+from jobs.document_jobs import delete_document_vectors
+from queues.deletion_queue import deletion_queue
 from queues.ingestion_queue import ingestion_queue
 from rag.embedding_models.embedding_factory import EmbeddingFactory
 from rag.llms.llama import LlamaManager
@@ -8,7 +11,6 @@ from rag.rerankers.cross_encoder import MiniLMReranker
 from rag.retrieval import RetrievalService
 from rag.vector_store.chroma_store import ChromaVectorStore
 from services.documentservice import DocumentService
-from jobs.document_jobs import ingest_document
 
 app = Flask(__name__)
 
@@ -101,6 +103,8 @@ def delete_document(documentId):
     filename = data.get("filename")
     try:
         DocumentService._delete_document(domain, filename)
+        # Enqueue the deletion of document vectors
+        deletion_queue.enqueue(delete_document_vectors, document_id=documentId)
     except FileNotFoundError:
         return jsonify({"status": "NOT_FOUND", "message": "Document not found"}), 404
 

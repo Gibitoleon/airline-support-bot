@@ -28,3 +28,6 @@ class ChromaVectorStore:
         )
 
         return results
+
+    def delete_by_document_id(self, document_id):
+        self.collection.delete(where={"document_id": document_id})
