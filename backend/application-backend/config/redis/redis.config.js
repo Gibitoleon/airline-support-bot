@@ -10,7 +10,7 @@ const client = createClient({
 });
 client.on('error', (err) => {
             console.error('Redis Client Error', err);
-            process.exit(1);
+            
         });
         
 export default client;

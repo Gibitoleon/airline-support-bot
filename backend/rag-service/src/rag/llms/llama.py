@@ -1,7 +1,6 @@
-from urllib import response
-
 from openai import OpenAI
 from .interface import LLMManager
+from .prompts.prompts import Prompts
 
 
 class LlamaManager(LLMManager):
@@ -11,69 +10,58 @@ class LlamaManager(LLMManager):
     def load_llm(self):
         return OpenAI(base_url="http://localhost:8080/v1", api_key="sk-no-key-required")
 
-    def generate_response(self, query: str, context: str = "") -> str:
+    def get_prompt(self, name: str) -> str:
+        prompt = next(prompt for prompt in Prompts if prompt["name"] == name)
 
-        prompt = f"""
-                    Context:
-                    {context}
+        return prompt["template"]
 
-                    Question:
-                    {query}
-                    """
+    def generate_response(
+        self, query: str, context: str = "", prompt_name: str = "response_prompt"
+    ) -> str:
+
+        template = self.get_prompt(prompt_name)
+
+        prompt = template.format(query=query, context=context)
 
         response = self.client.chat.completions.create(
-            ## model="Llama-3.2-3B-Instruct",
             model="hugging-quants/Llama-3.2-3B-Instruct-Q4_K_M-GGUF:Q4_K_M",
-            messages=[
-                {
-                    "role": "system",
-                    "content": """
-                    You are a customer and staff support assistant for Kenya Airways.
-
-                    Your purpose is to provide clear and helpful answers to customer
-                    and staff questions using the information provided in the context.
-
-                    Use only the provided context when answering.
-                    Do not invent or assume information.
-
-                    Never refer to information as "the TARGET CHUNK", "the context",
-                    or "the retrieved information".
-
-                    If the context does not contain enough information to answer the
-                    question, clearly state that the information is not available.
-
-                    Respond directly to the user's question in a professional and
-                    concise manner.
-                    """,
-                },
-                {"role": "user", "content": prompt},
-            ],
+            messages=[{"role": "user", "content": prompt}],
             temperature=0.1,
             max_tokens=512,
         )
 
         return response.choices[0].message.content
 
-    def generate_context(self, prompt: str) -> str:
+    def generate_context(
+        self, title: str, section: str, previous: str, chunk: str, next: str
+    ) -> str:
+
+        template = self.get_prompt("contextualizer_prompt")
+
+        prompt = template.format(
+            title=title, section=section, previous=previous, chunk=chunk, next=next
+        )
+
         response = self.client.chat.completions.create(
             model="hugging-quants/Llama-3.2-3B-Instruct-Q4_K_M-GGUF:Q4_K_M",
-            messages=[
-                {
-                    "role": "system",
-                    "content": """
-                You are helping prepare document chunks for a
-                Retrieval-Augmented Generation (RAG) system.
-
-                Follow the instructions provided in the user prompt.
-
-                Do not invent or assume information.
-                Return only the requested contextual description.
-                """,
-                },
-                {"role": "user", "content": prompt},
-            ],
+            messages=[{"role": "user", "content": prompt}],
             temperature=0.1,
             max_tokens=256,
         )
 
         return response.choices[0].message.content
+
+    def route_query(self, query: str) -> str:
+
+        template = self.get_prompt("route_prompt")
+
+        prompt = template.format(query=query)
+
+        response = self.client.chat.completions.create(
+            model="hugging-quants/Llama-3.2-3B-Instruct-Q4_K_M-GGUF:Q4_K_M",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.0,
+            max_tokens=5,
+        )
+
+        return response.choices[0].message.content.strip()
