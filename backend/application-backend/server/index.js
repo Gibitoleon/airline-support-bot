@@ -4,7 +4,7 @@ import db from '../models/index.js';
 import redisClient from '../config/redis/redis.config.js'
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT ;
 
  
 
@@ -28,7 +28,7 @@ async function startServer() {
 
     } catch (error) {
         console.error('Server startup failed:', error);
-        process.exit(1);
+        
     }
 }
 

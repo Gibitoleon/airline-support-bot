@@ -36,6 +36,15 @@ def retrieve():
     query = data.get("query")
     permissions = data.get("permissions")
 
+    queryroute = llm.route_query(query=query)
+    print(f"queryroute: {queryroute}")
+    if queryroute == "DIRECT":
+        print(f"passed here: {query}")
+        response = llm.generate_response(
+            query=query, context="", prompt_name="direct_response_prompt"
+        )
+        return jsonify({"status": "SUCCESS", "query": query, "response": response}), 200
+
     print(f"query: {query}")
     print(f"permissions: {permissions}")
 
@@ -49,7 +58,9 @@ def retrieve():
             }
         ), 403
 
-    response = llm.generate_response(query=query, context=result["content"])
+    response = llm.generate_response(
+        query=query, context=result["content"], prompt_name="response_prompt"
+    )
 
     return jsonify({"status": "SUCCESS", "query": query, "response": response}), 200
 
@@ -114,4 +125,4 @@ def delete_document(documentId):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001)
+    app.run(host="0.0.0.0", port=5001, debug=True)

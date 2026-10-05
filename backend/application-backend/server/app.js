@@ -15,6 +15,7 @@ import documentRoutes from "../routes/Document.routes.js"
 import errorHandler from "../middleware/Errorhandler.js";
 import { checkisAdmin } from '../middleware/Verification.guard.js';
 import  {getCustomerSession,getSessionData} from "../middleware/Session.middleware.js";
+import  dashboardRoutes from "../routes/Dashboard.routes.js"
 
 const app = express();
 
@@ -54,7 +55,10 @@ app.use('/api/v1/group',getSessionData,checkisAdmin, group_permission_Routes)
 app.use('/api/v1/usergroups',getSessionData,checkisAdmin,user_group_Routes)
 
 // document routes
-app.use('/api/v1/document',getSessionData,checkisAdmin,documentRoutes)
+app.use('/api/v1/document',getSessionData, checkisAdmin, documentRoutes)
+
+// dashboard routes
+app.use('/api/v1/dashboard', getSessionData, checkisAdmin, dashboardRoutes)
 
 // global error handler
 app.use(errorHandler); 
