@@ -1,7 +1,7 @@
 import db from "../models/index.js";
 import NotFoundError from "../errors/NotFounderror.js";
 
-const { User } = db;
+const { User, Role } = db;
 
 export default class UserService {
 
@@ -14,4 +14,24 @@ export default class UserService {
 
         return user;
     }
+
+    static async getStaffUsers() {
+    return await User.findAll({
+        attributes: [
+            "id",
+            "email",
+            "created_at"
+        ],
+        include: [
+            {
+                model: Role,
+                as: "role",
+                attributes: ["id", "name"],
+                where: {
+                    name: "STAFF"
+                }
+            }
+        ]
+    });
+}
 }

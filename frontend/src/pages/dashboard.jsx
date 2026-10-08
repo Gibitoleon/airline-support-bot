@@ -17,7 +17,7 @@ import {
   Tooltip,
 } from "chart.js";
 
-import { dashboardData } from "../../data/navigation.data.js";
+import { dashboardData } from "../../data/data.js";
 import StatCard from "../components/dashboard/statcard.jsx";
 import QueryVolumeChart from "../components/charts/QueryVolumeChart.jsx"
 import  DoughnutChart  from "../components/charts/DoughnutChart.jsx";
