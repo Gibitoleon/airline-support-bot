@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Menu } from "lucide-react";
 import Sidebar from "./components/sidebar.jsx";
 import Dashboard from "./pages/dashboard.jsx";
+import Users from "./pages/users.jsx";
 import "./App.css";
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
 
         <main className="relative flex-1 min-w-0 p-6 lg:p-10">
           <div className="mx-auto w-full max-w-[1600px]">
-           <Dashboard/>
+           <Users/>
           </div>
         </main>
       </div>

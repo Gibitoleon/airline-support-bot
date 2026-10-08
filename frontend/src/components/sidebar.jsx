@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-import { navigationItems } from "../../data/navigation.data.js";
+import { navigationItems } from "../../data/data.js";
 import logo from "../assets/images/logos/Kenya-Airways-Logo.svg";
 
 const Sidebar = ({ isOpen, onClose, onLogout }) => {
@@ -51,7 +51,7 @@ const Sidebar = ({ isOpen, onClose, onLogout }) => {
         </button>
 
         {/* Logo */}
-        <div className="relative h-16 overflow-hidden">
+        <div className="relative h-16 mb-4 overflow-hidden">
           <img
             src={logo}
             alt="Kenya Airways"
