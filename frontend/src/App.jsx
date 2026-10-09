@@ -12,7 +12,7 @@ import Landing from "./pages/Landing.jsx";
 import "./App.css";
 
 function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState("Hello");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = () => {
@@ -52,7 +52,7 @@ function App() {
 
         <main className="relative flex-1 min-w-0 p-6 lg:p-10">
           <div className="mx-auto w-full max-w-[1600px]">
-           <Dashboard/>
+           <Feedback/>
           </div>
         </main>
       </div>
