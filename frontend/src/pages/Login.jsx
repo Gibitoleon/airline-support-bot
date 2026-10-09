@@ -70,12 +70,12 @@ const Login = ({ onLoginSuccess }) => {
       {/* ---------- Form panel (RIGHT) ---------- */}
       <div className="flex flex-1 items-center justify-center px-6 py-12 sm:px-10 lg:px-12 xl:px-16">
         <div className="w-full max-w-md">
-          {/* Logo — crop trick for a bigger wordmark */}
-          <div className="relative mb-14 h-14 w-[240px] overflow-hidden sm:h-16 sm:w-[280px]">
+          {/* Logo — same size and crop as sidebar */}
+          <div className="relative mb-10 h-16 w-[240px] overflow-hidden">
             <img
               src={logo}
               alt="Kenya Airways"
-              className="absolute left-0 top-0 h-24 w-auto max-w-none object-contain sm:h-28"
+              className="absolute left-0 top-0 h-28 w-auto max-w-none object-contain"
             />
           </div>
 
@@ -101,6 +101,7 @@ const Login = ({ onLoginSuccess }) => {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Email */}
             <div className="space-y-2">
               <label
                 htmlFor="login-email"
@@ -124,6 +125,7 @@ const Login = ({ onLoginSuccess }) => {
               </div>
             </div>
 
+            {/* Password */}
             <div className="space-y-2">
               <div className="flex items-center justify-between gap-3">
                 <label
@@ -169,6 +171,7 @@ const Login = ({ onLoginSuccess }) => {
               </div>
             </div>
 
+            {/* Submit */}
             <button
               type="submit"
               disabled={isLoading}
@@ -185,6 +188,7 @@ const Login = ({ onLoginSuccess }) => {
             </button>
           </form>
 
+          {/* Footer hint */}
           <p className="mt-8 text-center text-xs text-muted">
             Customers don&apos;t need an account — just start chatting on the{" "}
             <a

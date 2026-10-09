@@ -67,18 +67,23 @@ export default class UserGroupService {
     }
 
     static async getGroupUsers(groupId) {
-        await GroupService.getGroupById(groupId);
+    const group = await GroupService.getGroupById(groupId);
 
-        return await UserGroup.findAll({
-            where: {
-                group_id: groupId
-            },
-            include: [
-                {
-                    model: User,
-                    as: "user"
-                }
-            ]
-        });
+    const users = await UserGroup.findAll({
+        where: {
+            group_id: groupId
+        },
+        include: [
+            {
+                model: User,
+                as: "user"
+            }
+        ]
+    });
+
+    return {
+        group_name: group.name,
+        users
+    };
     }
 }

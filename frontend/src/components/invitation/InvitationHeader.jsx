@@ -1,13 +1,9 @@
-import { Plus} from "lucide-react";
+import { Plus } from "lucide-react";
 const InvitationHeader = ({ onCreate }) => (
-  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-    <div className="min-w-0">
-      <h2 className="text-base font-semibold text-text">Invitations</h2>
-      <p className="mt-1 text-sm text-muted">
-        Manage invitations sent to users. Invitations expire 7 days after
-        they&apos;re sent.
-      </p>
-    </div>
+  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <p className="text-sm text-muted">
+      Invitations expire 7 days after they&apos;re sent.
+    </p>
 
     <button
       type="button"
@@ -19,5 +15,4 @@ const InvitationHeader = ({ onCreate }) => (
     </button>
   </div>
 );
-
-export default InvitationHeader;
+export default InvitationHeader
