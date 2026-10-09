@@ -1,5 +1,4 @@
-import {useState} from "react";
-import UserHeader from "./UserHeader.jsx";
+import { useState } from "react";
 import UsersList from "./UsersList.jsx";
 import UserDetail from "./UserDetail.jsx";
 import { usersData, userGroupsData } from "../../../data/data.js";
@@ -22,7 +21,7 @@ const UsersPanel = () => {
     if (!group || !selectedUser) return;
 
     const now = new Date().toISOString();
-    
+
     setUserGroups((prev) => [
       ...prev,
       {
@@ -57,14 +56,12 @@ const UsersPanel = () => {
   }
 
   return (
-    <div className="space-y-5 sm:space-y-6">
-      <UserHeader />
-      <UsersList
-        users={usersData}
-        groups={userGroups}
-        onSelect={setSelectedUserId}
-      />
-    </div>
+    <UsersList
+      users={usersData}
+      groups={userGroups}
+      onSelect={setSelectedUserId}
+    />
   );
 };
- export default UsersPanel;
+
+export default UsersPanel;

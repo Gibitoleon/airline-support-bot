@@ -4,7 +4,8 @@ import {
     FileText,
     UsersRound,
     ShieldCheck,
-    LogOut
+    LogOut,
+    MessageSquareQuote
 } from "lucide-react";
 
  const navigationItems = [
@@ -32,6 +33,11 @@ import {
         label: "Permissions",
         to: "/permissions",
         icon: ShieldCheck
+    },
+    {
+        label: "Feedback",
+        to: "/feedback",
+        icon: MessageSquareQuote
     },
     {
         label: "Logout",
@@ -597,4 +603,146 @@ import {
         }
     ]
 };
-export {navigationItems, dashboardData , invitationData, usersData , userGroupsData};
+
+
+const documentMetadata = [
+  {
+    id: 1,
+    document_id: "KQ-AIRPORT-001",
+    title: "Airport Lounge Services",
+    origin: "KENYA AIRWAYS",
+    domain: "AIRPORT_SERVICES",
+    category: "LOUNGE_SERVICES",
+    document_type: "POLICY",
+    applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
+    access: "PUBLIC",
+    status: "ACTIVE",
+    language: "EN",
+    file_name: "lounge_services.md",
+    file_path: "data/raw/airport_services/lounge_services.md",
+    created_at: "2026-09-27T12:51:33.269Z",
+    updated_at: "2026-09-27T12:51:33.269Z"
+  },
+  {
+    id: 2,
+    document_id: "KQ-BAG-001",
+    title: "Baggage Allowance",
+    origin: "KENYA AIRWAYS",
+    domain: "BAGGAGE",
+    category: "BAGGAGE_ALLOWANCE",
+    document_type: "POLICY",
+    applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
+    access: "PUBLIC",
+    status: "ACTIVE",
+    language: "EN",
+    file_name: "baggage_allowance.md",
+    file_path: "data/raw/baggage/baggage_allowance.md",
+    created_at: "2026-09-27T12:51:33.269Z",
+    updated_at: "2026-09-27T12:51:33.269Z"
+  },
+  {
+    id: 3,
+    document_id: "KQ-BAG-006",
+    title: "Baggage Service Desk Procedure",
+    origin: "SYNTHETIC",
+    domain: "BAGGAGE",
+    category: "BAGGAGE_SERVICE_DESK_PROCEDURE",
+    document_type: "PROCEDURE",
+    applicable_to: ["CUSTOMER_SERVICE_AGENT"],
+    access: "INTERNAL",
+    status: "ACTIVE",
+    language: "EN",
+    file_name: "baggage_service_desk_procedure.md",
+    file_path: "data/raw/baggage/baggage_service_desk_procedure.md",
+    created_at: "2026-09-27T12:51:33.269Z",
+    updated_at: "2026-09-27T12:51:33.269Z"
+  },
+  {
+    id: 4,
+    document_id: "KQ-BOOK-004",
+    title: "Refund Policy",
+    origin: "KENYA AIRWAYS",
+    domain: "BOOKING",
+    category: "REFUNDS",
+    document_type: "POLICY",
+    applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
+    access: "PUBLIC",
+    status: "ACTIVE",
+    language: "EN",
+    file_name: "refunds.md",
+    file_path: "data/raw/bookings/refunds.md",
+    created_at: "2026-09-27T12:51:33.269Z",
+    updated_at: "2026-09-27T12:51:33.269Z"
+  },
+  {
+    id: 5,
+    document_id: "KQ-DISR-002",
+    title: "Customer Service Procedure for Flight Disruptions",
+    origin: "SYNTHETIC",
+    domain: "FLIGHT_DISRUPTIONS",
+    category: "DISRUPTION_SUPPORT",
+    document_type: "PROCEDURE",
+    applicable_to: ["CUSTOMER_SERVICE_AGENT"],
+    access: "INTERNAL",
+    status: "ACTIVE",
+    language: "EN",
+    file_name: "flight_disruptions_service_procedure.md",
+    file_path: "data/raw/flight_disruptions/flight_disruptions_service_procedure.md",
+    created_at: "2026-09-27T12:51:33.269Z",
+    updated_at: "2026-09-27T12:51:33.269Z"
+  },
+  {
+    id: 6,
+    document_id: "KQ-CHECK-002",
+    title: "Check-in",
+    origin: "KENYA AIRWAYS",
+    domain: "CHECK_IN",
+    category: "CHECK_IN_PROCESS",
+    document_type: "PROCEDURE",
+    applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
+    access: "PUBLIC",
+    status: "ACTIVE",
+    language: "EN",
+    file_name: "check_in_process.md",
+    file_path: "data/raw/check_in/check_in_process.md",
+    created_at: "2026-09-27T12:51:33.269Z",
+    updated_at: "2026-09-27T12:51:33.269Z"
+  },
+  {
+    id: 7,
+    document_id: "KQ-ASSIST-001",
+    title: "Passengers with Reduced Mobility",
+    origin: "KENYA AIRWAYS",
+    domain: "SPECIAL_ASSISTANCE",
+    category: "DISABLED_PASSENGERS",
+    document_type: "POLICY",
+    applicable_to: ["CUSTOMER", "CUSTOMER_SERVICE_AGENT"],
+    access: "PUBLIC",
+    status: "ACTIVE",
+    language: "EN",
+    file_name: "disabled_passengers.md",
+    file_path: "data/raw/special_assistance/disabled_passengers.md",
+    created_at: "2026-09-27T12:51:33.269Z",
+    updated_at: "2026-09-27T12:51:33.269Z"
+  },
+  {
+    id: 8,
+    document_id: "KQ-SVC-003",
+    title: "Customer Service Procedure for Travel Service Requests",
+    origin: "SYNTHETIC",
+    domain: "TRAVEL_SERVICES",
+    category: "SERVICE_REQUESTS",
+    document_type: "PROCEDURE",
+    applicable_to: ["CUSTOMER_SERVICE_AGENT"],
+    access: "INTERNAL",
+    status: "INACTIVE",
+    language: "EN",
+    file_name: "travel_service_procedure.md",
+    file_path: "data/raw/travel_services/travel_service_procedure.md",
+    created_at: "2026-09-27T12:51:33.269Z",
+    updated_at: "2026-10-01T09:15:00.000Z"
+  }
+];
+
+
+export {navigationItems, dashboardData , invitationData, usersData , userGroupsData , documentMetadata};

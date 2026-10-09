@@ -3,14 +3,26 @@ import { Menu } from "lucide-react";
 import Sidebar from "./components/sidebar.jsx";
 import Dashboard from "./pages/dashboard.jsx";
 import Users from "./pages/users.jsx";
+import Documents from "./pages/Document.jsx";
+import Permissions from "./pages/Permission.jsx";
+import Groups from "./pages/Group.jsx";
+import Feedback from "./pages/Feedback.jsx";
+import Login from "./pages/Login.jsx";
+import Landing from "./pages/Landing.jsx";
 import "./App.css";
 
 function App() {
+  const [user, setUser] = useState();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = () => {
-    console.log("logout clicked");
+    setUser(null);
+    setSidebarOpen(false);
   };
+
+  if (!user) {
+    return <Landing/>
+  }
 
   return (
     <div className="flex min-h-screen w-full bg-background text-text antialiased">
@@ -40,7 +52,7 @@ function App() {
 
         <main className="relative flex-1 min-w-0 p-6 lg:p-10">
           <div className="mx-auto w-full max-w-[1600px]">
-           <Users/>
+           <Dashboard/>
           </div>
         </main>
       </div>
