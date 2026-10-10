@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Eye, EyeOff, Loader2, Lock, Mail } from "lucide-react";
 import logo from "../assets/images/logos/Kenya-Airways-Logo.svg";
+import useLogin from "../customhooks/useLogin.js";
 
 const HERO_IMAGE =
   "https://upload.wikimedia.org/wikipedia/commons/9/93/5Y-KZA_%2818529035463%29.jpg";
@@ -8,41 +9,16 @@ const HERO_IMAGE =
 const FIELD_CLASS =
   "w-full rounded-lg border border-border bg-elevated py-3 pl-10 pr-10 text-sm text-text outline-none transition placeholder:text-muted focus:border-primary/50 focus:ring-2 focus:ring-ring/30 disabled:cursor-not-allowed disabled:opacity-60";
 
-const Login = ({ onLoginSuccess }) => {
+const Login = () => {
+  const { login, isPending } = useLogin();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
-
-    if (!email.trim() || !password) {
-      setError("Please enter both email and password.");
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      await new Promise((r) => setTimeout(r, 800));
-
-      if (password.length < 6) {
-        throw new Error("Invalid email or password.");
-      }
-
-      console.warn("[Login] Backend integration pending. Would sign in:", {
-        email,
-      });
-
-      onLoginSuccess?.({ email });
-    } catch (err) {
-      setError(err.message || "Login failed. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
+    login({ email, password });
   };
 
   return (
@@ -56,7 +32,6 @@ const Login = ({ onLoginSuccess }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-l from-background/40 to-transparent" />
 
-        {/* Caption */}
         <div className="absolute inset-x-0 bottom-0 p-12 xl:p-16">
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-primary">
             The Pride of Africa
@@ -70,7 +45,7 @@ const Login = ({ onLoginSuccess }) => {
       {/* ---------- Form panel (RIGHT) ---------- */}
       <div className="flex flex-1 items-center justify-center px-6 py-12 sm:px-10 lg:px-12 xl:px-16">
         <div className="w-full max-w-md">
-          {/* Logo — same size and crop as sidebar */}
+          {/* Logo */}
           <div className="relative mb-10 h-16 w-[240px] overflow-hidden">
             <img
               src={logo}
@@ -89,16 +64,6 @@ const Login = ({ onLoginSuccess }) => {
             </p>
           </div>
 
-          {/* Error */}
-          {error && (
-            <div
-              role="alert"
-              className="mb-6 rounded-lg border border-primary/30 bg-primary/10 px-4 py-3 text-sm text-primary"
-            >
-              {error}
-            </div>
-          )}
-
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email */}
@@ -116,7 +81,7 @@ const Login = ({ onLoginSuccess }) => {
                   type="email"
                   autoComplete="email"
                   required
-                  disabled={isLoading}
+                  disabled={isPending}
                   placeholder="you@kenya-airways.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -149,7 +114,7 @@ const Login = ({ onLoginSuccess }) => {
                   type={showPassword ? "text" : "password"}
                   autoComplete="current-password"
                   required
-                  disabled={isLoading}
+                  disabled={isPending}
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -158,7 +123,7 @@ const Login = ({ onLoginSuccess }) => {
                 <button
                   type="button"
                   onClick={() => setShowPassword((s) => !s)}
-                  disabled={isLoading}
+                  disabled={isPending}
                   aria-label={showPassword ? "Hide password" : "Show password"}
                   className="absolute right-1.5 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-md text-muted transition hover:bg-surface-light hover:text-text disabled:cursor-not-allowed"
                 >
@@ -174,10 +139,10 @@ const Login = ({ onLoginSuccess }) => {
             {/* Submit */}
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isPending}
               className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-white shadow-glow transition hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background disabled:cursor-not-allowed disabled:opacity-70"
             >
-              {isLoading ? (
+              {isPending ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
                   Signing in...

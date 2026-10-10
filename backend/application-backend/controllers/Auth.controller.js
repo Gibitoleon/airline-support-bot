@@ -8,10 +8,12 @@
     const { email, password } = req.body;
     const user = await AuthenticationService.authenticateUser(email, password);
     const authorization = await AuthorizationService.getUserAuthorization(user.id)
+    const {role:{name}} = authorization
     SessionService.createAuthenticatedSession(req,user,authorization);
 
-    res.status(StatusCodes.OK).json({
-    message: 'Login successful'
+   return res.status(StatusCodes.OK).json({
+     message: 'Login successful',
+     user: {userid:user.id, role:name}
 });
  }
 

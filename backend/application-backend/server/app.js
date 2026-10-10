@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import cors from "cors"
 import redisClient from '../config/redis/redis.config.js';
 import sessionService from '../services/ExpressSessionService.js';
 
@@ -18,7 +19,14 @@ import  {getCustomerSession,getSessionData} from "../middleware/Session.middlewa
 import  dashboardRoutes from "../routes/Dashboard.routes.js"
 import userRoutes from "../routes/User.routes.js"
 
+
 const app = express();
+
+ // cors
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+ }));
 
 //express json 
 app.use(express.json());

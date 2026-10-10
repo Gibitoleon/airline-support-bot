@@ -9,41 +9,41 @@ import {
 } from "lucide-react";
 
  const navigationItems = [
-    {
-        label: "Dashboard",
-        to: "/dashboard",
-        icon: LayoutDashboard
-    },
-    {
-        label: "Users",
-        to: "/users",
-        icon: Users
-    },
-    {
-        label: "Documents",
-        to: "/documents",
-        icon: FileText
-    },
-    {
-        label: "Groups",
-        to: "/groups",
-        icon: UsersRound
-    },
-    {
-        label: "Permissions",
-        to: "/permissions",
-        icon: ShieldCheck
-    },
-    {
-        label: "Feedback",
-        to: "/feedback",
-        icon: MessageSquareQuote
-    },
-    {
-        label: "Logout",
-        to: null,
-        icon: LogOut
-    }
+  {
+    label: "Dashboard",
+    to: "/admin/dashboard",
+    icon: LayoutDashboard,
+  },
+  {
+    label: "Users",
+    to: "/admin/users",
+    icon: Users,
+  },
+  {
+    label: "Documents",
+    to: "/admin/documents",
+    icon: FileText,
+  },
+  {
+    label: "Groups",
+    to: "/admin/groups",
+    icon: UsersRound,
+  },
+  {
+    label: "Permissions",
+    to: "/admin/permissions",
+    icon: ShieldCheck,
+  },
+  {
+    label: "Feedback",
+    to: "/admin/feedbacks",
+    icon: MessageSquareQuote,
+  },
+  {
+    label: "Logout",
+    to: null,
+    icon: LogOut,
+  },
 ];
 
  const dashboardData = {
