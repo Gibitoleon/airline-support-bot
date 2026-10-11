@@ -13,7 +13,7 @@ import { generateInvitationUrl } from "../utils/url.js";
 import { calculateExpiry, isExpired } from "../utils/date.js";
 import { isValidEmail } from "../utils/email.js";
 
-const { UserInvitation } = db;
+const { UserInvitation, Role } = db;
 
 export default class InvitationService {
 
@@ -158,7 +158,23 @@ export default class InvitationService {
     
     static async getAllInvitations() {
     return await UserInvitation.findAll({
-        order: [["created_at", "DESC"]]
+        attributes: [
+        "id",
+        "email",
+        "role_id",
+        "status",
+        "expires_at",
+        "created_at",
+        "updated_at",
+        ],
+        include: [
+            {
+                model: Role,
+                as: "role",                   
+                attributes: ["id", "name"],
+            },
+        ],
+         order: [["created_at", "DESC"]],
     });
 }
 }

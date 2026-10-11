@@ -76,7 +76,10 @@ export default class UserGroupService {
         include: [
             {
                 model: User,
-                as: "user"
+                as: "user",
+                attributes: {
+                    exclude: ["password_hash"]
+                }
             }
         ]
     });
@@ -85,5 +88,5 @@ export default class UserGroupService {
         group_name: group.name,
         users
     };
-    }
+}
 }
