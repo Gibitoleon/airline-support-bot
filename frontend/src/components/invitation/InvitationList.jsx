@@ -49,4 +49,4 @@ const InvitationList = ({ data }) => {
     </>
   );
 };
-export default InvitationList
+export default InvitationList;

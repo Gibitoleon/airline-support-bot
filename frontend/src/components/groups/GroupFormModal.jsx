@@ -6,12 +6,33 @@ const FIELD_CLASS =
   "w-full rounded-lg border border-border bg-elevated px-3 py-2.5 text-sm text-text outline-none transition placeholder:text-muted focus:border-primary/50 focus:ring-2 focus:ring-ring/30 disabled:cursor-not-allowed disabled:opacity-70";
 
 const MODE_CONFIG = {
-  create: { title: "Create Group", subtitle: "Add a new group to the system.", submit: "Create Group", icon: Plus },
-  edit:   { title: "Edit Group",   subtitle: "Update the group name.",        submit: "Save Changes", icon: Save },
-  view:   { title: "Group Details", subtitle: "Group information.",            submit: null,           icon: null },
+  create: {
+    title: "Create Group",
+    subtitle: "Add a new group to the system.",
+    submit: "Create Group",
+    icon: Plus,
+  },
+  edit: {
+    title: "Edit Group",
+    subtitle: "Update the group name.",
+    submit: "Save Changes",
+    icon: Save,
+  },
+  view: {
+    title: "Group Details",
+    subtitle: "Group information.",
+    submit: null,
+    icon: null,
+  },
 };
 
-const GroupFormModal = ({ open, mode = "create", group, onClose, onSubmit }) => {
+const GroupFormModal = ({
+  open,
+  mode = "create",
+  group,
+  onClose,
+  onSubmit,
+}) => {
   const [name, setName] = useState("");
   const inputRef = useRef(null);
 
@@ -114,13 +135,17 @@ const GroupFormModal = ({ open, mode = "create", group, onClose, onSubmit }) => 
                 <p className="text-xs font-medium uppercase tracking-wider text-muted">
                   Created
                 </p>
-                <p className="text-sm text-text">{formatDate(group.created_at)}</p>
+                <p className="text-sm text-text">
+                  {formatDate(group.created_at)}
+                </p>
               </div>
               <div className="space-y-2">
                 <p className="text-xs font-medium uppercase tracking-wider text-muted">
                   Updated
                 </p>
-                <p className="text-sm text-text">{formatDate(group.updated_at)}</p>
+                <p className="text-sm text-text">
+                  {formatDate(group.updated_at)}
+                </p>
               </div>
             </div>
           )}

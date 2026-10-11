@@ -5,14 +5,8 @@ const useInvitations = () => {
     staleTime: 60 * 1000, // 1 min
     select: (data) =>
       (data?.invitations ?? []).map((inv) => {
-        const {
-          expires_at,
-          created_at,
-          updated_at,
-          role_id,
-          role,
-          ...rest
-        } = inv;
+        const { expires_at, created_at, updated_at, role_id, role, ...rest } =
+          inv;
 
         return {
           ...rest,

@@ -7,7 +7,9 @@ const InvitationRow = ({ invitation }) => {
   return (
     <tr className="border-b border-border transition-colors last:border-b-0 hover:bg-surface-light/40">
       <td className="px-5 py-4">
-        <span className="block truncate text-sm font-medium text-text">{email}</span>
+        <span className="block truncate text-sm font-medium text-text">
+          {email}
+        </span>
       </td>
       <td className="px-5 py-4">
         <RoleChip role={role} />
@@ -16,13 +18,13 @@ const InvitationRow = ({ invitation }) => {
         <StatusBadge status={status} />
       </td>
       <td className="whitespace-nowrap px-5 py-4 text-sm text-muted">
-        {formatDate(createdAt,{year: "numeric"})}
+        {formatDate(createdAt, { year: "numeric" })}
       </td>
       <td className="whitespace-nowrap px-5 py-4 text-sm text-muted">
-        {formatDate(expiresAt,{year: "numeric"})}
+        {formatDate(expiresAt, { year: "numeric" })}
       </td>
     </tr>
   );
 };
 
-export default InvitationRow
+export default InvitationRow;

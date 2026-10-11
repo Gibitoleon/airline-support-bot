@@ -20,9 +20,7 @@ const UsersSkeleton = () => (
 const UsersError = ({ message, onRetry }) => (
   <div className="rounded-xl border border-primary/30 bg-surface p-10 text-center shadow-card">
     <AlertCircle className="mx-auto h-8 w-8 text-primary" />
-    <p className="mt-3 text-sm font-medium text-text">
-      Failed to load users
-    </p>
+    <p className="mt-3 text-sm font-medium text-text">Failed to load users</p>
     <p className="mt-1 text-sm text-muted">
       {message || "Something went wrong. Please try again."}
     </p>
@@ -51,10 +49,7 @@ const UsersPanel = () => {
 
   if (isError) {
     return (
-      <UsersError
-        message={error?.response?.data?.message}
-        onRetry={refetch}
-      />
+      <UsersError message={error?.response?.data?.message} onRetry={refetch} />
     );
   }
 

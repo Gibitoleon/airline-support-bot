@@ -13,7 +13,7 @@ const useCreateInvitation = ({ onSuccess } = {}) => {
     },
     onError: (error) => {
       toast.error(
-        error?.response?.data?.message || "Failed to send invitation"
+        error?.response?.data?.message || "Failed to send invitation",
       );
     },
   });

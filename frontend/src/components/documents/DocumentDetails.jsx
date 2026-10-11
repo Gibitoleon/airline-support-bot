@@ -186,7 +186,7 @@ const DocumentDetails = () => {
 
   const doc = useMemo(
     () => documents.find((d) => d.document_id === documentId),
-    [documents, documentId]
+    [documents, documentId],
   );
 
   const goBack = () => navigate("/admin/documents");

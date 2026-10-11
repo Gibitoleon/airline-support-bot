@@ -1,5 +1,5 @@
-import {  useState } from "react";
-import { Plus, Send, X} from "lucide-react";
+import { useState } from "react";
+import { Plus, Send, X } from "lucide-react";
 import { invitationData, usersData, userGroupsData } from "../../data/data.js";
 import UsersPanel from "../components/user/UsersPanel.jsx";
 import InvitationsPanel from "../components/invitation/InvitationPanel.jsx";
@@ -19,9 +19,6 @@ const INVITATION_COLUMNS = ["Email", "Role", "Status", "Created", "Expires"];
 const USER_COLUMNS = ["Email", "Role", "Groups", "Joined"];
 
 const ROLE_OPTIONS = [{ value: "Staff", label: "Staff" }];
-
-
-
 
 const Users = () => {
   const [tab, setTab] = useState("users");

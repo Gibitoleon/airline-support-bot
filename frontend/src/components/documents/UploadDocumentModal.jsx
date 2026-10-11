@@ -44,7 +44,7 @@ const UploadDocumentModal = ({ open, onClose }) => {
     e.preventDefault();
     console.warn(
       "[Upload Document] Backend integration pending. Submitted:",
-      form
+      form,
     );
     onClose();
   };

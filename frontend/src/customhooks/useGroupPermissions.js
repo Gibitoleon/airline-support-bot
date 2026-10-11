@@ -8,7 +8,7 @@ const useGroupPermissions = (groupId) => {
       enabled: !!groupId,
       staleTime: 60 * 1000,
       select: (data) => data?.permissions ?? [],
-    }
+    },
   );
 };
 

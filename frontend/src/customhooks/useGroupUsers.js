@@ -8,7 +8,7 @@ const useGroupUsers = (groupId) => {
       enabled: !!groupId,
       staleTime: 60 * 1000,
       select: (data) => data?.users?.users ?? [],
-    }
+    },
   );
 };
 

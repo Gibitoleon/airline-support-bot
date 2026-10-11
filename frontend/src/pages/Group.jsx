@@ -22,9 +22,7 @@ const GroupsSkeleton = () => (
 const GroupsError = ({ message, onRetry }) => (
   <div className="rounded-xl border border-primary/30 bg-surface p-10 text-center shadow-card">
     <AlertCircle className="mx-auto h-8 w-8 text-primary" />
-    <p className="mt-3 text-sm font-medium text-text">
-      Failed to load groups
-    </p>
+    <p className="mt-3 text-sm font-medium text-text">Failed to load groups</p>
     <p className="mt-1 text-sm text-muted">
       {message || "Something went wrong. Please try again."}
     </p>
@@ -41,13 +39,7 @@ const GroupsError = ({ message, onRetry }) => (
 const Groups = () => {
   const navigate = useNavigate();
 
-  const {
-    data: groups = [],
-    isLoading,
-    isError,
-    error,
-    refetch,
-  } = useGroups();
+  const { data: groups = [], isLoading, isError, error, refetch } = useGroups();
 
   const [query, setQuery] = useState("");
   const [formState, setFormState] = useState({

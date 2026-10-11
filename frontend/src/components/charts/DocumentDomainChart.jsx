@@ -1,10 +1,10 @@
-import {  Bar } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import formatLabel from "../../utils/labelFormatter.js";
 import { tooltipStyle } from "../../utils/chart.tools.js";
-import {chartThemes as CHART} from "../../themes/chart.themes.js";
+import { chartThemes as CHART } from "../../themes/chart.themes.js";
 
 const DocumentDomainChart = ({ data }) => {
-    console.log("Document domain data:", data);
+  console.log("Document domain data:", data);
 
   const chartData = {
     labels: data.map((d) => formatLabel(d.domain)),
@@ -14,7 +14,12 @@ const DocumentDomainChart = ({ data }) => {
         backgroundColor: (ctx) => {
           const { ctx: c, chartArea } = ctx.chart;
           if (!chartArea) return CHART.primary;
-          const g = c.createLinearGradient(chartArea.left, 0, chartArea.right, 0);
+          const g = c.createLinearGradient(
+            chartArea.left,
+            0,
+            chartArea.right,
+            0,
+          );
           g.addColorStop(0, "rgba(227, 24, 55, 0.55)");
           g.addColorStop(1, "rgba(227, 24, 55, 1)");
           return g;
@@ -31,7 +36,7 @@ const DocumentDomainChart = ({ data }) => {
     maintainAspectRatio: false,
     animation: { duration: 800, easing: "easeOutQuart" },
     plugins: {
-      legend: { display: false  },
+      legend: { display: false },
       tooltip: tooltipStyle,
     },
     scales: {

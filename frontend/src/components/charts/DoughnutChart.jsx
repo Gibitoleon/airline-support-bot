@@ -1,6 +1,6 @@
 import formatLabel from "../../utils/labelFormatter.js";
 import { tooltipStyle } from "../../utils/chart.tools.js";
-import { Doughnut} from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 
 const DoughnutChart = ({ data, colorMap, labelKey, centerLabel }) => {
   const total = data.reduce((sum, d) => sum + d.count, 0) || 1;
@@ -43,7 +43,10 @@ const DoughnutChart = ({ data, colorMap, labelKey, centerLabel }) => {
 
       <ul className="w-full space-y-2">
         {data.map((d) => (
-          <li key={d[labelKey]} className="flex items-center justify-between text-sm">
+          <li
+            key={d[labelKey]}
+            className="flex items-center justify-between text-sm"
+          >
             <span className="flex items-center gap-2 text-muted">
               <span
                 className="h-2.5 w-2.5 rounded-full"

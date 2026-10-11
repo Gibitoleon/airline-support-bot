@@ -52,7 +52,11 @@ const ChatWidget = () => {
         aria-label={open ? "Close chat" : "Open chat"}
         className="fixed bottom-4 right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-glow transition-colors hover:bg-primary-hover sm:bottom-6 sm:right-6"
       >
-        {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
+        {open ? (
+          <X className="h-6 w-6" />
+        ) : (
+          <MessageCircle className="h-6 w-6" />
+        )}
       </button>
 
       {open && (
@@ -84,7 +88,9 @@ const ChatWidget = () => {
             {messages.map((m) => (
               <div
                 key={m.id}
-                className={m.role === "user" ? "flex justify-end" : "flex justify-start"}
+                className={
+                  m.role === "user" ? "flex justify-end" : "flex justify-start"
+                }
               >
                 <div
                   className={[
@@ -178,7 +184,11 @@ const Landing = () => {
               aria-label="Toggle menu"
               className="grid h-10 w-10 place-items-center rounded-lg border border-border bg-surface text-muted transition hover:text-text lg:hidden"
             >
-              {mobileNavOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {mobileNavOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </button>
           </div>
         </div>
@@ -258,8 +268,16 @@ const Landing = () => {
           {[
             { icon: Plane, label: "Book a flight", sub: "Find your next trip" },
             { icon: Clock, label: "Check-in", sub: "Online or at the airport" },
-            { icon: MapPin, label: "Flight status", sub: "Track any KQ flight" },
-            { icon: ShieldCheck, label: "Manage booking", sub: "Seats, meals & more" },
+            {
+              icon: MapPin,
+              label: "Flight status",
+              sub: "Track any KQ flight",
+            },
+            {
+              icon: ShieldCheck,
+              label: "Manage booking",
+              sub: "Seats, meals & more",
+            },
           ].map((a) => {
             const Icon = a.icon;
             return (
@@ -431,8 +449,14 @@ const Landing = () => {
 
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-8">
               {[
-                { title: "Travel", links: ["Book", "Check-in", "Flight status"] },
-                { title: "Support", links: ["Help centre", "Contact us", "Refunds"] },
+                {
+                  title: "Travel",
+                  links: ["Book", "Check-in", "Flight status"],
+                },
+                {
+                  title: "Support",
+                  links: ["Help centre", "Contact us", "Refunds"],
+                },
                 { title: "Company", links: ["About", "Careers", "Press"] },
               ].map((col) => (
                 <div key={col.title}>

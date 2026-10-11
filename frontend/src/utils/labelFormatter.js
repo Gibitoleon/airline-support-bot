@@ -3,8 +3,7 @@ const formatLabel = (value) => {
   if (value === null || value === undefined) return "";
 
   // If it's an object (e.g. a role like { id, name }), use its name
-  const raw =
-    typeof value === "object" && value !== null ? value.name : value;
+  const raw = typeof value === "object" && value !== null ? value.name : value;
 
   if (raw === null || raw === undefined) return "";
 

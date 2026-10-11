@@ -8,7 +8,7 @@ const useUserGroups = (userId) => {
       enabled: !!userId, // don't fire until we have a userId
       staleTime: 60 * 1000,
       select: (data) => data?.groups ?? [],
-    }
+    },
   );
 };
 

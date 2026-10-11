@@ -95,7 +95,9 @@ const SectionHeader = ({ title, meta }) => (
     <h2 className="min-w-0 truncate text-base font-semibold text-text">
       {title}
     </h2>
-    <span className="shrink-0 whitespace-nowrap text-xs text-muted">{meta}</span>
+    <span className="shrink-0 whitespace-nowrap text-xs text-muted">
+      {meta}
+    </span>
   </div>
 );
 
@@ -148,26 +150,23 @@ const GroupDetail = () => {
     refetch: refetchPerms,
   } = useGroupPermissions(groupId);
 
-  const {
-    data: users = [],
-    isLoading: usersLoading,
-  } = useGroupUsers(groupId);
+  const { data: users = [], isLoading: usersLoading } = useGroupUsers(groupId);
 
   // Full permissions catalog — replaces the mock
   const { data: allPermissions = [] } = usePermissions();
 
   const group = useMemo(
     () => groups.find((g) => String(g.id) === String(groupId)),
-    [groups, groupId]
+    [groups, groupId],
   );
 
   const assignedIds = useMemo(
     () => new Set(permissions.map((p) => p.permission.id)),
-    [permissions]
+    [permissions],
   );
 
   const availablePermissions = allPermissions.filter(
-    (p) => !assignedIds.has(p.id)
+    (p) => !assignedIds.has(p.id),
   );
 
   const goBack = () => navigate("/admin/groups");
@@ -179,7 +178,10 @@ const GroupDetail = () => {
   };
 
   const handleRemovePermission = (permissionId) => {
-    console.warn("[Remove Permission] Backend integration pending:", permissionId);
+    console.warn(
+      "[Remove Permission] Backend integration pending:",
+      permissionId,
+    );
     // TODO: useRemoveGroupPermission → invalidate ["group-permissions", groupId]
   };
 

@@ -9,7 +9,6 @@ const STATUS_STYLES = {
   },
 };
 
-
 const StatusBadge = ({ status }) => {
   const style = STATUS_STYLES[status] ?? {
     badge: "bg-elevated text-muted border-border",
@@ -29,4 +28,4 @@ const StatusBadge = ({ status }) => {
   );
 };
 
-export default StatusBadge
+export default StatusBadge;

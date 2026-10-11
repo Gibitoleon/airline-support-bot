@@ -1,6 +1,6 @@
 import formatDate from "../../utils/dateFormatter.js";
-import {chartThemes as CHART} from "../../themes/chart.themes.js";
-import {tooltipStyle} from "../../utils/chart.tools.js";
+import { chartThemes as CHART } from "../../themes/chart.themes.js";
+import { tooltipStyle } from "../../utils/chart.tools.js";
 import { Line } from "react-chartjs-2";
 
 const QueryVolumeChart = ({ data }) => {
@@ -27,7 +27,12 @@ const QueryVolumeChart = ({ data }) => {
         backgroundColor: (ctx) => {
           const { ctx: c, chartArea } = ctx.chart;
           if (!chartArea) return "transparent";
-          const g = c.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+          const g = c.createLinearGradient(
+            0,
+            chartArea.top,
+            0,
+            chartArea.bottom,
+          );
           g.addColorStop(0, "rgba(227, 24, 55, 0.35)");
           g.addColorStop(1, "rgba(227, 24, 55, 0)");
           return g;
@@ -73,4 +78,4 @@ const QueryVolumeChart = ({ data }) => {
     </div>
   );
 };
- export default QueryVolumeChart
+export default QueryVolumeChart;
