@@ -8,7 +8,6 @@ const formatLabel = (value) =>
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");
 
-
 const AddToGroup = ({ availableGroups, onAdd }) => {
   const [selected, setSelected] = useState("");
 

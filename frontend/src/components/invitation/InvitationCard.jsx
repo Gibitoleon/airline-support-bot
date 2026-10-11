@@ -1,4 +1,3 @@
-
 import formatDate from "../../utils/dateFormatter.js";
 import StatusBadge from "./StatusBadge.jsx";
 import RoleChip from "../chips/RoleChip.jsx";
@@ -18,11 +17,11 @@ const InvitationCard = ({ invitation }) => {
       <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted">
         <RoleChip role={role} />
         <span>·</span>
-         <span>Created {formatDate(createdAt, { year: "numeric" })}</span>
+        <span>Created {formatDate(createdAt, { year: "numeric" })}</span>
         <span>·</span>
-        <span>Expires {formatDate(expiresAt,{ year: "numeric" })}</span>
+        <span>Expires {formatDate(expiresAt, { year: "numeric" })}</span>
       </div>
     </div>
   );
 };
-export default InvitationCard
+export default InvitationCard;

@@ -7,15 +7,12 @@ const useAcceptInvitation = () => {
 
   const mutation = useCustommutation({
     onSuccess: (data) => {
-      toast.success(
-        data?.message || "Account activated. You can sign in now."
-      );
+      toast.success(data?.message || "Account activated. You can sign in now.");
       navigate("/login", { replace: true });
     },
     onError: (error) => {
       toast.error(
-        error?.response?.data?.message ||
-          "Invalid or expired invitation link."
+        error?.response?.data?.message || "Invalid or expired invitation link.",
       );
     },
   });

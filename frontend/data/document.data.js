@@ -80,7 +80,8 @@ export const documentMetadata = [
     status: "ACTIVE",
     language: "EN",
     file_name: "flight_disruptions_service_procedure.md",
-    file_path: "data/raw/flight_disruptions/flight_disruptions_service_procedure.md",
+    file_path:
+      "data/raw/flight_disruptions/flight_disruptions_service_procedure.md",
     created_at: "2026-09-27T12:51:33.269Z",
     updated_at: "2026-09-27T12:51:33.269Z",
   },

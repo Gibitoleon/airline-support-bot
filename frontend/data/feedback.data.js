@@ -9,8 +9,10 @@ export const feedbackData = {
       updatedAt: "2026-09-22T12:05:08.824Z",
       query: {
         id: 30,
-        question: "Give me information on the baggage allowance from Africa to Europe",
-        response: "For a journey from Africa to Europe, Kenya Airways offers a free checked baggage allowance of 30kg in Economy Class and 40kg in Business Class.",
+        question:
+          "Give me information on the baggage allowance from Africa to Europe",
+        response:
+          "For a journey from Africa to Europe, Kenya Airways offers a free checked baggage allowance of 30kg in Economy Class and 40kg in Business Class.",
       },
     },
     {
@@ -23,7 +25,8 @@ export const feedbackData = {
       query: {
         id: 29,
         question: "Give me information on the baggage allowance",
-        response: "For passengers travelling with us, the standard baggage allowance is 30kg for Economy Class, 40kg for Business Class, and 60kg for First Class. However, please note that this is the free allowance, and any additional baggage exceeding these limits will incur excess baggage charges.",
+        response:
+          "For passengers travelling with us, the standard baggage allowance is 30kg for Economy Class, 40kg for Business Class, and 60kg for First Class. However, please note that this is the free allowance, and any additional baggage exceeding these limits will incur excess baggage charges.",
       },
     },
   ],

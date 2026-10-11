@@ -1,5 +1,12 @@
 import { useMemo, useState } from "react";
-import { AlertCircle, Pencil, Plus, Search, ShieldCheck, X } from "lucide-react";
+import {
+  AlertCircle,
+  Pencil,
+  Plus,
+  Search,
+  ShieldCheck,
+  X,
+} from "lucide-react";
 
 import PermissionFormModal from "../components/permissions/PermissionFormModal.jsx";
 import usePermissions from "../customhooks/usePermission.js";
@@ -109,10 +116,13 @@ const Permissions = () => {
   const handleSubmit = ({ name }) => {
     // TODO: swap for useCreatePermission / useUpdatePermission mutations
     // which should invalidate ["permissions"] on success
-    console.warn(`[${formState.mode} Permission] Backend integration pending:`, {
-      id: formState.permission?.id,
-      name,
-    });
+    console.warn(
+      `[${formState.mode} Permission] Backend integration pending:`,
+      {
+        id: formState.permission?.id,
+        name,
+      },
+    );
     closeForm();
   };
 

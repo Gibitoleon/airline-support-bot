@@ -49,9 +49,7 @@ const FeedbackCard = ({ feedback }) => {
           <RatingStars rating={rating} />
           <span className="text-sm font-medium text-text">{rating}.0</span>
         </div>
-        <span className="text-xs text-muted">
-          {formatDateTime(createdAt)}
-        </span>
+        <span className="text-xs text-muted">{formatDateTime(createdAt)}</span>
       </div>
 
       {/* Query */}

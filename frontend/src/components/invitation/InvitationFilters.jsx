@@ -1,4 +1,3 @@
-
 const FILTERS = [
   { key: "ALL", label: "All" },
   { key: "PENDING", label: "Pending" },
@@ -24,7 +23,9 @@ const InvitationFilters = ({ active, onChange, counts }) => (
           <span
             className={[
               "rounded-full px-1.5 py-0.5 text-xs font-semibold",
-              isActive ? "bg-primary/20 text-primary" : "bg-elevated text-muted",
+              isActive
+                ? "bg-primary/20 text-primary"
+                : "bg-elevated text-muted",
             ].join(" ")}
           >
             {counts[f.key] ?? 0}
@@ -34,4 +35,4 @@ const InvitationFilters = ({ active, onChange, counts }) => (
     })}
   </div>
 );
-export default InvitationFilters
+export default InvitationFilters;

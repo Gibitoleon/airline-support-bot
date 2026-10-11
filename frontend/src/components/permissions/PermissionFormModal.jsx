@@ -19,7 +19,13 @@ const MODE_CONFIG = {
   },
 };
 
-const PermissionFormModal = ({ open, mode = "create", permission, onClose, onSubmit }) => {
+const PermissionFormModal = ({
+  open,
+  mode = "create",
+  permission,
+  onClose,
+  onSubmit,
+}) => {
   const [name, setName] = useState("");
   const inputRef = useRef(null);
 

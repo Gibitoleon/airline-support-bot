@@ -20,7 +20,6 @@ import AcceptInvitation from "./pages/AcceptInvitation.jsx";
 import "./App.css";
 import useAuthStore from "./stores/useLoginStore.js";
 
-
 function App() {
   const user = useAuthStore((state) => state.user);
   const userId = user?.userid;
@@ -64,9 +63,7 @@ function App() {
                 <Menu className="h-5 w-5" />
               </button>
 
-              <span className="text-base font-semibold">
-                Support Portal
-              </span>
+              <span className="text-base font-semibold">Support Portal</span>
             </header>
 
             <main className="relative min-w-0 flex-1 p-6 lg:p-10">
@@ -74,15 +71,20 @@ function App() {
                 <Routes>
                   <Route path="/admin/dashboard" element={<Dashboard />} />
                   <Route path="/admin/groups" element={<Groups />} />
-                  <Route path="/admin/groups/:groupId" element={<GroupDetail />} />
+                  <Route
+                    path="/admin/groups/:groupId"
+                    element={<GroupDetail />}
+                  />
                   <Route path="/admin/permissions" element={<Permissions />} />
                   <Route path="/admin/users" element={<Users />} />
                   <Route path="/admin/documents" element={<Documents />} />
-                  <Route path="/admin/documents/:documentId" element={<DocumentDetails />} />
+                  <Route
+                    path="/admin/documents/:documentId"
+                    element={<DocumentDetails />}
+                  />
                   <Route path="/admin/users/:userId" element={<UserDetail />} />
                   <Route path="/admin/feedbacks" element={<Feedback />} />
                   <Route path="/login" element={<Login />} />
-                 
                 </Routes>
               </div>
             </main>

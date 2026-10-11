@@ -18,8 +18,8 @@ const useAuthStore = create(
       partialize: (state) => ({
         user: state.user,
       }),
-    }
-  )
+    },
+  ),
 );
 
 export default useAuthStore;

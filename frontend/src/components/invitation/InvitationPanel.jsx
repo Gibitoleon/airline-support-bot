@@ -57,7 +57,7 @@ const InvitationsPanel = () => {
       PENDING: invitations.filter((i) => i.status === "PENDING").length,
       ACCEPTED: invitations.filter((i) => i.status === "ACCEPTED").length,
     }),
-    [invitations]
+    [invitations],
   );
 
   const filtered = useMemo(
@@ -65,7 +65,7 @@ const InvitationsPanel = () => {
       filter === "ALL"
         ? invitations
         : invitations.filter((i) => i.status === filter),
-    [invitations, filter]
+    [invitations, filter],
   );
 
   if (isLoading) {
@@ -93,11 +93,7 @@ const InvitationsPanel = () => {
     <div className="space-y-5 sm:space-y-6">
       <InvitationHeader onCreate={() => setModalOpen(true)} />
 
-      <InvitationFilters
-        active={filter}
-        onChange={setFilter}
-        counts={counts}
-      />
+      <InvitationFilters active={filter} onChange={setFilter} counts={counts} />
 
       <InvitationList data={filtered} />
 

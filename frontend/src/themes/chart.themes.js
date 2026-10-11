@@ -8,5 +8,3 @@ export const chartThemes = {
   elevated: "#1A1F28",
   surfaceLight: "#232934",
 };
-
-

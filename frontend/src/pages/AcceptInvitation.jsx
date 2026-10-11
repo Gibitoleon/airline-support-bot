@@ -64,8 +64,8 @@ const MissingToken = () => (
         Invalid invitation link
       </h1>
       <p className="mt-2 text-sm text-muted">
-        This invitation link is missing its token. Please use the link from
-        your email, or request a new invitation.
+        This invitation link is missing its token. Please use the link from your
+        email, or request a new invitation.
       </p>
       <Link
         to="/login"
@@ -154,8 +154,8 @@ const AcceptInvitation = () => {
               Set your password
             </h1>
             <p className="mt-2 text-sm text-muted">
-              Choose a password to activate your account. You&apos;ll use it
-              to sign in from now on.
+              Choose a password to activate your account. You&apos;ll use it to
+              sign in from now on.
             </p>
           </div>
 

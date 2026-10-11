@@ -15,4 +15,4 @@ const InvitationHeader = ({ onCreate }) => (
     </button>
   </div>
 );
-export default InvitationHeader
+export default InvitationHeader;

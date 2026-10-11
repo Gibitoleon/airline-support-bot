@@ -1,4 +1,4 @@
-import {chartThemes as CHART} from "../themes/chart.themes.js";
+import { chartThemes as CHART } from "../themes/chart.themes.js";
 export const tooltipStyle = {
   backgroundColor: CHART.elevated,
   borderColor: CHART.border,

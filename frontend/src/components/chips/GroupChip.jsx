@@ -7,7 +7,6 @@ const formatLabel = (value) =>
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");
 
-
 const GroupChip = ({ group, onRemove }) => (
   <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-elevated px-3 py-2.5">
     <span className="min-w-0 truncate text-sm font-medium text-text">

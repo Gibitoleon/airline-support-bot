@@ -34,7 +34,7 @@ ChartJS.register(
   BarElement,
   ArcElement,
   Filler,
-  Tooltip
+  Tooltip,
 );
 
 const STATUS_COLORS = {

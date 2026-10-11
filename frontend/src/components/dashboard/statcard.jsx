@@ -1,7 +1,8 @@
-
 const StatCard = ({ label, value, icon: Icon, accent = false }) => (
-  <div className="min-w-0 rounded-xl border border-border bg-surface p-5 shadow-card 
-    transition-colors duration-200 hover:border-primary-hover ">
+  <div
+    className="min-w-0 rounded-xl border border-border bg-surface p-5 shadow-card 
+    transition-colors duration-200 hover:border-primary-hover "
+  >
     <div className="flex items-start justify-between gap-3">
       <div className="min-w-0">
         <p className="text-xs font-medium uppercase tracking-wider text-muted">

@@ -8,7 +8,7 @@ const useDocumentContent = (documentId) => {
       enabled: !!documentId, // don't fetch until we have an ID
       staleTime: 5 * 60 * 1000, // 5 min — document content is stable
       select: (data) => data?.content ?? null,
-    }
+    },
   );
 };
 
