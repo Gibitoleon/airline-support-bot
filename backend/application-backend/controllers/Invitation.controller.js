@@ -13,8 +13,7 @@ const sendInvitation = async (req, res) => {
     );
 
     return res.status(StatusCodes.CREATED).json({
-        message: "Invitation created successfully",
-        invitation
+        message: "Invitation created and sent successfully",
     });
 };
 const getAllInvitations = async (req,res) => {
