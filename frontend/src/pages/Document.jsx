@@ -1,13 +1,56 @@
 import { useMemo, useState } from "react";
-import { FileText, Upload, X } from "lucide-react";
-import { documentMetadata } from "../../data/document.data.js";
+import { useNavigate } from "react-router-dom";
+import { AlertCircle, FileText, Upload, X } from "lucide-react";
+
 import FilterBar from "../components/documents/FilterBar.jsx";
 import DocumentCard from "../components/documents/DocumentCard.jsx";
 import UploadDocumentModal from "../components/documents/UploadDocumentModal.jsx";
 import DeleteConfirmDialog from "../components/documents/DeleteConfirmDialog.jsx";
-import DocumentDetails from "../components/documents/DocumentDetails.jsx";
+import useDocuments from "../customhooks/useDocument.js";
+
+/* ---------- Loading skeleton ---------- */
+const DocumentsSkeleton = () => (
+  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    {[0, 1, 2, 3, 4, 5].map((i) => (
+      <div
+        key={i}
+        className="h-44 animate-pulse rounded-xl border border-border bg-surface"
+      />
+    ))}
+  </div>
+);
+
+/* ---------- Error state ---------- */
+const DocumentsError = ({ message, onRetry }) => (
+  <div className="rounded-xl border border-primary/30 bg-surface p-10 text-center shadow-card">
+    <AlertCircle className="mx-auto h-8 w-8 text-primary" />
+    <p className="mt-3 text-sm font-medium text-text">
+      Failed to load documents
+    </p>
+    <p className="mt-1 text-sm text-muted">
+      {message || "Something went wrong. Please try again."}
+    </p>
+    <button
+      type="button"
+      onClick={onRetry}
+      className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white shadow-glow transition hover:bg-primary-hover"
+    >
+      Retry
+    </button>
+  </div>
+);
 
 const Documents = () => {
+  const navigate = useNavigate();
+
+  const {
+    data: documents = [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useDocuments();
+
   const [query, setQuery] = useState("");
   const [domain, setDomain] = useState("ALL");
   const [type, setType] = useState("ALL");
@@ -16,7 +59,6 @@ const Documents = () => {
 
   const [uploadOpen, setUploadOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null);
-  const [selectedDocumentId, setSelectedDocumentId] = useState(null);
 
   const hasActiveFilters =
     query !== "" ||
@@ -36,7 +78,7 @@ const Documents = () => {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
 
-    return documentMetadata.filter((d) => {
+    return documents.filter((d) => {
       if (domain !== "ALL" && d.domain !== domain) return false;
       if (type !== "ALL" && d.document_type !== type) return false;
       if (access !== "ALL" && d.access !== access) return false;
@@ -49,24 +91,53 @@ const Documents = () => {
       }
       return true;
     });
-  }, [query, domain, type, access, status]);
+  }, [documents, query, domain, type, access, status]);
 
   const handleDeleteConfirm = (doc) => {
     console.warn("[Delete Document] Backend integration pending:", doc);
     setDeleteTarget(null);
   };
 
-  // Detail view
-  if (selectedDocumentId) {
+  /* ---------- Loading ---------- */
+  if (isLoading) {
     return (
-      <DocumentDetails
-        documentId={selectedDocumentId}
-        onBack={() => setSelectedDocumentId(null)}
-      />
+      <div className="space-y-6 sm:space-y-8">
+        <header className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div className="min-w-0">
+            <h1 className="text-2xl font-semibold tracking-tight text-text lg:text-3xl">
+              Documents
+            </h1>
+            <p className="mt-1.5 text-sm text-muted">
+              Manage knowledge base documents
+            </p>
+          </div>
+        </header>
+        <DocumentsSkeleton />
+      </div>
     );
   }
 
-  // List view
+  /* ---------- Error ---------- */
+  if (isError) {
+    return (
+      <div className="space-y-6 sm:space-y-8">
+        <header>
+          <h1 className="text-2xl font-semibold tracking-tight text-text lg:text-3xl">
+            Documents
+          </h1>
+          <p className="mt-1.5 text-sm text-muted">
+            Manage knowledge base documents
+          </p>
+        </header>
+        <DocumentsError
+          message={error?.response?.data?.message}
+          onRetry={refetch}
+        />
+      </div>
+    );
+  }
+
+  /* ---------- List ---------- */
   return (
     <div className="space-y-6 sm:space-y-8">
       <header className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -76,8 +147,8 @@ const Documents = () => {
           </h1>
           <p className="mt-1.5 text-sm text-muted">
             {hasActiveFilters
-              ? `Showing ${filtered.length} of ${documentMetadata.length} documents`
-              : `Manage knowledge base documents · ${documentMetadata.length} total`}
+              ? `Showing ${filtered.length} of ${documents.length} documents`
+              : `Manage knowledge base documents · ${documents.length} total`}
           </p>
         </div>
 
@@ -130,7 +201,7 @@ const Documents = () => {
             <DocumentCard
               key={doc.id}
               doc={doc}
-              onOpen={() => setSelectedDocumentId(doc.document_id)}
+              onOpen={() => navigate(`/admin/documents/${doc.document_id}`)}
               onDelete={setDeleteTarget}
             />
           ))}

@@ -4,7 +4,7 @@ import useAuthStore from "../stores/useLoginStore.js";
 
 const useLogout = () => {
   const navigate = useNavigate();
-  const clearUser = useAuthStore((s) => s.clearUser);
+  const clearUser = useAuthStore((state) => state.clearUser);
 
   const mutation = useCustommutation({
     onSuccess: () => {

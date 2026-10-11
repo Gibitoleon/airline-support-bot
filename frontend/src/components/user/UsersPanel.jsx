@@ -1,65 +1,67 @@
-import { useState } from "react";
-import UsersList from "./UsersList.jsx";
-import UserDetail from "./UserDetail.jsx";
-import { usersData, userGroupsData } from "../../../data/data.js";
+import { useNavigate } from "react-router-dom";
+import { AlertCircle } from "lucide-react";
 
-const ALL_GROUPS = Array.from(
-  new Map(userGroupsData.groups.map((g) => [g.group.id, g.group])).values()
+import UsersList from "./UsersList.jsx";
+import useStaffUsers from "../../customhooks/useStaffUsers.js";
+
+/* ---------- Loading skeleton ---------- */
+const UsersSkeleton = () => (
+  <div className="animate-pulse space-y-3">
+    {[0, 1, 2, 3, 4].map((i) => (
+      <div
+        key={i}
+        className="h-20 rounded-xl border border-border bg-surface"
+      />
+    ))}
+  </div>
+);
+
+/* ---------- Error state ---------- */
+const UsersError = ({ message, onRetry }) => (
+  <div className="rounded-xl border border-primary/30 bg-surface p-10 text-center shadow-card">
+    <AlertCircle className="mx-auto h-8 w-8 text-primary" />
+    <p className="mt-3 text-sm font-medium text-text">
+      Failed to load users
+    </p>
+    <p className="mt-1 text-sm text-muted">
+      {message || "Something went wrong. Please try again."}
+    </p>
+    <button
+      type="button"
+      onClick={onRetry}
+      className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white shadow-glow transition hover:bg-primary-hover"
+    >
+      Retry
+    </button>
+  </div>
 );
 
 const UsersPanel = () => {
-  const [selectedUserId, setSelectedUserId] = useState(null);
-  const [userGroups, setUserGroups] = useState(userGroupsData.groups);
+  const navigate = useNavigate();
 
-  const selectedUser = usersData.find((u) => u.id === selectedUserId) ?? null;
-  const selectedUserGroups = userGroups.filter(
-    (g) => g.user_id === selectedUserId
-  );
+  const {
+    data: users = [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useStaffUsers();
 
-  const handleAddToGroup = (groupId) => {
-    const group = ALL_GROUPS.find((g) => g.id === groupId);
-    if (!group || !selectedUser) return;
+  if (isLoading) return <UsersSkeleton />;
 
-    const now = new Date().toISOString();
-
-    setUserGroups((prev) => [
-      ...prev,
-      {
-        user_id: selectedUser.id,
-        group_id: group.id,
-        created_at: now,
-        updated_at: now,
-        group,
-      },
-    ]);
-  };
-
-  const handleRemoveFromGroup = (groupId) => {
-    setUserGroups((prev) =>
-      prev.filter(
-        (g) => !(g.user_id === selectedUserId && g.group_id === groupId)
-      )
-    );
-  };
-
-  if (selectedUser) {
+  if (isError) {
     return (
-      <UserDetail
-        user={selectedUser}
-        userGroups={selectedUserGroups}
-        allGroups={ALL_GROUPS}
-        onBack={() => setSelectedUserId(null)}
-        onAdd={handleAddToGroup}
-        onRemove={handleRemoveFromGroup}
+      <UsersError
+        message={error?.response?.data?.message}
+        onRetry={refetch}
       />
     );
   }
 
   return (
     <UsersList
-      users={usersData}
-      groups={userGroups}
-      onSelect={setSelectedUserId}
+      users={users}
+      onSelect={(id) => navigate(`/admin/users/${id}`)}
     />
   );
 };

@@ -3,10 +3,7 @@ import UserRow from "./UserRow";
 
 const USER_COLUMNS = ["Email", "Role", "Groups", "Joined"];
 
-const UsersList = ({ users, groups, onSelect }) => {
-  const groupsCountFor = (userId) =>
-    groups.filter((g) => g.user_id === userId).length;
-
+const UsersList = ({ users, onSelect }) => {
   if (users.length === 0) {
     return (
       <div className="rounded-xl border border-border bg-surface p-10 text-center shadow-card">
@@ -22,12 +19,7 @@ const UsersList = ({ users, groups, onSelect }) => {
     <>
       <div className="space-y-3 md:hidden">
         {users.map((u) => (
-          <UserCard
-            key={u.id}
-            user={u}
-            groupsCount={groupsCountFor(u.id)}
-            onSelect={onSelect}
-          />
+          <UserCard key={u.id} user={u} onSelect={onSelect} />
         ))}
       </div>
 
@@ -51,12 +43,7 @@ const UsersList = ({ users, groups, onSelect }) => {
             </thead>
             <tbody>
               {users.map((u) => (
-                <UserRow
-                  key={u.id}
-                  user={u}
-                  groupsCount={groupsCountFor(u.id)}
-                  onSelect={onSelect}
-                />
+                <UserRow key={u.id} user={u} onSelect={onSelect} />
               ))}
             </tbody>
           </table>

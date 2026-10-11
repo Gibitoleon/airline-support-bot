@@ -1,16 +1,37 @@
 import { useMemo } from "react";
-import { ArrowLeft, FileText, AlertTriangle } from "lucide-react";
-import {
-  documentMetadata,
-  documentContentById,
-  DOCUMENT_STATUS_STYLES,
-  DOCUMENT_ACCESS_STYLES,
-} from "../../../data/document.data.js"
+import { useParams, useNavigate } from "react-router-dom";
+import { ArrowLeft, FileText, AlertTriangle, Loader2 } from "lucide-react";
+
+import useDocuments from "../../customhooks/useDocument.js";
+import useDocumentContent from "../../customhooks/useDocumentContent.js";
 import Badge from "./Badge.jsx";
 import formatDate from "../../utils/dateFormatter.js";
 import formatLabel from "../../utils/labelFormatter.js";
 
-/* ---------- Tiny inline markdown renderer ---------- */
+/* ---------- Badge styles ---------- */
+const DOCUMENT_STATUS_STYLES = {
+  ACTIVE: {
+    badge: "bg-emerald-400/10 text-emerald-400 border-emerald-400/20",
+    dot: "bg-emerald-400",
+  },
+  INACTIVE: {
+    badge: "bg-elevated text-muted border-border",
+    dot: "bg-muted",
+  },
+};
+
+const DOCUMENT_ACCESS_STYLES = {
+  PUBLIC: {
+    badge: "bg-sky-400/10 text-sky-400 border-sky-400/20",
+    dot: "bg-sky-400",
+  },
+  INTERNAL: {
+    badge: "bg-amber-400/10 text-amber-400 border-amber-400/20",
+    dot: "bg-amber-400",
+  },
+};
+
+/* ---------- Inline markdown ---------- */
 const renderInline = (text) => {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return parts.map((part, i) => {
@@ -130,7 +151,7 @@ const MarkdownView = ({ content }) => {
   );
 };
 
-/* ---------- Meta row ---------- */
+/* ---------- Meta ---------- */
 const MetaItem = ({ label, children }) => (
   <div className="min-w-0">
     <p className="text-xs font-medium uppercase tracking-wider text-muted">
@@ -140,21 +161,52 @@ const MetaItem = ({ label, children }) => (
   </div>
 );
 
+/* ---------- Skeleton ---------- */
+const ContentSkeleton = () => (
+  <div className="animate-pulse space-y-3">
+    <div className="h-4 w-2/3 rounded bg-surface-light" />
+    <div className="h-4 w-full rounded bg-surface-light" />
+    <div className="h-4 w-5/6 rounded bg-surface-light" />
+    <div className="h-4 w-3/4 rounded bg-surface-light" />
+  </div>
+);
+
 /* ---------- Page ---------- */
-const DocumentDetails = ({ documentId, onBack }) => {
+const DocumentDetails = () => {
+  const { documentId } = useParams();
+  const navigate = useNavigate();
+
+  const { data: documents = [], isLoading: docsLoading } = useDocuments();
+
+  const {
+    data: content,
+    isLoading: contentLoading,
+    isError: contentError,
+  } = useDocumentContent(documentId);
+
   const doc = useMemo(
-    () => documentMetadata.find((d) => d.document_id === documentId),
-    [documentId]
+    () => documents.find((d) => d.document_id === documentId),
+    [documents, documentId]
   );
 
-  const content = documentContentById[documentId];
+  const goBack = () => navigate("/admin/documents");
+
+  if (docsLoading) {
+    return (
+      <div className="animate-pulse space-y-6">
+        <div className="h-5 w-32 rounded bg-surface-light" />
+        <div className="h-32 rounded-xl border border-border bg-surface" />
+        <div className="h-64 rounded-xl border border-border bg-surface" />
+      </div>
+    );
+  }
 
   if (!doc) {
     return (
       <div className="space-y-6">
         <button
           type="button"
-          onClick={onBack}
+          onClick={goBack}
           className="inline-flex items-center gap-1.5 text-sm text-muted transition hover:text-text"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -177,15 +229,17 @@ const DocumentDetails = ({ documentId, onBack }) => {
 
   return (
     <div className="space-y-6 sm:space-y-8">
+      {/* Back */}
       <button
         type="button"
-        onClick={onBack}
+        onClick={goBack}
         className="inline-flex items-center gap-1.5 text-sm text-muted transition hover:text-text"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to documents
       </button>
 
+      {/* Header */}
       <header>
         <div className="flex flex-wrap items-center gap-2">
           <span className="inline-flex rounded-md border border-border bg-elevated px-2 py-0.5 font-mono text-xs font-medium text-muted">
@@ -209,6 +263,7 @@ const DocumentDetails = ({ documentId, onBack }) => {
         </p>
       </header>
 
+      {/* Metadata */}
       <div className="rounded-xl border border-border bg-surface p-6 shadow-card">
         <h2 className="mb-5 text-base font-semibold text-text">Metadata</h2>
 
@@ -229,7 +284,7 @@ const DocumentDetails = ({ documentId, onBack }) => {
 
           <MetaItem label="Applicable To">
             <div className="flex flex-wrap gap-1.5">
-              {doc.applicable_to.map((a) => (
+              {doc.applicable_to?.map((a) => (
                 <span
                   key={a}
                   className="inline-flex rounded-md border border-border bg-elevated px-2 py-0.5 text-xs font-medium text-muted"
@@ -256,26 +311,35 @@ const DocumentDetails = ({ documentId, onBack }) => {
         </div>
       </div>
 
+      {/* Content */}
       <div className="rounded-xl border border-border bg-surface p-6 shadow-card">
         <div className="mb-5 flex items-center justify-between gap-3">
           <h2 className="text-base font-semibold text-text">Content</h2>
           <span className="text-xs text-muted">Markdown</span>
         </div>
 
-        {content ? (
+        {contentLoading ? (
+          <ContentSkeleton />
+        ) : contentError ? (
+          <div className="rounded-lg border border-primary/30 bg-primary/5 p-8 text-center">
+            <AlertTriangle className="mx-auto h-8 w-8 text-primary" />
+            <p className="mt-3 text-sm font-medium text-text">
+              Failed to load content
+            </p>
+            <p className="mt-1 text-sm text-muted">
+              The document content could not be retrieved.
+            </p>
+          </div>
+        ) : content ? (
           <MarkdownView content={content} />
         ) : (
           <div className="rounded-lg border border-dashed border-border bg-elevated/40 p-8 text-center">
             <FileText className="mx-auto h-8 w-8 text-muted" />
             <p className="mt-3 text-sm font-medium text-text">
-              Content not loaded
+              No content available
             </p>
             <p className="mx-auto mt-1 max-w-md text-sm text-muted">
-              Wire this section to your document-content endpoint to render the
-              full markdown here.
-            </p>
-            <p className="mt-3 font-mono text-xs text-muted">
-              GET /documents/{doc.document_id}/content
+              This document has no content to display.
             </p>
           </div>
         )}

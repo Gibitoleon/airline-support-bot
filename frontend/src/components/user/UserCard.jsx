@@ -1,10 +1,9 @@
-
 import { Users as UsersIcon } from "lucide-react";
-import  RoleChip  from "../chips/RoleChip.jsx";
-import  RowChevron from "./RowChevron.jsx";
-import  formatDate from "../../utils/dateFormatter.js";
+import RoleChip from "../chips/RoleChip.jsx";
+import RowChevron from "./RowChevron.jsx";
+import formatDate from "../../utils/dateFormatter.js";
 
-const UserCard = ({ user, groupsCount, onSelect }) => (
+const UserCard = ({ user, onSelect }) => (
   <button
     type="button"
     onClick={() => onSelect(user.id)}
@@ -22,10 +21,10 @@ const UserCard = ({ user, groupsCount, onSelect }) => (
       <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted">
         <span className="inline-flex items-center gap-1">
           <UsersIcon className="h-3.5 w-3.5" />
-          {groupsCount} {groupsCount === 1 ? "group" : "groups"}
+          {user.groupCount} {user.groupCount === 1 ? "group" : "groups"}
         </span>
         <span>·</span>
-        <span>Joined {formatDate(user.created_at, { year: "numeric" })}</span>
+        <span>Joined {formatDate(user.createdAt)}</span>
       </div>
     </div>
 
