@@ -1,9 +1,21 @@
 import { useMemo, useState } from "react";
-import { ArrowLeft, Plus, Users as UsersIcon, X } from "lucide-react";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  ArrowLeft,
+  AlertCircle,
+  Plus,
+  Users as UsersIcon,
+  X,
+} from "lucide-react";
+
+import useGroups from "../../customhooks/useGroup.js";
+import useGroupPermissions from "../../customhooks/useGroupPermissions.js";
+import useGroupUsers from "../../customhooks/useGroupUsers.js";
+import usePermissions from "../../customhooks/usePermission.js";
 import formatDate from "../../utils/dateFormatter.js";
 import formatLabel from "../../utils/labelFormatter.js";
 
-/* ---------- Permission chip (with remove) ---------- */
+/* ---------- Permission chip ---------- */
 const PermissionChip = ({ permission, onRemove }) => (
   <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-elevated px-3 py-2.5">
     <span className="min-w-0 flex-1 truncate text-sm font-medium text-text">
@@ -20,7 +32,7 @@ const PermissionChip = ({ permission, onRemove }) => (
   </div>
 );
 
-/* ---------- Add permission row ---------- */
+/* ---------- Add permission ---------- */
 const AddPermission = ({ available, onAdd }) => {
   const [selected, setSelected] = useState("");
 
@@ -67,7 +79,7 @@ const AddPermission = ({ available, onAdd }) => {
   );
 };
 
-/* ---------- User row (read-only) ---------- */
+/* ---------- User row ---------- */
 const UserRow = ({ user }) => (
   <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-elevated px-3 py-2.5">
     <p className="min-w-0 flex-1 truncate text-sm font-medium text-text">
@@ -83,23 +95,72 @@ const SectionHeader = ({ title, meta }) => (
     <h2 className="min-w-0 truncate text-base font-semibold text-text">
       {title}
     </h2>
-    <span className="shrink-0 whitespace-nowrap text-xs text-muted">
-      {meta}
-    </span>
+    <span className="shrink-0 whitespace-nowrap text-xs text-muted">{meta}</span>
   </div>
 );
 
-/* ---------- Page ---------- */
-const GroupDetail = ({
-  group,
-  permissions,
-  allPermissions,
-  users,
-  onBack,
-  onAddPermission,
-  onRemovePermission,
-  onEdit,
-}) => {
+/* ---------- Section skeleton ---------- */
+const SectionSkeleton = () => (
+  <div className="animate-pulse space-y-2">
+    {[0, 1].map((i) => (
+      <div
+        key={i}
+        className="h-12 rounded-lg border border-border bg-surface"
+      />
+    ))}
+  </div>
+);
+
+/* ---------- Not found ---------- */
+const NotFound = ({ groupId, onBack }) => (
+  <div className="space-y-6">
+    <button
+      type="button"
+      onClick={onBack}
+      className="inline-flex items-center gap-1.5 text-sm text-muted transition hover:text-text"
+    >
+      <ArrowLeft className="h-4 w-4" />
+      Back to groups
+    </button>
+
+    <div className="rounded-xl border border-primary/30 bg-surface p-10 text-center shadow-card">
+      <AlertCircle className="mx-auto h-8 w-8 text-primary" />
+      <p className="mt-3 text-sm font-medium text-text">Group not found</p>
+      <p className="mt-1 text-sm text-muted">
+        No group matches the ID{" "}
+        <span className="font-mono text-text">{groupId}</span>.
+      </p>
+    </div>
+  </div>
+);
+
+/* ---------- Main ---------- */
+const GroupDetail = () => {
+  const { groupId } = useParams();
+  const navigate = useNavigate();
+
+  const { data: groups = [], isLoading: groupsLoading } = useGroups();
+
+  const {
+    data: permissions = [],
+    isLoading: permsLoading,
+    isError: permsError,
+    refetch: refetchPerms,
+  } = useGroupPermissions(groupId);
+
+  const {
+    data: users = [],
+    isLoading: usersLoading,
+  } = useGroupUsers(groupId);
+
+  // Full permissions catalog — replaces the mock
+  const { data: allPermissions = [] } = usePermissions();
+
+  const group = useMemo(
+    () => groups.find((g) => String(g.id) === String(groupId)),
+    [groups, groupId]
+  );
+
   const assignedIds = useMemo(
     () => new Set(permissions.map((p) => p.permission.id)),
     [permissions]
@@ -109,12 +170,40 @@ const GroupDetail = ({
     (p) => !assignedIds.has(p.id)
   );
 
+  const goBack = () => navigate("/admin/groups");
+
+  /* ---------- Permission actions (local — wire to mutations later) ---------- */
+  const handleAddPermission = (permissionId) => {
+    console.warn("[Add Permission] Backend integration pending:", permissionId);
+    // TODO: useAddGroupPermission → invalidate ["group-permissions", groupId]
+  };
+
+  const handleRemovePermission = (permissionId) => {
+    console.warn("[Remove Permission] Backend integration pending:", permissionId);
+    // TODO: useRemoveGroupPermission → invalidate ["group-permissions", groupId]
+  };
+
+  /* ---------- Loading ---------- */
+  if (groupsLoading) {
+    return (
+      <div className="animate-pulse space-y-6">
+        <div className="h-5 w-32 rounded bg-surface-light" />
+        <div className="h-32 rounded-xl border border-border bg-surface" />
+        <div className="h-64 rounded-xl border border-border bg-surface" />
+      </div>
+    );
+  }
+
+  /* ---------- Not found ---------- */
+  if (!group) return <NotFound groupId={groupId} onBack={goBack} />;
+
+  /* ---------- Main render ---------- */
   return (
     <div className="space-y-6 sm:space-y-8">
       {/* Back */}
       <button
         type="button"
-        onClick={onBack}
+        onClick={goBack}
         className="inline-flex items-center gap-1.5 text-sm text-muted transition hover:text-text"
       >
         <ArrowLeft className="h-4 w-4" />
@@ -122,23 +211,13 @@ const GroupDetail = ({
       </button>
 
       {/* Header */}
-      <header className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <div className="min-w-0">
-          <h1 className="break-words text-2xl font-semibold tracking-tight text-text lg:text-3xl">
-            {group.name}
-          </h1>
-          <p className="mt-1.5 text-sm text-muted">
-            Group · Created {formatDate(group.created_at)}
-          </p>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => onEdit(group)}
-          className="inline-flex shrink-0 items-center justify-center self-start rounded-lg border border-border bg-surface px-4 py-2.5 text-sm font-medium text-muted transition hover:bg-surface-light hover:text-text"
-        >
-          Edit
-        </button>
+      <header>
+        <h1 className="break-words text-2xl font-semibold tracking-tight text-text lg:text-3xl">
+          {group.name}
+        </h1>
+        <p className="mt-1.5 text-sm text-muted">
+          Group · Created {formatDate(group.created_at)}
+        </p>
       </header>
 
       {/* Permissions */}
@@ -148,7 +227,23 @@ const GroupDetail = ({
           meta={`${permissions.length} of ${allPermissions.length}`}
         />
 
-        {permissions.length === 0 ? (
+        {permsLoading ? (
+          <SectionSkeleton />
+        ) : permsError ? (
+          <div className="rounded-xl border border-primary/30 bg-surface p-6 text-center shadow-card">
+            <AlertCircle className="mx-auto h-6 w-6 text-primary" />
+            <p className="mt-2 text-sm font-medium text-text">
+              Failed to load permissions
+            </p>
+            <button
+              type="button"
+              onClick={refetchPerms}
+              className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface px-3 py-2 text-sm font-medium text-muted transition hover:bg-surface-light hover:text-text"
+            >
+              Retry
+            </button>
+          </div>
+        ) : permissions.length === 0 ? (
           <div className="rounded-xl border border-border bg-surface p-6 text-center shadow-card">
             <p className="text-sm text-muted">
               No permissions assigned to this group yet.
@@ -160,7 +255,7 @@ const GroupDetail = ({
               <PermissionChip
                 key={p.permission_id}
                 permission={p.permission}
-                onRemove={onRemovePermission}
+                onRemove={handleRemovePermission}
               />
             ))}
           </div>
@@ -170,7 +265,7 @@ const GroupDetail = ({
           <h3 className="text-sm font-semibold text-text">Add Permission</h3>
           <AddPermission
             available={availablePermissions}
-            onAdd={onAddPermission}
+            onAdd={handleAddPermission}
           />
         </div>
       </section>
@@ -187,7 +282,9 @@ const GroupDetail = ({
           }
         />
 
-        {users.length === 0 ? (
+        {usersLoading ? (
+          <SectionSkeleton />
+        ) : users.length === 0 ? (
           <div className="rounded-xl border border-border bg-surface p-6 text-center shadow-card">
             <p className="text-sm text-muted">
               No users assigned to this group yet.

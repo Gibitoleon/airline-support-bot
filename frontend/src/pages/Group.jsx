@@ -1,41 +1,60 @@
 import { useMemo, useState } from "react";
-import { Plus, Search, UsersRound, X } from "lucide-react";
-import {
-  groupsData,
-  groupPermissionsData,
-  allPermissionsData,
-  groupUsersData,
-} from "../../data/group.data.js";
+import { useNavigate } from "react-router-dom";
+import { AlertCircle, Plus, Search, UsersRound, X } from "lucide-react";
+
 import GroupCard from "../components/groups/GroupCard.jsx";
 import GroupFormModal from "../components/groups/GroupFormModal.jsx";
-import GroupDetail from "../components/groups/GroupDetails.jsx";
+import useGroups from "../customhooks/useGroup.js";
+
+/* ---------- Skeleton ---------- */
+const GroupsSkeleton = () => (
+  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    {[0, 1, 2, 3, 4, 5].map((i) => (
+      <div
+        key={i}
+        className="h-32 animate-pulse rounded-xl border border-border bg-surface"
+      />
+    ))}
+  </div>
+);
+
+/* ---------- Error ---------- */
+const GroupsError = ({ message, onRetry }) => (
+  <div className="rounded-xl border border-primary/30 bg-surface p-10 text-center shadow-card">
+    <AlertCircle className="mx-auto h-8 w-8 text-primary" />
+    <p className="mt-3 text-sm font-medium text-text">
+      Failed to load groups
+    </p>
+    <p className="mt-1 text-sm text-muted">
+      {message || "Something went wrong. Please try again."}
+    </p>
+    <button
+      type="button"
+      onClick={onRetry}
+      className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white shadow-glow transition hover:bg-primary-hover"
+    >
+      Retry
+    </button>
+  </div>
+);
 
 const Groups = () => {
-  const [groups, setGroups] = useState(groupsData.groups);
-  const [permissions, setPermissions] = useState(
-    groupPermissionsData.permissions
-  );
-  const [query, setQuery] = useState("");
-  const [selectedGroupId, setSelectedGroupId] = useState(null);
+  const navigate = useNavigate();
 
+  const {
+    data: groups = [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useGroups();
+
+  const [query, setQuery] = useState("");
   const [formState, setFormState] = useState({
     open: false,
     mode: "create",
     group: null,
   });
-
-  const selectedGroup =
-    groups.find((g) => g.id === selectedGroupId) ?? null;
-
-  const selectedPermissions = useMemo(
-    () => permissions.filter((p) => p.group_id === selectedGroupId),
-    [permissions, selectedGroupId]
-  );
-
-  const selectedUsers = useMemo(
-    () => (selectedGroupId ? groupUsersData[selectedGroupId] ?? [] : []),
-    [selectedGroupId]
-  );
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -46,95 +65,45 @@ const Groups = () => {
   const openCreate = () =>
     setFormState({ open: true, mode: "create", group: null });
 
-  const openEdit = (group) =>
-    setFormState({ open: true, mode: "edit", group });
-
   const closeForm = () =>
     setFormState({ open: false, mode: "create", group: null });
 
   const handleFormSubmit = ({ name }) => {
-    const now = new Date().toISOString();
-
-    if (formState.mode === "create") {
-      setGroups((prev) => [
-        ...prev,
-        {
-          id: Math.max(0, ...prev.map((g) => g.id)) + 1,
-          name,
-          created_at: now,
-          updated_at: now,
-        },
-      ]);
-    } else if (formState.mode === "edit" && formState.group) {
-      setGroups((prev) =>
-        prev.map((g) =>
-          g.id === formState.group.id ? { ...g, name, updated_at: now } : g
-        )
-      );
-    }
-
+    // TODO: swap for useCreateGroup mutation when POST /group is ready
+    console.warn("[Create Group] Backend integration pending:", { name });
     closeForm();
   };
 
-  /* ---------- Permission actions ---------- */
-  const handleAddPermission = (permissionId) => {
-    if (!selectedGroupId) return;
-    const permission = allPermissionsData.find((p) => p.id === permissionId);
-    if (!permission) return;
-
-    const now = new Date().toISOString();
-    setPermissions((prev) => [
-      ...prev,
-      {
-        group_id: selectedGroupId,
-        permission_id: permission.id,
-        created_at: now,
-        updated_at: now,
-        permission,
-      },
-    ]);
-  };
-
-  const handleRemovePermission = (permissionId) => {
-    if (!selectedGroupId) return;
-    setPermissions((prev) =>
-      prev.filter(
-        (p) =>
-          !(
-            p.group_id === selectedGroupId &&
-            p.permission_id === permissionId
-          )
-      )
-    );
-  };
-
-  /* ---------- Detail view ---------- */
-  if (selectedGroup) {
+  if (isLoading) {
     return (
-      <>
-        <GroupDetail
-          group={selectedGroup}
-          permissions={selectedPermissions}
-          allPermissions={allPermissionsData}
-          users={selectedUsers}
-          onBack={() => setSelectedGroupId(null)}
-          onAddPermission={handleAddPermission}
-          onRemovePermission={handleRemovePermission}
-          onEdit={openEdit}
-        />
-
-        <GroupFormModal
-          open={formState.open}
-          mode={formState.mode}
-          group={formState.group}
-          onClose={closeForm}
-          onSubmit={handleFormSubmit}
-        />
-      </>
+      <div className="space-y-6 sm:space-y-8">
+        <header>
+          <h1 className="text-2xl font-semibold tracking-tight text-text lg:text-3xl">
+            Groups
+          </h1>
+          <p className="mt-1.5 text-sm text-muted">Loading groups...</p>
+        </header>
+        <GroupsSkeleton />
+      </div>
     );
   }
 
-  /* ---------- List view ---------- */
+  if (isError) {
+    return (
+      <div className="space-y-6 sm:space-y-8">
+        <header>
+          <h1 className="text-2xl font-semibold tracking-tight text-text lg:text-3xl">
+            Groups
+          </h1>
+        </header>
+        <GroupsError
+          message={error?.response?.data?.message}
+          onRetry={refetch}
+        />
+      </div>
+    );
+  }
+
   const hasQuery = query.trim().length > 0;
 
   return (
@@ -210,8 +179,7 @@ const Groups = () => {
             <GroupCard
               key={group.id}
               group={group}
-              onOpen={(g) => setSelectedGroupId(g.id)}
-            
+              onOpen={(g) => navigate(`/admin/groups/${g.id}`)}
             />
           ))}
         </div>

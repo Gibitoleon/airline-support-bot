@@ -12,29 +12,36 @@ import Permissions from "./pages/Permission.jsx";
 import Groups from "./pages/Group.jsx";
 import Feedback from "./pages/Feedback.jsx";
 import Login from "./pages/Login.jsx";
+import UserDetail from "./components/user/UserDetail.jsx";
+import DocumentDetails from "./components/documents/DocumentDetails.jsx";
+import GroupDetail from "./components/groups/GroupDetails.jsx";
 import Landing from "./pages/Landing.jsx";
+import AcceptInvitation from "./pages/AcceptInvitation.jsx";
 import "./App.css";
 import useAuthStore from "./stores/useLoginStore.js";
 
 
 function App() {
-  const user = useAuthStore((state)=>state.user)
-  const userId = user?.userid
-  console.log(user)
-  const clearUser = useAuthStore((state)=>state.clearUser)
+  const user = useAuthStore((state) => state.user);
+  const userId = user?.userid;
+  console.log(user);
+  const clearUser = useAuthStore((state) => state.clearUser);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = () => {
-    clearUser()
+    clearUser();
     setSidebarOpen(false);
   };
 
   return (
     <>
-      <AppToaster/>
+      <AppToaster />
 
       {!userId ? (
-        <Login />
+        <Routes>
+          <Route path="/accept-invitation" element={<AcceptInvitation />} />
+          <Route path="*" element={<Login />} />
+        </Routes>
       ) : (
         <div className="flex min-h-screen w-full bg-background text-text antialiased">
           <div className="pointer-events-none fixed inset-0" />
@@ -67,11 +74,15 @@ function App() {
                 <Routes>
                   <Route path="/admin/dashboard" element={<Dashboard />} />
                   <Route path="/admin/groups" element={<Groups />} />
+                  <Route path="/admin/groups/:groupId" element={<GroupDetail />} />
                   <Route path="/admin/permissions" element={<Permissions />} />
                   <Route path="/admin/users" element={<Users />} />
                   <Route path="/admin/documents" element={<Documents />} />
+                  <Route path="/admin/documents/:documentId" element={<DocumentDetails />} />
+                  <Route path="/admin/users/:userId" element={<UserDetail />} />
                   <Route path="/admin/feedbacks" element={<Feedback />} />
                   <Route path="/login" element={<Login />} />
+                 
                 </Routes>
               </div>
             </main>

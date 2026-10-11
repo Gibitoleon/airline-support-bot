@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
-import { Pencil, Plus, Search, ShieldCheck, X } from "lucide-react";
-import { permissionsData } from "../../data/permission.data.js";
+import { AlertCircle, Pencil, Plus, Search, ShieldCheck, X } from "lucide-react";
+
 import PermissionFormModal from "../components/permissions/PermissionFormModal.jsx";
+import usePermissions from "../customhooks/usePermission.js";
 import formatDate from "../utils/dateFormatter.js";
 import formatLabel from "../utils/labelFormatter.js";
 
@@ -41,11 +42,49 @@ const PermissionCard = ({ permission, onEdit }) => (
   </div>
 );
 
+/* ---------- Loading skeleton ---------- */
+const PermissionsSkeleton = () => (
+  <div className="animate-pulse space-y-3">
+    {[0, 1, 2, 3].map((i) => (
+      <div
+        key={i}
+        className="h-20 rounded-xl border border-border bg-surface"
+      />
+    ))}
+  </div>
+);
+
+/* ---------- Error state ---------- */
+const PermissionsError = ({ message, onRetry }) => (
+  <div className="rounded-xl border border-primary/30 bg-surface p-10 text-center shadow-card">
+    <AlertCircle className="mx-auto h-8 w-8 text-primary" />
+    <p className="mt-3 text-sm font-medium text-text">
+      Failed to load permissions
+    </p>
+    <p className="mt-1 text-sm text-muted">
+      {message || "Something went wrong. Please try again."}
+    </p>
+    <button
+      type="button"
+      onClick={onRetry}
+      className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white shadow-glow transition hover:bg-primary-hover"
+    >
+      Retry
+    </button>
+  </div>
+);
+
 /* ---------- Page ---------- */
 const Permissions = () => {
-  const [permissions, setPermissions] = useState(permissionsData.permissions);
-  const [query, setQuery] = useState("");
+  const {
+    data: permissions = [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = usePermissions();
 
+  const [query, setQuery] = useState("");
   const [formState, setFormState] = useState({
     open: false,
     mode: "create",
@@ -68,33 +107,50 @@ const Permissions = () => {
     setFormState({ open: false, mode: "create", permission: null });
 
   const handleSubmit = ({ name }) => {
-    const now = new Date().toISOString();
-
-    if (formState.mode === "create") {
-      setPermissions((prev) => [
-        ...prev,
-        {
-          id: Math.max(0, ...prev.map((p) => p.id)) + 1,
-          name,
-          created_at: now,
-          updated_at: now,
-        },
-      ]);
-    } else if (formState.mode === "edit" && formState.permission) {
-      setPermissions((prev) =>
-        prev.map((p) =>
-          p.id === formState.permission.id
-            ? { ...p, name, updated_at: now }
-            : p
-        )
-      );
-    }
-
+    // TODO: swap for useCreatePermission / useUpdatePermission mutations
+    // which should invalidate ["permissions"] on success
+    console.warn(`[${formState.mode} Permission] Backend integration pending:`, {
+      id: formState.permission?.id,
+      name,
+    });
     closeForm();
   };
 
   const hasQuery = query.trim().length > 0;
 
+  /* ---------- Loading ---------- */
+  if (isLoading) {
+    return (
+      <div className="space-y-6 sm:space-y-8">
+        <header>
+          <h1 className="text-2xl font-semibold tracking-tight text-text lg:text-3xl">
+            Permissions
+          </h1>
+          <p className="mt-1.5 text-sm text-muted">Loading permissions...</p>
+        </header>
+        <PermissionsSkeleton />
+      </div>
+    );
+  }
+
+  /* ---------- Error ---------- */
+  if (isError) {
+    return (
+      <div className="space-y-6 sm:space-y-8">
+        <header>
+          <h1 className="text-2xl font-semibold tracking-tight text-text lg:text-3xl">
+            Permissions
+          </h1>
+        </header>
+        <PermissionsError
+          message={error?.response?.data?.message}
+          onRetry={refetch}
+        />
+      </div>
+    );
+  }
+
+  /* ---------- Main ---------- */
   return (
     <div className="space-y-6 sm:space-y-8">
       {/* Header */}
@@ -147,7 +203,9 @@ const Permissions = () => {
         <div className="rounded-xl border border-border bg-surface p-10 text-center shadow-card">
           <ShieldCheck className="mx-auto h-8 w-8 text-muted" />
           <p className="mt-3 text-sm font-medium text-text">
-            {hasQuery ? "No permissions match your search" : "No permissions yet"}
+            {hasQuery
+              ? "No permissions match your search"
+              : "No permissions yet"}
           </p>
           <p className="mt-1 text-sm text-muted">
             {hasQuery
@@ -170,11 +228,7 @@ const Permissions = () => {
           {/* Mobile: cards */}
           <div className="space-y-3 md:hidden">
             {filtered.map((p) => (
-              <PermissionCard
-                key={p.id}
-                permission={p}
-                onEdit={openEdit}
-              />
+              <PermissionCard key={p.id} permission={p} onEdit={openEdit} />
             ))}
           </div>
 

@@ -1,5 +1,6 @@
-import { Star, MessageSquareQuote } from "lucide-react";
-import { feedbackData } from "../../data/feedback.data.js";
+import { AlertCircle, Star, MessageSquareQuote } from "lucide-react";
+
+import useFeedback from "../customhooks/useFeedback.js";
 
 /* ---------- Helpers ---------- */
 const formatDateTime = (iso) =>
@@ -60,7 +61,7 @@ const FeedbackCard = ({ feedback }) => {
             Question
           </p>
           <p className="mt-1.5 text-sm leading-relaxed text-text">
-            {query.question}
+            {query?.question}
           </p>
         </div>
 
@@ -69,7 +70,7 @@ const FeedbackCard = ({ feedback }) => {
             Response
           </p>
           <p className="mt-1.5 text-sm leading-relaxed text-muted">
-            {query.response}
+            {query?.response}
           </p>
         </div>
       </div>
@@ -87,13 +88,83 @@ const FeedbackCard = ({ feedback }) => {
   );
 };
 
+/* ---------- Skeleton ---------- */
+const FeedbackSkeleton = () => (
+  <div className="animate-pulse space-y-4">
+    {[0, 1, 2].map((i) => (
+      <div
+        key={i}
+        className="h-56 rounded-xl border border-border bg-surface"
+      />
+    ))}
+  </div>
+);
+
+/* ---------- Error state ---------- */
+const FeedbackError = ({ message, onRetry }) => (
+  <div className="rounded-xl border border-primary/30 bg-surface p-10 text-center shadow-card">
+    <AlertCircle className="mx-auto h-8 w-8 text-primary" />
+    <p className="mt-3 text-sm font-medium text-text">
+      Failed to load feedback
+    </p>
+    <p className="mt-1 text-sm text-muted">
+      {message || "Something went wrong. Please try again."}
+    </p>
+    <button
+      type="button"
+      onClick={onRetry}
+      className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white shadow-glow transition hover:bg-primary-hover"
+    >
+      Retry
+    </button>
+  </div>
+);
+
 /* ---------- Page ---------- */
 const Feedback = () => {
-  const feedbacks = feedbackData.Feedbacks;
+  const {
+    data: feedbacks = [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useFeedback();
 
+  /* ---------- Loading ---------- */
+  if (isLoading) {
+    return (
+      <div className="space-y-6 sm:space-y-8">
+        <header>
+          <h1 className="text-2xl font-semibold tracking-tight text-text lg:text-3xl">
+            Feedback
+          </h1>
+          <p className="mt-1.5 text-sm text-muted">Loading feedback...</p>
+        </header>
+        <FeedbackSkeleton />
+      </div>
+    );
+  }
+
+  /* ---------- Error ---------- */
+  if (isError) {
+    return (
+      <div className="space-y-6 sm:space-y-8">
+        <header>
+          <h1 className="text-2xl font-semibold tracking-tight text-text lg:text-3xl">
+            Feedback
+          </h1>
+        </header>
+        <FeedbackError
+          message={error?.response?.data?.message}
+          onRetry={refetch}
+        />
+      </div>
+    );
+  }
+
+  /* ---------- Main ---------- */
   return (
     <div className="space-y-6 sm:space-y-8">
-      {/* Header */}
       <header>
         <h1 className="text-2xl font-semibold tracking-tight text-text lg:text-3xl">
           Feedback
@@ -104,7 +175,6 @@ const Feedback = () => {
         </p>
       </header>
 
-      {/* Empty state */}
       {feedbacks.length === 0 ? (
         <div className="rounded-xl border border-border bg-surface p-10 text-center shadow-card">
           <MessageSquareQuote className="mx-auto h-8 w-8 text-muted" />
