@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   AlertCircle,
+  Loader2,
   Plus,
   Users as UsersIcon,
   X,
@@ -12,11 +13,13 @@ import useGroups from "../../customhooks/useGroup.js";
 import useGroupPermissions from "../../customhooks/useGroupPermissions.js";
 import useGroupUsers from "../../customhooks/useGroupUsers.js";
 import usePermissions from "../../customhooks/usePermission.js";
+import useAddGroupPermission from "../../customhooks/useAddPermissions.js";
+import useRemoveGroupPermission from "../../customhooks/useRemovePermissions.js";
 import formatDate from "../../utils/dateFormatter.js";
 import formatLabel from "../../utils/labelFormatter.js";
 
 /* ---------- Permission chip ---------- */
-const PermissionChip = ({ permission, onRemove }) => (
+const PermissionChip = ({ permission, onRemove, disabled }) => (
   <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-elevated px-3 py-2.5">
     <span className="min-w-0 flex-1 truncate text-sm font-medium text-text">
       {formatLabel(permission.name)}
@@ -24,8 +27,9 @@ const PermissionChip = ({ permission, onRemove }) => (
     <button
       type="button"
       onClick={() => onRemove(permission.id)}
+      disabled={disabled}
       aria-label={`Remove ${permission.name}`}
-      className="grid h-7 w-7 shrink-0 place-items-center rounded-md text-muted transition hover:bg-primary/10 hover:text-primary"
+      className="grid h-7 w-7 shrink-0 place-items-center rounded-md text-muted transition hover:bg-primary/10 hover:text-primary disabled:cursor-not-allowed disabled:opacity-50"
     >
       <X className="h-3.5 w-3.5" />
     </button>
@@ -33,7 +37,7 @@ const PermissionChip = ({ permission, onRemove }) => (
 );
 
 /* ---------- Add permission ---------- */
-const AddPermission = ({ available, onAdd }) => {
+const AddPermission = ({ available, onAdd, isPending }) => {
   const [selected, setSelected] = useState("");
 
   if (available.length === 0) {
@@ -48,6 +52,7 @@ const AddPermission = ({ available, onAdd }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isPending) return;
     const id = Number(selected || available[0].id);
     if (!id) return;
     onAdd(id);
@@ -58,8 +63,9 @@ const AddPermission = ({ available, onAdd }) => {
     <form onSubmit={handleSubmit} className="flex flex-col gap-2 sm:flex-row">
       <select
         value={selected}
+        disabled={isPending}
         onChange={(e) => setSelected(e.target.value)}
-        className="w-full min-w-0 rounded-lg border border-border bg-elevated px-3 py-2.5 text-sm text-text outline-none transition focus:border-primary/50 focus:ring-2 focus:ring-ring/30 sm:flex-1"
+        className="w-full min-w-0 rounded-lg border border-border bg-elevated px-3 py-2.5 text-sm text-text outline-none transition focus:border-primary/50 focus:ring-2 focus:ring-ring/30 disabled:cursor-not-allowed disabled:opacity-60 sm:flex-1"
       >
         {available.map((p) => (
           <option key={p.id} value={p.id} className="bg-elevated">
@@ -70,10 +76,20 @@ const AddPermission = ({ available, onAdd }) => {
 
       <button
         type="submit"
-        className="flex w-full shrink-0 items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white shadow-glow transition hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-surface sm:w-auto"
+        disabled={isPending}
+        className="flex w-full shrink-0 items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white shadow-glow transition hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-surface disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
       >
-        <Plus className="h-4 w-4" />
-        Add Permission
+        {isPending ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Adding...
+          </>
+        ) : (
+          <>
+            <Plus className="h-4 w-4" />
+            Add Permission
+          </>
+        )}
       </button>
     </form>
   );
@@ -152,8 +168,11 @@ const GroupDetail = () => {
 
   const { data: users = [], isLoading: usersLoading } = useGroupUsers(groupId);
 
-  // Full permissions catalog — replaces the mock
   const { data: allPermissions = [] } = usePermissions();
+
+  const { addGroupPermission, isPending: isAdding } = useAddGroupPermission();
+  const { removeGroupPermission, isPending: isRemoving } =
+    useRemoveGroupPermission();
 
   const group = useMemo(
     () => groups.find((g) => String(g.id) === String(groupId)),
@@ -171,18 +190,13 @@ const GroupDetail = () => {
 
   const goBack = () => navigate("/admin/groups");
 
-  /* ---------- Permission actions (local — wire to mutations later) ---------- */
+  /* ---------- Permission actions ---------- */
   const handleAddPermission = (permissionId) => {
-    console.warn("[Add Permission] Backend integration pending:", permissionId);
-    // TODO: useAddGroupPermission → invalidate ["group-permissions", groupId]
+    addGroupPermission({ groupId, permissionId });
   };
 
   const handleRemovePermission = (permissionId) => {
-    console.warn(
-      "[Remove Permission] Backend integration pending:",
-      permissionId,
-    );
-    // TODO: useRemoveGroupPermission → invalidate ["group-permissions", groupId]
+    removeGroupPermission({ groupId, permissionId });
   };
 
   /* ---------- Loading ---------- */
@@ -258,6 +272,7 @@ const GroupDetail = () => {
                 key={p.permission_id}
                 permission={p.permission}
                 onRemove={handleRemovePermission}
+                disabled={isRemoving}
               />
             ))}
           </div>
@@ -268,6 +283,7 @@ const GroupDetail = () => {
           <AddPermission
             available={availablePermissions}
             onAdd={handleAddPermission}
+            isPending={isAdding}
           />
         </div>
       </section>
