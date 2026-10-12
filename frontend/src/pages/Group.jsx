@@ -57,14 +57,10 @@ const Groups = () => {
   const openCreate = () =>
     setFormState({ open: true, mode: "create", group: null });
 
+  const openEdit = (group) => setFormState({ open: true, mode: "edit", group });
+
   const closeForm = () =>
     setFormState({ open: false, mode: "create", group: null });
-
-  const handleFormSubmit = ({ name }) => {
-    // TODO: swap for useCreateGroup mutation when POST /group is ready
-    console.warn("[Create Group] Backend integration pending:", { name });
-    closeForm();
-  };
 
   if (isLoading) {
     return (
@@ -172,6 +168,7 @@ const Groups = () => {
               key={group.id}
               group={group}
               onOpen={(g) => navigate(`/admin/groups/${g.id}`)}
+              onEdit={openEdit}
             />
           ))}
         </div>
@@ -182,7 +179,6 @@ const Groups = () => {
         mode={formState.mode}
         group={formState.group}
         onClose={closeForm}
-        onSubmit={handleFormSubmit}
       />
     </div>
   );

@@ -8,6 +8,8 @@ import formatDate from "../../utils/dateFormatter.js";
 import useStaffUsers from "../../customhooks/useStaffUsers.js";
 import useUserGroups from "../../customhooks/useUserGroups.js";
 import useGroups from "../../customhooks/useGroup.js";
+import useAddUserToGroup from "../../customhooks/useAddUserToGroup.js";
+import useRemoveUserFromGroup from "../../customhooks/useRemoveUserFromGroup.js";
 
 /* ---------- Loading skeleton ---------- */
 const UserDetailSkeleton = () => (
@@ -85,8 +87,11 @@ const UserDetail = () => {
     refetch,
   } = useUserGroups(userId);
 
-  // Full group catalog — real API data
   const { data: allGroups = [] } = useGroups();
+
+  const { addUserToGroup, isPending: isAdding } = useAddUserToGroup();
+  const { removeUserFromGroup, isPending: isRemoving } =
+    useRemoveUserFromGroup();
 
   const user = users.find((u) => String(u.id) === String(userId));
   const goBack = () => navigate("/admin/users");
@@ -108,6 +113,15 @@ const UserDetail = () => {
   /* Computed */
   const groupIds = new Set(userGroups.map((ug) => ug.group.id));
   const availableGroups = allGroups.filter((g) => !groupIds.has(g.id));
+
+  /* Handlers */
+  const handleAdd = (groupId) => {
+    addUserToGroup({ userId, groupId });
+  };
+
+  const handleRemove = (groupId) => {
+    removeUserFromGroup({ userId, groupId });
+  };
 
   return (
     <div className="space-y-6">
@@ -173,10 +187,8 @@ const UserDetail = () => {
               <GroupChip
                 key={ug.group_id}
                 group={ug.group}
-                onRemove={() => {
-                  // TODO: DELETE /usergroups when ready
-                  console.warn("[Remove from group]", ug.group_id);
-                }}
+                onRemove={() => handleRemove(ug.group_id)}
+                disabled={isRemoving}
               />
             ))}
           </div>
@@ -188,10 +200,8 @@ const UserDetail = () => {
         <h3 className="text-base font-semibold text-text">Add to Group</h3>
         <AddToGroup
           availableGroups={availableGroups}
-          onAdd={(groupId) => {
-            // TODO: POST /usergroups when ready
-            console.warn("[Add to group]", groupId);
-          }}
+          onAdd={handleAdd}
+          isPending={isAdding}
         />
       </div>
     </div>

@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { Plus, Save, X } from "lucide-react";
+import { Loader2, Plus, Save, X } from "lucide-react";
+
 import formatDate from "../../utils/dateFormatter.js";
+import useCreateGroup from "../../customhooks/useCreateGroups.js";
+import useUpdateGroup from "../../customhooks/useEditGroup.js";
 
 const FIELD_CLASS =
   "w-full rounded-lg border border-border bg-elevated px-3 py-2.5 text-sm text-text outline-none transition placeholder:text-muted focus:border-primary/50 focus:ring-2 focus:ring-ring/30 disabled:cursor-not-allowed disabled:opacity-70";
@@ -11,30 +14,37 @@ const MODE_CONFIG = {
     subtitle: "Add a new group to the system.",
     submit: "Create Group",
     icon: Plus,
+    pendingLabel: "Creating...",
   },
   edit: {
     title: "Edit Group",
     subtitle: "Update the group name.",
     submit: "Save Changes",
     icon: Save,
+    pendingLabel: "Saving...",
   },
   view: {
     title: "Group Details",
     subtitle: "Group information.",
     submit: null,
     icon: null,
+    pendingLabel: null,
   },
 };
 
-const GroupFormModal = ({
-  open,
-  mode = "create",
-  group,
-  onClose,
-  onSubmit,
-}) => {
+const GroupFormModal = ({ open, mode = "create", group, onClose }) => {
   const [name, setName] = useState("");
   const inputRef = useRef(null);
+
+  const { createGroup, isPending: isCreating } = useCreateGroup({
+    onSuccess: onClose,
+  });
+
+  const { updateGroup, isPending: isUpdating } = useUpdateGroup({
+    onSuccess: onClose,
+  });
+
+  const isPending = isCreating || isUpdating;
 
   useEffect(() => {
     if (!open) return;
@@ -47,7 +57,7 @@ const GroupFormModal = ({
       focusTimer = setTimeout(() => inputRef.current?.focus(), 50);
     }
 
-    const onKey = (e) => e.key === "Escape" && onClose();
+    const onKey = (e) => e.key === "Escape" && !isPending && onClose();
     window.addEventListener("keydown", onKey);
 
     const prevOverflow = document.body.style.overflow;
@@ -58,7 +68,7 @@ const GroupFormModal = ({
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
     };
-  }, [open, mode, group, onClose]);
+  }, [open, mode, group, onClose, isPending]);
 
   if (!open) return null;
 
@@ -67,16 +77,27 @@ const GroupFormModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isView) return;
+    if (isView || isPending) return;
+
     const trimmed = name.trim();
     if (!trimmed) return;
-    onSubmit({ name: trimmed });
+
+    if (mode === "create") {
+      createGroup({ name: trimmed });
+      return;
+    }
+
+    // mode === "edit"
+    updateGroup({
+      groupId: group.id,
+      name: trimmed,
+    });
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4">
       <div
-        onClick={onClose}
+        onClick={isPending ? undefined : onClose}
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         aria-hidden="true"
       />
@@ -101,8 +122,9 @@ const GroupFormModal = ({
           <button
             type="button"
             onClick={onClose}
+            disabled={isPending}
             aria-label="Close"
-            className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-muted transition hover:bg-surface-light hover:text-text"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-muted transition hover:bg-surface-light hover:text-text disabled:cursor-not-allowed disabled:opacity-60"
           >
             <X className="h-4 w-4" />
           </button>
@@ -121,7 +143,7 @@ const GroupFormModal = ({
               id="group-name"
               type="text"
               required={!isView}
-              disabled={isView}
+              disabled={isView || isPending}
               placeholder="e.g. Operations"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -154,7 +176,8 @@ const GroupFormModal = ({
             <button
               type="button"
               onClick={onClose}
-              className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm font-medium text-muted transition hover:bg-surface-light hover:text-text sm:w-auto"
+              disabled={isPending}
+              className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm font-medium text-muted transition hover:bg-surface-light hover:text-text disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
             >
               {isView ? "Close" : "Cancel"}
             </button>
@@ -162,10 +185,20 @@ const GroupFormModal = ({
             {!isView && (
               <button
                 type="submit"
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white shadow-glow transition hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-surface sm:w-auto"
+                disabled={isPending}
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white shadow-glow transition hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-surface disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
               >
-                <config.icon className="h-4 w-4" />
-                {config.submit}
+                {isPending ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    {config.pendingLabel}
+                  </>
+                ) : (
+                  <>
+                    <config.icon className="h-4 w-4" />
+                    {config.submit}
+                  </>
+                )}
               </button>
             )}
           </div>

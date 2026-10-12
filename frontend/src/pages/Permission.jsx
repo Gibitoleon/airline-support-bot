@@ -113,19 +113,6 @@ const Permissions = () => {
   const closeForm = () =>
     setFormState({ open: false, mode: "create", permission: null });
 
-  const handleSubmit = ({ name }) => {
-    // TODO: swap for useCreatePermission / useUpdatePermission mutations
-    // which should invalidate ["permissions"] on success
-    console.warn(
-      `[${formState.mode} Permission] Backend integration pending:`,
-      {
-        id: formState.permission?.id,
-        name,
-      },
-    );
-    closeForm();
-  };
-
   const hasQuery = query.trim().length > 0;
 
   /* ---------- Loading ---------- */
@@ -309,13 +296,12 @@ const Permissions = () => {
         </>
       )}
 
-      {/* Modal */}
+      {/* Modal — owns its own create/update mutations */}
       <PermissionFormModal
         open={formState.open}
         mode={formState.mode}
         permission={formState.permission}
         onClose={closeForm}
-        onSubmit={handleSubmit}
       />
     </div>
   );

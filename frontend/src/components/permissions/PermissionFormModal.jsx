@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Plus, Save, X } from "lucide-react";
+import { Loader2, Plus, Save, X } from "lucide-react";
+
+import useCreatePermission from "../../customhooks/useCreatePermission.js";
+import useUpdatePermission from "../../customhooks/useUpdatePermission.js";
 
 const FIELD_CLASS =
-  "w-full rounded-lg border border-border bg-elevated px-3 py-2.5 text-sm text-text outline-none transition placeholder:text-muted focus:border-primary/50 focus:ring-2 focus:ring-ring/30";
+  "w-full rounded-lg border border-border bg-elevated px-3 py-2.5 text-sm text-text outline-none transition placeholder:text-muted focus:border-primary/50 focus:ring-2 focus:ring-ring/30 font-mono uppercase disabled:cursor-not-allowed disabled:opacity-60";
 
 const MODE_CONFIG = {
   create: {
@@ -10,12 +13,14 @@ const MODE_CONFIG = {
     subtitle: "Add a new permission to the catalog.",
     submit: "Create Permission",
     icon: Plus,
+    pendingLabel: "Creating...",
   },
   edit: {
     title: "Edit Permission",
     subtitle: "Rename this permission.",
     submit: "Save Changes",
     icon: Save,
+    pendingLabel: "Saving...",
   },
 };
 
@@ -24,10 +29,19 @@ const PermissionFormModal = ({
   mode = "create",
   permission,
   onClose,
-  onSubmit,
 }) => {
   const [name, setName] = useState("");
   const inputRef = useRef(null);
+
+  const { createPermission, isPending: isCreating } = useCreatePermission({
+    onSuccess: onClose,
+  });
+
+  const { updatePermission, isPending: isUpdating } = useUpdatePermission({
+    onSuccess: onClose,
+  });
+
+  const isPending = isCreating || isUpdating;
 
   useEffect(() => {
     if (!open) return;
@@ -35,7 +49,7 @@ const PermissionFormModal = ({
     setName(permission?.name ?? "");
 
     const t = setTimeout(() => inputRef.current?.focus(), 50);
-    const onKey = (e) => e.key === "Escape" && onClose();
+    const onKey = (e) => e.key === "Escape" && !isPending && onClose();
     window.addEventListener("keydown", onKey);
 
     const prevOverflow = document.body.style.overflow;
@@ -46,24 +60,34 @@ const PermissionFormModal = ({
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
     };
-  }, [open, permission, onClose]);
+  }, [open, permission, onClose, isPending]);
 
   if (!open) return null;
 
   const config = MODE_CONFIG[mode];
-  const Icon = config.icon;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isPending) return;
+
     const trimmed = name.trim().toUpperCase().replace(/\s+/g, "_");
     if (!trimmed) return;
-    onSubmit({ name: trimmed });
+
+    if (mode === "create") {
+      createPermission({ name: trimmed });
+      return;
+    }
+
+    updatePermission({
+      permissionId: permission.id,
+      name: trimmed,
+    });
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4">
       <div
-        onClick={onClose}
+        onClick={isPending ? undefined : onClose}
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         aria-hidden="true"
       />
@@ -88,8 +112,9 @@ const PermissionFormModal = ({
           <button
             type="button"
             onClick={onClose}
+            disabled={isPending}
             aria-label="Close"
-            className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-muted transition hover:bg-surface-light hover:text-text"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-muted transition hover:bg-surface-light hover:text-text disabled:cursor-not-allowed disabled:opacity-60"
           >
             <X className="h-4 w-4" />
           </button>
@@ -108,10 +133,11 @@ const PermissionFormModal = ({
               id="permission-name"
               type="text"
               required
+              disabled={isPending}
               placeholder="e.g. VIEW_REPORTS"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className={`${FIELD_CLASS} font-mono uppercase`}
+              className={FIELD_CLASS}
             />
             <p className="text-xs text-muted">
               Use UPPER_SNAKE_CASE. Spaces are converted to underscores.
@@ -122,16 +148,27 @@ const PermissionFormModal = ({
             <button
               type="button"
               onClick={onClose}
-              className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm font-medium text-muted transition hover:bg-surface-light hover:text-text sm:w-auto"
+              disabled={isPending}
+              className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm font-medium text-muted transition hover:bg-surface-light hover:text-text disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white shadow-glow transition hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-surface sm:w-auto"
+              disabled={isPending}
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white shadow-glow transition hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-surface disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
             >
-              <Icon className="h-4 w-4" />
-              {config.submit}
+              {isPending ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  {config.pendingLabel}
+                </>
+              ) : (
+                <>
+                  <config.icon className="h-4 w-4" />
+                  {config.submit}
+                </>
+              )}
             </button>
           </div>
         </form>
