@@ -40,6 +40,7 @@ function App() {
         <Routes>
           <Route path="/accept-invitation" element={<AcceptInvitation />} />
           <Route path="*" element={<Login />} />
+          <Route path="/landing" element={<Landing />} />
         </Routes>
       ) : (
         <div className="flex min-h-screen w-full bg-background text-text antialiased">

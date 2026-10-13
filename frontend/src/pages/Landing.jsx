@@ -2,7 +2,6 @@ import { useState } from "react";
 import {
   MessageCircle,
   X,
-  Send,
   MapPin,
   Plane,
   Clock,
@@ -11,129 +10,14 @@ import {
   Menu,
 } from "lucide-react";
 import logo from "../assets/images/logos/Kenya-Airways-Logo.svg";
+import ChatWidget from "../components/chat/ChatWidget.jsx";
 
 const HERO_IMAGE =
   "https://upload.wikimedia.org/wikipedia/commons/9/93/5Y-KZA_%2818529035463%29.jpg";
 
-/* ---------- Chat widget ---------- */
-const ChatWidget = () => {
-  const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      role: "assistant",
-      text: "Hi there! I'm the Kenya Airways support assistant. Ask me about baggage, check-in, refunds, or any travel question.",
-    },
-  ]);
-  const [input, setInput] = useState("");
-
-  const handleSend = (e) => {
-    e.preventDefault();
-    const text = input.trim();
-    if (!text) return;
-
-    setMessages((prev) => [
-      ...prev,
-      { id: Date.now(), role: "user", text },
-      {
-        id: Date.now() + 1,
-        role: "assistant",
-        text: "Thanks for your question. The RAG backend isn't wired up yet — this is just the UI shell.",
-      },
-    ]);
-    setInput("");
-  };
-
-  return (
-    <>
-      <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        aria-label={open ? "Close chat" : "Open chat"}
-        className="fixed bottom-4 right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-glow transition-colors hover:bg-primary-hover sm:bottom-6 sm:right-6"
-      >
-        {open ? (
-          <X className="h-6 w-6" />
-        ) : (
-          <MessageCircle className="h-6 w-6" />
-        )}
-      </button>
-
-      {open && (
-        <div className="fixed bottom-20 right-4 z-40 flex h-[520px] max-h-[calc(100dvh-6rem)] w-[380px] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-2xl sm:bottom-24 sm:right-6 sm:max-w-[calc(100vw-3rem)]">
-          <div className="flex items-center gap-3 border-b border-border bg-elevated px-4 py-3">
-            <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
-              <MessageCircle className="h-4 w-4" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-semibold text-text">
-                Kenya Airways Support
-              </p>
-              <p className="flex items-center gap-1.5 truncate text-xs text-muted">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                Online
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              aria-label="Close"
-              className="grid h-8 w-8 shrink-0 place-items-center rounded-md text-muted transition hover:bg-surface-light hover:text-text"
-            >
-              <X className="h-4 w-4" />
-            </button>
-          </div>
-
-          <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
-            {messages.map((m) => (
-              <div
-                key={m.id}
-                className={
-                  m.role === "user" ? "flex justify-end" : "flex justify-start"
-                }
-              >
-                <div
-                  className={[
-                    "max-w-[85%] break-words rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed",
-                    m.role === "user"
-                      ? "rounded-br-md bg-primary text-white"
-                      : "rounded-bl-md border border-border bg-elevated text-text",
-                  ].join(" ")}
-                >
-                  {m.text}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <form
-            onSubmit={handleSend}
-            className="flex items-center gap-2 border-t border-border bg-surface p-3"
-          >
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask a question..."
-              className="min-w-0 flex-1 rounded-lg border border-border bg-elevated px-3 py-2.5 text-sm text-text outline-none transition placeholder:text-muted focus:border-primary/50 focus:ring-2 focus:ring-ring/30"
-            />
-            <button
-              type="submit"
-              aria-label="Send"
-              className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary text-white transition hover:bg-primary-hover"
-            >
-              <Send className="h-4 w-4" />
-            </button>
-          </form>
-        </div>
-      )}
-    </>
-  );
-};
-
-/* ---------- Landing page ---------- */
 const Landing = () => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
 
   const navLinks = [
     { label: "Book", href: "#" },
@@ -147,7 +31,6 @@ const Landing = () => {
       {/* ---------- Header ---------- */}
       <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3.5 sm:px-6 sm:py-4">
-          {/* Logo — crop trick */}
           <a
             href="#"
             className="relative h-12 w-[200px] shrink-0 overflow-hidden sm:h-14 sm:w-[240px]"
@@ -413,11 +296,7 @@ const Landing = () => {
               </div>
               <button
                 type="button"
-                onClick={() =>
-                  document
-                    .querySelector('button[aria-label="Open chat"]')
-                    ?.click()
-                }
+                onClick={() => setChatOpen(true)}
                 className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-medium text-white shadow-glow transition-colors hover:bg-primary-hover sm:w-auto"
               >
                 <MessageCircle className="h-4 w-4" />
@@ -433,7 +312,6 @@ const Landing = () => {
         <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12">
           <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
             <div className="max-w-xs">
-              {/* Logo — crop trick */}
               <div className="relative h-14 w-[220px] overflow-hidden">
                 <img
                   src={logo}
@@ -500,7 +378,7 @@ const Landing = () => {
         </div>
       </footer>
 
-      <ChatWidget />
+      <ChatWidget isOpen={chatOpen} onOpenChange={setChatOpen} />
     </div>
   );
 };
