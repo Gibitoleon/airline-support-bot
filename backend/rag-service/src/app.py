@@ -7,6 +7,7 @@ from queues.deletion_queue import deletion_queue
 from queues.ingestion_queue import ingestion_queue
 from rag.embedding_models.embedding_factory import EmbeddingFactory
 from rag.llms.llama import LlamaManager
+from rag.llms.gemini import GeminiManager
 from rag.rerankers.cross_encoder import MiniLMReranker
 from rag.retrieval import RetrievalService
 from rag.vector_store.chroma_store import ChromaVectorStore
