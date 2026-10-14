@@ -1,5 +1,7 @@
 import os
+
 from openai import OpenAI
+
 from .interface import LLMManager
 from .prompts.prompts import Prompts
 
