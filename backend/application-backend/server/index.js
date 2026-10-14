@@ -1,35 +1,29 @@
-import app from './app.js';
-import 'dotenv/config';
-import db from '../models/index.js'; 
-import redisClient from '../config/redis/redis.config.js'
+import app from "./app.js";
+import "dotenv/config";
+import db from "../models/index.js";
+import redisClient from "../config/redis/redis.config.js";
 
-
-const port = process.env.PORT ;
-
- 
+const port = process.env.PORT;
 
 // server startup function to ensure Redis and database connections are established before starting the server
 async function startServer() {
-    try {
+  try {
+    // Test Redis connection
+    await redisClient.connect();
 
-        // Test Redis connection
-        await redisClient.connect();
+    console.log("Redis connected successfully");
+    // Test database connection
+    await db.sequelize.authenticate();
 
-       console.log('Redis connected successfully');
-        // Test database connection
-        await db.sequelize.authenticate();
+    console.log("Database connected successfully");
 
-        console.log('Database connected successfully');
-
-        // Only start Express after redis and  DB connection succeeds
-        app.listen(port, () => {
-            console.log(`Server is running on port ${port}`);
-        });
-
-    } catch (error) {
-        console.error('Server startup failed:', error);
-        
-    }
+    // Only start Express after redis and  DB connection succeeds
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+  } catch (error) {
+    console.error("Server startup failed:", error);
+  }
 }
 
 startServer();
