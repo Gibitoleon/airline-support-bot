@@ -9,7 +9,7 @@ const FetchApi = async (url, method = "GET", info) => {
     credentials: "include",
     headers: { "Content-Type": "application/json" },
     withCredentials: true,
-    baseURL: `http://localhost:3000/api/v1`,
+    baseURL: import.meta.env.VITE_API_URL,
   };
   if (method !== "GET" && method !== "DELETE") {
     config.data = info;

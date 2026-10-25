@@ -1,10 +1,18 @@
-# Ignore all data files
+# Ignore generated data by default
 data/*
+
+# Keep raw Markdown source documents
+!data/raw/
+!data/raw/**
 
 # Keep the data directory visible in Git
 !data/.gitkeep
 
+# Python cache
 __pycache__/
 *.py[cod]cs
 
+# Environment variables and secrets
 .env
+.env.*
+!.env.example

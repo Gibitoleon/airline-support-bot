@@ -23,7 +23,7 @@ reranker = MiniLMReranker()
 
 vector_store = ChromaVectorStore(collection_name="kenya_airways_gemini")
 
-llm = LlamaManager()
+llm = GroqManager()
 
 retrievalService = RetrievalService(
     embedding_manager=embedding_model, vector_store=vector_store, reranker=reranker

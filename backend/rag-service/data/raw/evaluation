@@ -1,0 +1,1840 @@
+
+Q001 | What are the steps for booking a Kenya Airways flight online?
+      Type: direct | Sections: How to Book a Flight
+
+Q002 | What types of trips can I book online?
+      Type: direct | Sections: Available Trip Types
+
+Q003 | Can I book a one-way or multi-city flight?
+      Type: paraphrased | Sections: Available Trip Types
+
+Q004 | What information do I need to provide when searching for a flight?
+      Type: specific_detail | Sections: How to Book a Flight
+
+Q005 | How can I change my seat after making a booking?
+      Type: indirect | Sections: Manage an Existing Booking
+
+Q006 | What can I do through Manage Booking?
+      Type: direct | Sections: Manage an Existing Booking
+
+Q007 | Can I modify an existing booking and purchase an upgrade?
+      Type: paraphrased | Sections: Manage an Existing Booking
+
+Q008 | What factors can affect the changes I make to an existing booking?
+      Type: multi-section | Sections: Manage an Existing Booking, Important Notes
+
+Q009 | Why might the fares shown when booking a flight be different?
+      Type: reasoning/detail | Sections: Important Notes
+
+Q010 | What determines whether a flight is available?
+      Type: specific_detail | Sections: Important Notes
+
+
+Q011 | What information should a customer service agent confirm before assisting with a flight booking?
+      Type: direct | Sections: Procedure
+
+Q012 | What departure and destination information should the agent confirm?
+      Type: specific_detail | Sections: Procedure
+
+Q013 | What travel dates should the agent confirm with the passenger?
+      Type: specific_detail | Sections: Procedure
+
+Q014 | What trip types can a passenger choose when making a booking?
+      Type: direct | Sections: Procedure
+
+Q015 | What travel class should the agent confirm?
+      Type: specific_detail | Sections: Procedure
+
+Q016 | How should an agent check available flights and fares?
+      Type: direct | Sections: Procedure
+
+Q017 | What should an agent explain to a passenger about available flight options and fare conditions?
+      Type: multi-part | Sections: Procedure
+
+Q018 | When should a customer service agent assist a passenger with the booking process?
+      Type: direct | Sections: Procedure
+
+
+Q019 | When should a flight booking enquiry be escalated?
+      Type: direct | Sections: Escalation
+
+Q020 | What should an agent do if no suitable flight is available?
+      Type: scenario | Sections: Escalation
+
+Q021 | What should an agent do if the booking system shows inconsistent information?
+      Type: scenario | Sections: Escalation
+
+Q022 | When should an enquiry involving an exception to standard booking conditions be escalated?
+      Type: scenario | Sections: Escalation
+
+Q023 | When should a payment or ticketing issue be escalated?
+      Type: scenario | Sections: Escalation
+
+Q024 | Can an agent guarantee flight availability before the booking is confirmed?
+      Type: specific_detail | Sections: Escalation
+
+Q025 | Can an agent guarantee a fare price before the booking is confirmed?
+      Type: specific_detail | Sections: Escalation
+
+Q026 | What issues can prevent a flight booking from being completed?
+      Type: specific_detail | Sections: Escalation
+
+Q027 | What should an agent do when a passenger requires an exception to standard booking conditions?
+      Type: scenario | Sections: Escalation
+
+
+Q028 | What information should an agent confirm before modifying or cancelling an existing booking?
+      Type: direct | Sections: Procedure
+
+Q029 | Why does the agent need to verify the passenger's booking reference and identity?
+      Type: reasoning/detail | Sections: Procedure
+
+Q030 | What should an agent review before processing a requested booking change?
+      Type: specific_detail | Sections: Procedure
+
+Q031 | How can an agent determine whether a requested booking change is allowed?
+      Type: direct | Sections: Procedure
+
+Q032 | What should the agent check when a passenger requests a different flight date or flight?
+      Type: specific_detail | Sections: Procedure
+
+Q033 | What charges might apply when a passenger changes a booking?
+      Type: specific_detail | Sections: Procedure
+
+Q034 | Does an agent need the passenger's approval before processing a booking change?
+      Type: direct | Sections: Procedure
+
+Q035 | What should the agent provide after completing a booking change or cancellation?
+      Type: direct | Sections: Procedure
+
+Q036 | When should a booking change or cancellation enquiry be escalated?
+      Type: direct | Sections: Escalation
+
+Q037 | What should an agent do if the ticket conditions cannot be verified?
+      Type: scenario | Sections: Escalation
+
+Q038 | What should an agent do if a passenger disputes a booking change charge?
+      Type: scenario | Sections: Escalation
+
+Q039 | When should a booking involving another airline be escalated?
+      Type: specific_detail | Sections: Escalation
+
+Q040 | When does a refund require additional assessment?
+      Type: specific_detail | Sections: Escalation
+
+Q041 | What should an agent do if the requested booking change cannot be processed through the available system?
+      Type: scenario | Sections: Escalation
+
+Q042 | Can an agent promise a refund without authorization?
+      Type: specific_detail | Sections: Escalation
+
+Q043 | Can an agent waive applicable booking charges without authorization?
+      Type: specific_detail | Sections: Escalation
+
+Q044 | Who can upgrade from Economy Class to Business Class?
+      Type: direct | Sections: Overview
+
+Q045 | What options are available for upgrading an Economy Class ticket?
+      Type: direct | Sections: Upgrade Options
+
+Q046 | How does the Bid to Upgrade option work?
+      Type: direct | Sections: Bid to Upgrade
+
+Q047 | How long before departure can passengers submit a Bid to Upgrade?
+      Type: specific_detail | Sections: Bid to Upgrade
+
+Q048 | Does the Bid to Upgrade deadline depend on the departure airport?
+      Type: specific_detail | Sections: Bid to Upgrade
+
+Q049 | What happens if a passenger's upgrade bid is successful?
+      Type: direct | Sections: Bid to Upgrade
+
+Q050 | How can a passenger upgrade by paying the fare difference?
+      Type: direct | Sections: Buy-Up Upgrade
+
+Q051 | Is a Buy-Up Upgrade subject to availability?
+      Type: specific_detail | Sections: Buy-Up Upgrade
+
+Q052 | Can I request an upgrade at the airport during check-in?
+      Type: direct | Sections: Last-Minute Airport Upgrade
+
+Q053 | What fee is required for a last-minute airport upgrade?
+      Type: specific_detail | Sections: Last-Minute Airport Upgrade
+
+Q054 | What is required to get a QR Code Upgrade?
+      Type: direct | Sections: QR Code Upgrade
+
+Q055 | Where can passengers find or use the QR code for an upgrade?
+      Type: specific_detail | Sections: QR Code Upgrade
+
+Q056 | What benefits do Business Class passengers receive?
+      Type: direct | Sections: Benefits of Business Class
+
+Q057 | Do Business Class passengers get lounge access?
+      Type: specific_detail | Sections: Benefits of Business Class
+
+Q058 | What Business Class benefits are available at Jomo Kenyatta International Airport?
+      Type: specific_detail | Sections: Benefits of Business Class
+
+Q059 | What happens to my baggage allowance if I upgrade using a bid?
+      Type: specific_detail | Sections: Baggage
+
+Q060 | Does upgrading through the airport change my original baggage allowance?
+      Type: specific_detail | Sections: Baggage
+
+Q061 | How are loyalty points calculated after certain types of upgrades?
+      Type: direct | Sections: Loyalty Points
+
+Q062 | Which upgrade methods earn loyalty points based on the original ticket?
+      Type: specific_detail | Sections: Loyalty Points
+
+Q063 | Do complimentary upgrades earn loyalty points based on the original ticket purchased?
+      Type: specific_detail | Sections: Loyalty Points
+
+
+Q064 | What payment methods does Kenya Airways support for flight bookings?
+      Type: direct | Sections: Payment Options
+
+Q065 | Which credit and debit cards can I use to pay for a booking?
+      Type: specific_detail | Sections: Credit and Debit Cards
+
+Q066 | What happens after a card payment is authorized?
+      Type: direct | Sections: Credit and Debit Cards
+
+Q067 | Which mobile money services can passengers use to pay?
+      Type: direct | Sections: Mobile Money
+
+Q068 | Can I use M-Pesa to pay for my Kenya Airways booking?
+      Type: specific_detail | Sections: Mobile Money
+
+Q069 | Which digital wallets and online payment methods are supported?
+      Type: direct | Sections: Digital Wallets and Online Payments
+
+Q070 | Can I pay using PayPal or Alipay?
+      Type: paraphrased | Sections: Digital Wallets and Online Payments
+
+Q071 | Where are bank transfers and mobile banking available?
+      Type: specific_detail | Sections: Bank Transfer / Mobile Banking
+
+Q072 | How can customers make real-time payments through mobile banking?
+      Type: specific_detail | Sections: Bank Transfer / Mobile Banking
+
+Q073 | Can I reserve a booking online and pay later in cash?
+      Type: direct | Sections: Cash Payment
+
+Q074 | Where can passengers make cash payments for their bookings?
+      Type: specific_detail | Sections: Cash Payment
+
+Q075 | Do all Kenya Airways ticket offices accept cash payments?
+      Type: direct | Sections: Cash Payment
+
+Q076 | Can cash payments attract an additional service fee?
+      Type: specific_detail | Sections: Cash Payment
+
+Q077 | What should I bring when paying for a booking in cash?
+      Type: specific_detail | Sections: Cash Payment
+
+Q078 | Which payment methods result in an e-ticket being sent by email?
+      Type: multi-section | Sections: Credit and Debit Cards, Mobile Money
+
+
+Q079 | When is a Kenya Airways ticket eligible for a refund?
+      Type: direct | Sections: Refund Eligibility
+
+Q080 | Can an unused ticket be refunded?
+      Type: specific_detail | Sections: Refund Eligibility
+
+Q081 | Can a partially used ticket qualify for a refund?
+      Type: specific_detail | Sections: Refund Eligibility
+
+Q082 | Can I get a refund if Kenya Airways cancels my flight?
+      Type: direct | Sections: Refund Eligibility
+
+Q083 | Can a passenger receive a refund after cancelling an eligible booking?
+      Type: specific_detail | Sections: Refund Eligibility
+
+Q084 | Can taxes and airport charges be refunded on a non-refundable ticket if I do not travel?
+      Type: multi-condition | Sections: Refund Eligibility, Taxes and Fees
+
+Q085 | What happens if government taxes or airport charges change after I purchase my ticket?
+      Type: direct | Sections: Taxes and Fees
+
+Q086 | What happens when taxes or charges are reduced after ticket issuance?
+      Type: specific_detail | Sections: Taxes and Fees
+
+Q087 | How can passengers request a refund for a booking made through kenya-airways.com?
+      Type: direct | Sections: Tickets Purchased on kenya-airways.com
+
+Q088 | How do I cancel and request a refund if my booking is still active?
+      Type: specific_detail | Sections: Tickets Purchased on kenya-airways.com
+
+Q089 | Which option should I use if my travel has already passed and I need a refund?
+      Type: specific_detail | Sections: Tickets Purchased on kenya-airways.com
+
+Q090 | What happens to the remaining flight segments when I refund a booking?
+      Type: important_detail | Sections: Tickets Purchased on kenya-airways.com
+
+Q091 | Can Kenya Airways process a refund for a ticket purchased through a travel agency?
+      Type: direct | Sections: Tickets Purchased Through a Travel Agent
+
+Q092 | Who should I contact if my ticket was issued by a travel agent?
+      Type: direct | Sections: Tickets Purchased Through a Travel Agent
+
+Q093 | How can I request a refund for a ticket purchased at a Kenya Airways ticket office?
+      Type: direct | Sections: Tickets Purchased Through Kenya Airways Ticket Offices or Contact Centre
+
+Q094 | How can I request a refund through the Kenya Airways contact centre?
+      Type: specific_detail | Sections: Tickets Purchased Through Kenya Airways Ticket Offices or Contact Centre
+
+Q095 | Where is a refund sent after it is processed?
+      Type: direct | Sections: Refund Processing
+
+Q096 | How long do credit or debit card refunds normally take to process?
+      Type: specific_detail | Sections: Refund Processing
+
+Q097 | Does the 21–30 business day refund processing time include bank processing time?
+      Type: specific_detail | Sections: Refund Processing
+
+Q098 | When can passengers request a refund because of a Kenya Airways flight cancellation?
+      Type: direct | Sections: Flight Disruption Refunds
+
+Q099 | Can I request a refund if my flight was delayed by more than eight hours?
+      Type: specific_detail | Sections: Flight Disruption Refunds
+
+Q100 | Are flight disruption refund options available for tickets purchased through travel agencies?
+      Type: important_detail | Sections: Flight Disruption Refunds
+
+Q101 | What refund is available when a passenger dies?
+      Type: direct | Sections: Medical and Bereavement Refunds, Death of a Passenger
+
+Q102 | Are family members automatically entitled to a refund when a passenger dies?
+      Type: specific_detail | Sections: Death of a Passenger
+
+Q103 | Can date change fees for accompanying family members be waived after a passenger's death?
+      Type: specific_detail | Sections: Death of a Passenger
+
+Q104 | Are free refunds automatically granted for medical reasons?
+      Type: direct | Sections: Medical Reasons
+
+Q105 | What rules apply to medical refund requests?
+      Type: specific_detail | Sections: Medical Reasons
+
+Q106 | What are the requirements for the United States 24-hour refund policy?
+      Type: direct | Sections: United States 24-Hour Refund Policy
+
+Q107 | How long after booking can a qualifying US flight booking be cancelled for a full refund?
+      Type: specific_detail | Sections: United States 24-Hour Refund Policy
+
+Q108 | How far in advance must the scheduled departure be for the US 24-hour refund policy to apply?
+      Type: specific_detail | Sections: United States 24-Hour Refund Policy
+
+Q109 | Should a US 24-hour refund request be submitted through Manage My Booking?
+      Type: specific_detail | Sections: United States 24-Hour Refund Policy
+
+Q110 | How long are US 24-hour refund requests normally processed after submission?
+      Type: specific_detail | Sections: United States 24-Hour Refund Policy
+
+Q111 | Can a refund request be submitted by email?
+      Type: direct | Sections: Important Notes
+
+Q112 | What happens to the itinerary after a refund is processed?
+      Type: direct | Sections: Important Notes
+
+Q113 | How long do passengers generally have to reschedule travel while retaining the remaining ticket value?
+      Type: specific_detail | Sections: Important Notes
+
+Q114 | What conditions and penalties apply to refund requests?
+      Type: multi-section | Sections: Refund Processing, Important Notes
+
+
+Q115 | What seat options are available on Kenya Airways?
+      Type: direct | Sections: Overview
+
+Q116 | What factors determine seat availability?
+      Type: specific_detail | Sections: Overview
+
+Q117 | What is the Neighbour Free Seat option?
+      Type: direct | Sections: Neighbour Free Seat
+
+Q118 | What are the benefits of reserving a Neighbour Free Seat?
+      Type: direct | Sections: Neighbour Free Seat, Benefits
+
+Q119 | Which seat types are excluded from the Neighbour Free Seat option?
+      Type: specific_detail | Sections: Neighbour Free Seat, Restrictions
+
+Q120 | Can I reserve a Neighbour Free Seat if I have an Extra Legroom seat?
+      Type: specific_detail | Sections: Neighbour Free Seat, Restrictions
+
+Q121 | What is an Economy Comfort Seat?
+      Type: direct | Sections: Economy Comfort Seat
+
+Q122 | Which Kenya Airways aircraft offer Economy Comfort Seats?
+      Type: specific_detail | Sections: Economy Comfort Seat
+
+Q123 | How much additional legroom does an Economy Comfort Seat provide?
+      Type: specific_detail | Sections: Economy Comfort Seat, Features
+
+Q124 | Where are Economy Comfort Seats located?
+      Type: specific_detail | Sections: Economy Comfort Seat, Features
+
+Q125 | What are Extra Legroom Seats?
+      Type: direct | Sections: Extra Legroom Seats
+
+Q126 | Which aircraft offer Extra Legroom Seats?
+      Type: specific_detail | Sections: Extra Legroom Seats
+
+Q127 | Who might choose an Extra Legroom Seat?
+      Type: reasoning/detail | Sections: Extra Legroom Seats
+
+Q128 | What are Preferred Seats?
+      Type: direct | Sections: Preferred Seats
+
+Q129 | Where are Preferred Seats located?
+      Type: specific_detail | Sections: Preferred Seats
+
+Q130 | What are the benefits of choosing a Preferred Seat?
+      Type: direct | Sections: Preferred Seats
+
+Q131 | Can I select a seat during booking?
+      Type: direct | Sections: Important Notes
+
+Q132 | Can I select an eligible seat after booking?
+      Type: direct | Sections: Important Notes
+
+Q133 | Can I select a seat through the booking management service before departure?
+      Type: specific_detail | Sections: Important Notes
+
+Q134 | Do premium seat selections cost extra?
+      Type: specific_detail | Sections: Important Notes
+
+Q135 | Can the available seat types differ depending on the aircraft and route?
+      Type: specific_detail | Sections: Important Notes
+
+
+Q136 | What determines a passenger's free checked baggage allowance?
+      Type: direct | Sections: Overview, Free Checked Baggage Allowance
+
+Q137 | How much checked baggage can a Business Class passenger take when travelling between Africa and Europe or America?
+      Type: specific_detail | Sections: Free Checked Baggage Allowance, Africa ↔ Europe / America
+
+Q138 | How much checked baggage is allowed for Economy Class passengers travelling between Africa and Europe or America?
+      Type: specific_detail | Sections: Free Checked Baggage Allowance, Africa ↔ Europe / America
+
+Q139 | What is the baggage allowance for Business Class passengers travelling between Africa and the Middle East or Asia?
+      Type: specific_detail | Sections: Free Checked Baggage Allowance, Africa ↔ Middle East / Asia
+
+Q140 | What is the baggage allowance for Economy Class passengers travelling between Africa and the Middle East or Asia?
+      Type: specific_detail | Sections: Free Checked Baggage Allowance, Africa ↔ Middle East / Asia
+
+Q141 | What baggage allowance applies to flights between Bangkok and Guangzhou?
+      Type: direct | Sections: Free Checked Baggage Allowance, Bangkok ↔ Guangzhou
+
+Q142 | How many kilograms can a Business Class passenger check on a Bangkok–Guangzhou flight?
+      Type: specific_detail | Sections: Bangkok ↔ Guangzhou
+
+Q143 | What is the checked baggage allowance for Economy Class on the Nairobi–Mumbai route?
+      Type: specific_detail | Sections: Nairobi ↔ Mumbai
+
+Q144 | What is the baggage allowance for Africa-to-Africa flights?
+      Type: direct | Sections: Africa ↔ Africa
+
+Q145 | How does the checked baggage allowance differ between Business and Economy Class on domestic flights?
+      Type: comparison | Sections: Domestic Flights
+
+Q146 | How many checked bags can an Economy passenger take on a domestic Kenya Airways flight?
+      Type: specific_detail | Sections: Domestic Flights
+
+Q147 | How much can each Business Class checked bag weigh on domestic flights?
+      Type: specific_detail | Sections: Domestic Flights
+
+Q148 | Which Asante Rewards members receive an additional checked baggage allowance?
+      Type: direct | Sections: Additional Allowance for Asante Rewards Members
+
+Q149 | Does Asante Silver provide an additional baggage allowance?
+      Type: direct | Sections: Additional Allowance for Asante Rewards Members
+
+Q150 | How much additional baggage does an Asante Gold member receive in Economy Class?
+      Type: specific_detail | Sections: Additional Allowance for Asante Rewards Members
+
+Q151 | How much additional baggage does an Asante Platinum member receive in Business Class?
+      Type: specific_detail | Sections: Additional Allowance for Asante Rewards Members
+
+Q152 | What information should be included on a checked baggage label?
+      Type: direct | Sections: Baggage Identification
+
+Q153 | Does the name on a baggage label have to match the passenger's ticket?
+      Type: specific_detail | Sections: Baggage Identification
+
+Q154 | Is providing an email address on a baggage label required?
+      Type: reasoning/detail | Sections: Baggage Identification
+
+Q155 | What can an infant travelling with a passenger carry free of charge?
+      Type: direct | Sections: Special Allowances, Infants
+
+Q156 | Can an infant travel with both a stroller and a child car seat?
+      Type: paraphrased | Sections: Special Allowances, Infants
+
+Q157 | Is a wheelchair included in the free baggage allowance for passengers requiring mobility assistance?
+      Type: direct | Sections: Special Allowances, Passengers Requiring Mobility Assistance
+
+Q158 | How much Holy Water can a passenger travelling from Jeddah carry?
+      Type: specific_detail | Sections: Special Allowances, Holy Water
+
+Q159 | Are claims accepted for damage or leakage involving Holy Water?
+      Type: specific_detail | Sections: Special Allowances, Holy Water
+
+Q160 | How is baggage allowance determined when a journey involves a partner airline?
+      Type: direct | Sections: Codeshare and Interline Flights
+
+Q161 | What is the Most Significant Carrier Rule?
+      Type: reasoning/detail | Sections: Codeshare and Interline Flights
+
+Q162 | Which baggage allowance should a passenger follow on a codeshare flight?
+      Type: specific_detail | Sections: Codeshare and Interline Flights, Important Notes
+
+Q163 | Do flights to or from the United States or Canada follow the same baggage concept as other routes?
+      Type: comparison | Sections: Codeshare and Interline Flights
+
+Q164 | Can passengers travelling together combine their baggage allowance?
+      Type: direct | Sections: Baggage Pooling
+
+Q165 | What conditions must passengers meet to pool their baggage allowance?
+      Type: direct | Sections: Baggage Pooling
+
+Q166 | Does baggage pooling allow passengers to combine the weight allowance of their bags?
+      Type: reasoning/detail | Sections: Baggage Pooling
+
+Q167 | Two passengers each have one 23 kg bag allowance. Can they check one 46 kg bag?
+      Type: reasoning | Sections: Baggage Pooling
+
+Q168 | Can a family travelling to the same destination pool their baggage allowance?
+      Type: paraphrased | Sections: Baggage Pooling
+
+Q169 | What happens if a passenger exceeds the free checked baggage allowance?
+      Type: direct | Sections: Excess Baggage
+
+Q170 | Where can passengers obtain current excess baggage rates?
+      Type: direct | Sections: Excess Baggage
+
+Q171 | What items are prohibited in both checked and carry-on baggage?
+      Type: direct | Sections: Baggage Restrictions, Prohibited Items
+
+Q172 | Are explosives allowed in checked baggage?
+      Type: specific_detail | Sections: Prohibited Items
+
+Q173 | Can passengers carry compressed gases such as propane or butane?
+      Type: specific_detail | Sections: Prohibited Items
+
+Q174 | Are flammable liquids such as paints and adhesives prohibited?
+      Type: specific_detail | Sections: Prohibited Items
+
+Q175 | Can passengers carry pepper spray in their baggage?
+      Type: specific_detail | Sections: Prohibited Items
+
+Q176 | What types of radioactive materials are allowed in baggage?
+      Type: reasoning/detail | Sections: Prohibited Items
+
+Q177 | Are wet-cell batteries permitted in checked baggage?
+      Type: specific_detail | Sections: Prohibited Items
+
+Q178 | Are lighters allowed when travelling to or from the United States?
+      Type: specific_detail | Sections: Prohibited Items
+
+Q179 | Which items are generally not permitted in carry-on baggage but may be transported in checked baggage?
+      Type: direct | Sections: Restricted Items
+
+Q180 | Can passengers carry knives in their cabin baggage?
+      Type: specific_detail | Sections: Restricted Items
+
+Q181 | Are scissors permitted in carry-on baggage?
+      Type: specific_detail | Sections: Restricted Items
+
+Q182 | Can sporting equipment such as golf clubs be carried in cabin baggage?
+      Type: specific_detail | Sections: Restricted Items
+
+Q183 | Are toy guns and replica firearms permitted in carry-on baggage?
+      Type: specific_detail | Sections: Restricted Items
+
+Q184 | What restrictions apply to aerosols carried in baggage?
+      Type: specific_detail | Sections: Restricted Items
+
+Q185 | What can happen to restricted items at the boarding gate?
+      Type: direct | Sections: Important Information
+
+Q186 | Can airport security return an item that was confiscated at the boarding gate?
+      Type: specific_detail | Sections: Important Information
+
+Q187 | What is the medical exception for needles and syringes?
+      Type: direct | Sections: Overview, Medical Exception
+
+Q188 | What documentation is required when carrying medically necessary needles or syringes?
+      Type: specific_detail | Sections: Medical Exception
+
+Q189 | Can medically necessary syringes be carried without prescription medication?
+      Type: reasoning | Sections: Medical Exception
+
+Q190 | What should an agent do when a passenger reports a baggage problem?
+      Type: direct | Sections: Baggage Service Desk Procedure, Procedure
+
+Q191 | What information should a baggage service agent request from a passenger reporting a baggage issue?
+      Type: specific_detail | Sections: Baggage Service Desk Procedure, Procedure
+
+Q192 | How does an agent check whether a baggage report already exists?
+      Type: direct | Sections: Baggage Service Desk Procedure, Procedure
+
+Q193 | What reference number should the agent provide after creating a baggage report?
+      Type: specific_detail | Sections: Baggage Service Desk Procedure, Procedure
+
+Q194 | What should an agent explain after creating or updating a baggage report?
+      Type: specific_detail | Sections: Baggage Service Desk Procedure, Procedure
+
+Q195 | When should a baggage case be escalated?
+      Type: direct | Sections: Baggage Service Desk Procedure, Escalation
+
+Q196 | Should an agent promise a specific compensation amount to a passenger?
+      Type: direct | Sections: Baggage Service Desk Procedure, Escalation
+
+Q197 | What should an agent verify before handling a baggage claim?
+      Type: direct | Sections: Baggage Claim Handling Procedure, Procedure
+
+Q198 | What information should be confirmed when handling a baggage claim?
+      Type: specific_detail | Sections: Baggage Claim Handling Procedure, Procedure
+
+Q199 | How should an agent handle a passenger asking about compensation for baggage?
+      Type: direct | Sections: Baggage Claim Handling Procedure, Compensation Requests
+
+Q200 | Can an agent guarantee baggage compensation before a claim is reviewed?
+      Type: reasoning | Sections: Baggage Claim Handling Procedure, Compensation Requests
+
+Q201 | When should a baggage claim be escalated because of a compensation request?
+      Type: specific_detail | Sections: Baggage Claim Handling Procedure, Escalation
+
+Q202 | When should a baggage case involving damage or loss be escalated?
+      Type: specific_detail | Sections: Baggage Claim Handling Procedure, Escalation
+
+Q203 | What should a passenger do if checked baggage is delayed, lost, or damaged?
+      Type: direct | Sections: Delayed, Lost or Damaged Baggage, Reporting Delayed, Lost or Damaged Baggage
+
+Q204 | Where should a passenger report delayed, lost, or damaged baggage?
+      Type: specific_detail | Sections: Reporting Delayed, Lost or Damaged Baggage
+
+Q205 | When should a baggage problem be reported after arrival?
+      Type: specific_detail | Sections: Reporting Delayed, Lost or Damaged Baggage
+
+Q206 | What reference number does a passenger receive after reporting a baggage problem?
+      Type: direct | Sections: Reporting Delayed, Lost or Damaged Baggage
+
+Q207 | How can a passenger track the status of delayed baggage?
+      Type: direct | Sections: Reporting Delayed, Lost or Damaged Baggage
+
+Q208 | How is delayed baggage delivered when it is located?
+      Type: direct | Sections: Baggage Delivery
+
+Q209 | Is baggage delivery available in every country?
+      Type: specific_detail | Sections: Baggage Delivery
+
+Q210 | What should passengers do if they want to claim compensation for delayed, lost, or damaged baggage?
+      Type: direct | Sections: Compensation Claims
+
+Q211 | What lounge services are available to passengers at Jomo Kenyatta International Airport?
+      Type: direct | Sections: Airport Lounge Services, Lounge Facilities
+
+Q212 | Which Kenya Airways lounges are available at JKIA?
+      Type: direct | Sections: Kenya Airways Lounges
+
+Q213 | What are the names of the Kenya Airways lounges?
+      Type: direct | Sections: Kenya Airways Lounges
+
+Q214 | Who is eligible for Kenya Airways lounge access?
+      Type: direct | Sections: Lounge Access Eligibility
+
+Q215 | Can Business Class passengers access Kenya Airways lounges?
+      Type: specific_detail | Sections: Lounge Access Eligibility
+
+Q216 | Can SkyTeam Gold and Platinum cardholders use Kenya Airways lounges?
+      Type: specific_detail | Sections: Lounge Access Eligibility
+
+Q217 | Can passengers travelling on Kenya Airways partner airlines access the lounges?
+      Type: specific_detail | Sections: Lounge Access Eligibility
+
+Q218 | Can Economy Class passengers purchase lounge access?
+      Type: direct | Sections: Lounge Access Eligibility, Lounge Purchase Options
+
+Q219 | What facilities are available in Kenya Airways lounges?
+      Type: direct | Sections: Lounge Facilities
+
+Q220 | Do Kenya Airways lounges provide Wi-Fi?
+      Type: specific_detail | Sections: Lounge Facilities
+
+Q221 | Are food and beverages available in the lounges?
+      Type: specific_detail | Sections: Lounge Facilities
+
+Q222 | Which lounge facilities are useful for passengers who need to work?
+      Type: indirect | Sections: Lounge Facilities
+
+Q223 | Do the lounges have shower facilities?
+      Type: specific_detail | Sections: Lounge Facilities
+
+Q224 | Are charging points available for electronic devices?
+      Type: specific_detail | Sections: Lounge Facilities
+
+Q225 | Where is Pride Lounge located?
+      Type: specific_detail | Sections: Pride Lounge
+
+Q226 | What facilities are available at Pride Lounge?
+      Type: direct | Sections: Pride Lounge
+
+Q227 | What is available at Simba Lounge?
+      Type: direct | Sections: Simba Lounge
+
+Q228 | Where is Simba Lounge located?
+      Type: specific_detail | Sections: Simba Lounge
+
+Q229 | Does Simba Lounge have a private room?
+      Type: specific_detail | Sections: Simba Lounge
+
+Q230 | How many people can the VVIP room at Simba Lounge accommodate?
+      Type: specific_detail | Sections: Simba Lounge
+
+Q231 | Can steward services be requested at the Simba Lounge VVIP room?
+      Type: specific_detail | Sections: Simba Lounge
+
+Q232 | Where is Asante Lounge located?
+      Type: specific_detail | Sections: Asante Lounge
+
+Q233 | Is Asante Lounge open 24 hours?
+      Type: direct | Sections: Asante Lounge
+
+Q234 | What facilities are available at Asante Lounge?
+      Type: direct | Sections: Asante Lounge
+
+Q235 | Does Asante Lounge provide showers and amenity kits?
+      Type: specific_detail | Sections: Asante Lounge
+
+Q236 | Can Economy Class passengers purchase lounge access?
+      Type: direct | Sections: Lounge Purchase Options
+
+Q237 | What are the Pay Lounge Day Pass rates?
+      Type: direct | Sections: Lounge Purchase Options
+
+Q238 | How much does a lounge pass for 0–3 hours cost?
+      Type: specific_detail | Sections: Lounge Purchase Options
+
+Q239 | How much does lounge access cost for 3–6 hours?
+      Type: specific_detail | Sections: Lounge Purchase Options
+
+Q240 | What is the lounge day pass price for 6–9 hours?
+      Type: specific_detail | Sections: Lounge Purchase Options
+
+Q241 | How much does a 9–12 hour lounge pass cost?
+      Type: specific_detail | Sections: Lounge Purchase Options
+
+Q242 | Do children pay the same lounge rate as adults?
+      Type: comparison | Sections: Lounge Purchase Options
+
+Q243 | How much do children aged 2–12 pay for lounge access?
+      Type: specific_detail | Sections: Lounge Purchase Options
+
+Q244 | Do infants below two years need to pay for lounge access?
+      Type: specific_detail | Sections: Lounge Purchase Options
+
+Q245 | What private lounge services are available at Simba Lounge?
+      Type: direct | Sections: Private Lounge Services
+
+Q246 | How much does the Simba Lounge VIP Room cost?
+      Type: specific_detail | Sections: Private Lounge Services
+
+Q247 | What is the maximum capacity of the Simba Lounge VIP Room?
+      Type: specific_detail | Sections: Private Lounge Services
+
+Q248 | Are steward services available for the Simba Lounge VIP Room?
+      Type: specific_detail | Sections: Private Lounge Services
+
+Q249 | What is the cost of the VVIP Lounge Room?
+      Type: specific_detail | Sections: Private Lounge Services
+
+Q250 | How many people can the VVIP Lounge Room accommodate?
+      Type: specific_detail | Sections: Private Lounge Services
+
+Q251 | Is the VVIP Lounge Room fee separate from the Simba Lounge access fee?
+      Type: reasoning/detail | Sections: Private Lounge Services
+
+Q252 | What conditions apply to lounge access?
+      Type: direct | Sections: Lounge Conditions
+
+Q253 | Does lounge access depend on available space?
+      Type: specific_detail | Sections: Lounge Conditions
+
+Q254 | Can a purchased lounge service be refunded?
+      Type: direct | Sections: Lounge Conditions
+
+Q255 | Can a Pay Lounge Day Pass be transferred to another passenger?
+      Type: direct | Sections: Lounge Conditions
+
+Q256 | Are lounge services subject to terms and conditions?
+      Type: specific_detail | Sections: Lounge Conditions
+
+Q257 | An Economy passenger wants lounge access. What options are available to them?
+      Type: multi-section | Sections: Lounge Access Eligibility, Lounge Purchase Options
+
+Q258 | What lounge options are available to a passenger who wants additional privacy?
+      Type: multi-section | Sections: Simba Lounge, Private Lounge Services
+
+Q259 | What lounge facilities would be useful for a passenger who wants to work, eat, and freshen up before departure?
+      Type: multi-section | Sections: Lounge Facilities, Asante Lounge
+
+Q260 | A passenger wants to stay in a lounge for eight hours. Which day-pass category applies and how much does it cost?
+      Type: reasoning | Sections: Lounge Purchase Options
+
+Q261 | A family has two adults and children aged 2–12. How does the child lounge rate compare with the adult rate?
+      Type: reasoning/comparison | Sections: Lounge Purchase Options
+
+Q262 | Can a passenger purchase lounge access and later receive a refund if their plans change?
+      Type: reasoning | Sections: Lounge Purchase Options, Lounge Conditions
+
+Q263 | What is the difference between the Simba Lounge VIP Room and the VVIP Lounge Room?
+      Type: comparison | Sections: Simba Lounge, Private Lounge Services
+
+Q264 | Which lounge operates 24 hours a day?
+      Type: specific_detail | Sections: Asante Lounge
+
+Q265 | Which lounge is located at Terminal 1A?
+      Type: specific_detail | Sections: Simba Lounge
+
+Q266 | Which lounge is located at Terminal 1C?
+      Type: specific_detail | Sections: Asante Lounge
+
+Q267 | What additional privacy service is available at Simba Lounge?
+      Type: direct | Sections: Simba Lounge, Private Lounge Services
+
+Q268 | What is the maximum capacity of the VVIP Lounge Room?
+      Type: specific_detail | Sections: Private Lounge Services
+
+Q269 | Are lounge day passes transferable?
+      Type: direct | Sections: Lounge Conditions
+
+Q270 | What factors can prevent a passenger from accessing a lounge even if they are otherwise eligible?
+      Type: reasoning | Sections: Lounge Access Eligibility, Lounge Conditions
+
+Q271 | What baggage drop-off services are available to passengers travelling with checked baggage?
+      Type: direct | Sections: Overview
+
+Q272 | What are the two options for dropping off checked baggage?
+      Type: direct | Sections: Overview
+
+Q273 | Can passengers use dedicated baggage drop-off counters instead of standard check-in counters?
+      Type: specific_detail | Sections: Overview
+
+Q274 | Who can use the baggage drop-off counters?
+      Type: specific_detail | Sections: Overview
+
+Q275 | If I have already checked in online and only have baggage to deposit, where can I drop it off?
+      Type: paraphrased | Sections: Overview
+
+Q276 | What happens during the baggage drop-off process?
+      Type: direct | Sections: Baggage Drop-Off Process
+
+Q277 | What does the passenger need to present at the baggage drop-off counter?
+      Type: specific_detail | Sections: Baggage Drop-Off Process
+
+Q278 | Why is baggage weighed during the drop-off process?
+      Type: reasoning/detail | Sections: Baggage Drop-Off Process
+
+Q279 | What happens after the baggage is weighed?
+      Type: direct | Sections: Baggage Drop-Off Process
+
+Q280 | How is checked baggage linked to the passenger's travel information?
+      Type: specific_detail | Sections: Baggage Drop-Off Process
+
+Q281 | What happens to the baggage after it has been tagged?
+      Type: specific_detail | Sections: Baggage Drop-Off Process
+
+Q282 | Why are baggage tagging and identification important?
+      Type: reasoning | Sections: Baggage Drop-Off Process
+
+Q283 | How early should passengers drop off baggage for local flights?
+      Type: specific_detail | Sections: Baggage Drop-Off Timing, Local Flights
+
+Q284 | How early should passengers complete baggage drop-off for international flights?
+      Type: specific_detail | Sections: Baggage Drop-Off Timing, International Flights
+
+Q285 | Is the baggage drop-off deadline the same for local and international flights?
+      Type: comparison | Sections: Baggage Drop-Off Timing, Local Flights, International Flights
+
+Q286 | How long before the flight closing time can baggage be dropped off on local flights?
+      Type: specific_detail | Sections: Local Flights
+
+Q287 | How many hours before departure should international passengers complete baggage drop-off?
+      Type: specific_detail | Sections: International Flights
+
+Q288 | What should passengers do to allow enough time for airport procedures?
+      Type: direct | Sections: Passenger Recommendations
+
+Q289 | Why are passengers advised to arrive at the airport early?
+      Type: reasoning | Sections: Passenger Recommendations
+
+Q290 | What airport procedures should passengers allow time for when arriving early?
+      Type: direct | Sections: Passenger Recommendations
+
+Q291 | Does arriving early help passengers avoid delays?
+      Type: specific_detail | Sections: Passenger Recommendations
+
+Q292 | I have already checked in online and only have a bag to hand over. What should I do?
+      Type: paraphrased | Sections: Overview, Baggage Drop-Off Process
+
+Q293 | I am travelling internationally with checked baggage. When should I complete baggage drop-off?
+      Type: scenario | Sections: Baggage Drop-Off Timing, International Flights
+
+Q294 | I am travelling on a local flight. How late can I drop off my baggage?
+      Type: scenario | Sections: Baggage Drop-Off Timing, Local Flights
+
+Q295 | What is the difference between the baggage drop-off process for local and international passengers?
+      Type: comparison | Sections: Baggage Drop-Off Timing, Local Flights, International Flights
+
+Q296 | What should a customer service agent do when a passenger cannot complete check-in?
+      Type: direct | Sections: Purpose, Procedure
+
+Q297 | What information should an agent confirm when assisting with a check-in problem?
+      Type: specific_detail | Sections: Procedure
+
+Q298 | What can an agent use to identify a passenger's booking when resolving a check-in issue?
+      Type: specific_detail | Sections: Procedure
+
+Q299 | What should an agent verify about the passenger before investigating a boarding pass problem?
+      Type: specific_detail | Sections: Procedure
+
+Q300 | How should an agent determine why a boarding pass cannot be generated?
+      Type: direct | Sections: Procedure
+
+Q301 | What should an agent check when a passenger cannot obtain a boarding pass?
+      Type: direct | Sections: Procedure
+
+Q302 | What should a passenger do if online check-in is unavailable?
+      Type: direct | Sections: Procedure
+
+Q303 | Can a passenger complete check-in at an airport counter if online check-in is unavailable?
+      Type: specific_detail | Sections: Procedure
+
+Q304 | What should an agent do if a check-in problem cannot be resolved?
+      Type: direct | Sections: Procedure
+
+Q305 | When should a check-in issue be escalated to another team?
+      Type: direct | Sections: Escalation
+
+Q306 | Should agents manually override a check-in restriction?
+      Type: direct | Sections: Escalation
+
+Q307 | When should an agent escalate an inconsistent booking issue?
+      Type: specific_detail | Sections: Escalation
+
+Q308 | What should happen if required travel documents cannot be verified?
+      Type: specific_detail | Sections: Escalation
+
+Q309 | What should an agent do if a passenger cannot check in at the airport?
+      Type: specific_detail | Sections: Escalation
+
+Q310 | When should a system-related check-in problem be escalated?
+      Type: reasoning/detail | Sections: Escalation
+
+Q311 | What should happen if a passenger disputes a check-in restriction?
+      Type: specific_detail | Sections: Escalation
+
+Q312 | What types of check-in services does Kenya Airways offer?
+      Type: direct | Sections: Overview
+
+Q313 | What is the benefit of online check-in?
+      Type: direct | Sections: Overview, Online Check-in, Benefits
+
+Q314 | Can passengers obtain their boarding pass before arriving at the airport?
+      Type: specific_detail | Sections: Overview, Benefits
+
+Q315 | Who can use online check-in?
+      Type: specific_detail | Sections: Online Check-in
+
+Q316 | How early can passengers check in online for international flights?
+      Type: specific_detail | Sections: Online Check-in, Availability
+
+Q317 | How late can passengers complete online check-in for international flights?
+      Type: specific_detail | Sections: Online Check-in, Availability
+
+Q318 | When does online check-in open for flights involving the United States?
+      Type: specific_detail | Sections: Online Check-in, Availability
+
+Q319 | How long before departure does online check-in close for flights involving the United States?
+      Type: specific_detail | Sections: Online Check-in, Availability
+
+Q320 | Is the online check-in window the same for international flights and flights involving the United States?
+      Type: comparison | Sections: Online Check-in, Availability
+
+Q321 | What can passengers do after completing online check-in?
+      Type: direct | Sections: Benefits
+
+Q322 | Can passengers select their preferred seats during online check-in?
+      Type: specific_detail | Sections: Benefits
+
+Q323 | Can online check-in reduce waiting time at the airport?
+      Type: specific_detail | Sections: Benefits
+
+Q324 | Where should passengers go after completing online check-in if they have checked baggage?
+      Type: direct | Sections: Benefits, Baggage Drop-Off Services
+
+Q325 | Can passengers with checked baggage use a designated baggage drop-off counter after online check-in?
+      Type: specific_detail | Sections: Benefits, Baggage Drop-Off Services
+
+Q326 | How early must passengers complete international airport check-in?
+      Type: specific_detail | Sections: International Check-in
+
+Q327 | Does the international check-in requirement depend on travel class?
+      Type: specific_detail | Sections: International Check-in
+
+Q328 | When do international check-in counters close?
+      Type: specific_detail | Sections: International Check-in
+
+Q329 | How early should a passenger arrive for international check-in?
+      Type: paraphrased | Sections: International Check-in
+
+Q330 | How early must passengers complete domestic check-in?
+      Type: specific_detail | Sections: Domestic Check-in
+
+Q331 | What identification is required for domestic check-in?
+      Type: specific_detail | Sections: Domestic Check-in
+
+Q332 | When do domestic check-in counters close?
+      Type: specific_detail | Sections: Domestic Check-in
+
+Q333 | Is the domestic check-in deadline different from the international check-in deadline?
+      Type: comparison | Sections: International Check-in, Domestic Check-in
+
+Q334 | Who is eligible for priority check-in when travelling from Nairobi?
+      Type: direct | Sections: Priority Check-in, Eligibility
+
+Q335 | What benefits do eligible Asante Rewards Gold and Platinum members receive through priority check-in?
+      Type: direct | Sections: Priority Check-in, Eligibility, Benefits
+
+Q336 | What is online check-in and what benefits does it provide?
+      Type: direct | Sections: Check-in → Overview, Check-in → Online Check-in → Benefits
+
+Q337 | How early can I check in online for an international flight?
+      Type: specific_detail | Sections: Check-in → Online Check-in → Availability
+
+Q338 | How early can I check in online for a flight involving the United States?
+      Type: specific_detail | Sections: Check-in → Online Check-in → Availability
+
+Q339 | Until when is online check-in available for international flights?
+      Type: specific_detail | Sections: Check-in → Online Check-in → Availability
+
+Q340 | Why might online check-in for a US flight have a shorter availability window?
+      Type: reasoning | Sections: Check-in → Online Check-in → Availability
+
+Q341 | What can passengers do after completing online check-in?
+      Type: direct | Sections: Check-in → Online Check-in → Benefits
+
+Q342 | Can I select my seat when checking in online?
+      Type: specific_detail | Sections: Check-in → Online Check-in → Benefits
+
+Q343 | Can I get my boarding pass before arriving at the airport?
+      Type: specific_detail | Sections: Check-in → Online Check-in → Benefits
+
+Q344 | What should a passenger with checked baggage do after completing online check-in?
+      Type: scenario | Sections: Check-in → Online Check-in → Benefits
+
+Q345 | What are the check-in requirements for international flights?
+      Type: direct | Sections: Check-in → International Check-in
+
+Q346 | How long before departure must international passengers complete check-in?
+      Type: specific_detail | Sections: Check-in → International Check-in
+
+Q347 | When do international check-in counters close?
+      Type: specific_detail | Sections: Check-in → International Check-in
+
+Q348 | Do international passengers have to check in regardless of their travel class?
+      Type: specific_detail | Sections: Check-in → International Check-in
+
+Q349 | What identification is required for domestic check-in?
+      Type: specific_detail | Sections: Check-in → Domestic Check-in
+
+Q350 | How early should passengers complete domestic check-in?
+      Type: specific_detail | Sections: Check-in → Domestic Check-in
+
+Q351 | When do domestic check-in counters close?
+      Type: specific_detail | Sections: Check-in → Domestic Check-in
+
+Q352 | What is priority check-in?
+      Type: direct | Sections: Check-in → Priority Check-in
+
+Q353 | Who is eligible for priority check-in?
+      Type: direct | Sections: Check-in → Priority Check-in → Eligibility
+
+Q354 | Can an Asante Rewards Silver member use priority check-in when departing from Nairobi?
+      Type: scenario | Sections: Check-in → Priority Check-in → Eligibility
+
+Q355 | What benefits do eligible passengers receive through priority check-in?
+      Type: direct | Sections: Check-in → Priority Check-in → Benefits
+
+Q356 | Does priority check-in include lounge access?
+      Type: specific_detail | Sections: Check-in → Priority Check-in → Benefits
+
+Q357 | Can eligible priority check-in passengers request a Business Class upgrade?
+      Type: specific_detail | Sections: Check-in → Priority Check-in → Benefits
+
+Q358 | A passenger is unable to complete check-in online. What should the customer service agent do first?
+      Type: scenario | Sections: Customer Service Procedure for Check-In and Boarding Pass Issues → Procedure
+
+Q359 | What information should an agent verify when a passenger cannot obtain a boarding pass?
+      Type: specific_detail | Sections: Customer Service Procedure for Check-In and Boarding Pass Issues → Procedure → Steps 1–4
+
+Q360 | When should an agent advise a passenger to complete check-in at the airport counter?
+      Type: scenario | Sections: Customer Service Procedure for Check-In and Boarding Pass Issues → Procedure → Step 5
+
+Q361 | When should a check-in or boarding-pass issue be escalated?
+      Type: direct | Sections: Customer Service Procedure for Check-In and Boarding Pass Issues → Escalation
+
+Q362 | What should an agent do if the passenger's booking details are inconsistent?
+      Type: scenario | Sections: Customer Service Procedure for Check-In and Boarding Pass Issues → Escalation
+
+Q363 | Can a customer service agent manually override a check-in restriction?
+      Type: specific_detail | Sections: Customer Service Procedure for Check-In and Boarding Pass Issues → Escalation
+
+Q364 | What should an agent do when the system prevents check-in despite apparently valid booking information?
+      Type: scenario | Sections: Customer Service Procedure for Check-In and Boarding Pass Issues → Escalation
+
+Q365 | What information should an agent confirm when handling a general check-in enquiry?
+      Type: multi-step | Sections: Customer Service Procedure for Check-In Queries → Procedure → Steps 1–4
+
+Q366 | How should an agent assist a passenger who has checked baggage during a check-in enquiry?
+      Type: scenario | Sections: Customer Service Procedure for Check-In Queries → Procedure → Step 6
+
+Q367 | When should a check-in enquiry be escalated to another team?
+      Type: direct | Sections: Customer Service Procedure for Check-In Queries → Escalation
+
+
+Q368 | What should passengers do at a self-service check-in kiosk?
+      Type: direct | Sections: Self-Service Airport Check-In → Self-Service Check-In Process
+
+Q369 | Which airline should a passenger select at the self-service kiosk?
+      Type: specific_detail | Sections: Self-Service Airport Check-In → Select Airline
+
+Q370 | What information can passengers use to identify themselves at the self-service kiosk?
+      Type: specific_detail | Sections: Self-Service Airport Check-In → Passenger Identification
+
+Q371 | Can I use my booking reference to identify myself at the self-service kiosk?
+      Type: specific_detail | Sections: Self-Service Airport Check-In → Passenger Identification
+
+Q372 | Can a passenger use their passport information at the self-service kiosk?
+      Type: specific_detail | Sections: Self-Service Airport Check-In → Passenger Identification
+
+Q373 | What should passengers verify after the kiosk retrieves their booking?
+      Type: specific_detail | Sections: Self-Service Airport Check-In → Booking Verification
+
+Q374 | What information is checked during booking verification at the kiosk?
+      Type: direct | Sections: Self-Service Airport Check-In → Booking Verification
+
+Q375 | What happens after the passenger confirms their travel information at the kiosk?
+      Type: direct | Sections: Self-Service Airport Check-In → Boarding Pass Generation
+
+Q376 | What information appears on the boarding pass generated by the kiosk?
+      Type: specific_detail | Sections: Self-Service Airport Check-In → Boarding Pass Generation
+
+Q377 | Can I receive my self-service boarding pass digitally?
+      Type: specific_detail | Sections: Self-Service Airport Check-In → Boarding Pass Generation
+
+Q378 | Can the self-service kiosk print my boarding pass?
+      Type: specific_detail | Sections: Self-Service Airport Check-In → Boarding Pass Generation
+
+Q379 | What should a passenger do after completing self-service check-in?
+      Type: direct | Sections: Self-Service Airport Check-In → Completing Check-In
+
+Q380 | What are the advantages of using a self-service check-in kiosk?
+      Type: direct | Sections: Self-Service Airport Check-In → Benefits of Self-Service Check-In
+
+Q381 | How does self-service check-in reduce waiting time?
+      Type: reasoning | Sections: Self-Service Airport Check-In → Benefits of Self-Service Check-In
+
+Q382 | A passenger cannot complete online check-in and cannot generate a boarding pass. What should the agent check before escalating?
+      Type: scenario | Sections: Customer Service Procedure for Check-In and Boarding Pass Issues → Procedure, Customer Service Procedure for Check-In and Boarding Pass Issues → Escalation
+
+Q383 | A passenger's online check-in is unavailable. What alternative should the agent recommend?
+      Type: scenario | Sections: Customer Service Procedure for Check-In and Boarding Pass Issues → Procedure
+
+Q384 | A passenger wants to use a self-service kiosk but is unsure what information they need. What should the agent tell them?
+      Type: scenario | Sections: Self-Service Airport Check-In → Passenger Identification, Self-Service Airport Check-In → Booking Verification
+
+Q385 | What is the complete process for checking in using a self-service kiosk?
+      Type: multi-step | Sections: Self-Service Airport Check-In → Self-Service Check-In Process → Sections 1–7
+
+Q386 | What are the different check-in options provided by Kenya Airways?
+      Type: direct | Sections: Check-in → Overview, Check-in → Online Check-in, Check-in → International Check-in, Check-in → Domestic Check-in, Check-in → Priority Check-in, Self-Service Airport Check-In → Overview
+
+Q387 | How does online check-in differ from self-service airport check-in?
+      Type: comparison | Sections: Check-in → Online Check-in, Self-Service Airport Check-In → Self-Service Check-In Process
+
+Q388 | A passenger cannot check in online but has a valid booking. What possible next step is provided by the customer service procedure?
+      Type: scenario | Sections: Customer Service Procedure for Check-In and Boarding Pass Issues → Procedure → Step 5, Customer Service Procedure for Check-In and Boarding Pass Issues → Escalation
+
+Q389 | What circumstances require escalation when handling a check-in problem?
+      Type: multi-section | Sections: Customer Service Procedure for Check-In and Boarding Pass Issues → Escalation, Customer Service Procedure for Check-In Queries → Escalation
+
+Q390 | What should customer service agents avoid doing when handling check-in restrictions?
+      Type: specific_detail | Sections: Customer Service Procedure for Check-In and Boarding Pass Issues → Escalation
+
+Q391 | What can cause a Kenya Airways flight to be delayed or cancelled?
+      Type: direct | Sections: Flight Delays and Cancellations → Overview
+
+Q392 | What is the Kenya Airways Self-Rebooking Service?
+      Type: direct | Sections: Flight Delays and Cancellations → Self-Rebooking Service
+
+Q393 | Can I rebook my disrupted flight online without contacting customer support?
+      Type: paraphrased | Sections: Flight Delays and Cancellations → Self-Rebooking Service
+
+Q394 | What are the benefits of the Self-Rebooking Service?
+      Type: direct | Sections: Flight Delays and Cancellations → Self-Rebooking Service → Benefits
+
+Q395 | Does self-rebooking cost anything for an eligible disrupted flight?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → Charges
+
+Q396 | What information do I need to rebook a disrupted flight?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → How to Rebook
+
+Q397 | How do I rebook a flight that has been delayed or cancelled?
+      Type: direct | Sections: Flight Delays and Cancellations → How to Rebook
+
+Q398 | Where can I access the Self-Rebooking Service?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → How to Rebook, Flight Delays and Cancellations → FAQs → Where do I rebook my flight?
+
+Q399 | What types of flight disruptions make a passenger eligible for self-rebooking?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → Eligibility
+
+Q400 | Can I use Self-Rebooking for a flight that has not been disrupted?
+      Type: direct | Sections: Flight Delays and Cancellations → Eligibility
+
+Q401 | How soon after my original flight can I choose an alternative flight?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → Available Flight Options
+
+Q402 | How far after the original departure date can self-rebooking options be available?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → Available Flight Options
+
+Q403 | What booking details remain unchanged after self-rebooking?
+      Type: direct | Sections: Flight Delays and Cancellations → Existing Booking Details
+
+Q404 | Will my destination change when I self-rebook my disrupted flight?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → Existing Booking Details
+
+Q405 | Will my travel class remain the same after self-rebooking?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → Existing Booking Details
+
+Q406 | Will my baggage allowance remain unchanged after self-rebooking?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → Existing Booking Details
+
+Q407 | What happens if I do not complete the self-rebooking process?
+      Type: direct | Sections: Flight Delays and Cancellations → Automatic Rebooking
+
+Q408 | If I am satisfied with the automatically assigned flight, what should I do?
+      Type: scenario | Sections: Flight Delays and Cancellations → Automatic Rebooking
+
+Q409 | If I do not like the automatically assigned flight, how can I choose another option?
+      Type: scenario | Sections: Flight Delays and Cancellations → Automatic Rebooking
+
+Q410 | What happens to baggage that was already checked in before a flight disruption?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → Checked Baggage
+
+Q411 | Will my checked baggage be transferred automatically to the new flight?
+      Type: direct | Sections: Flight Delays and Cancellations → Checked Baggage, Flight Delays and Cancellations → FAQs → Already checked in
+
+Q412 | What do passengers receive after confirming a self-rebooked flight?
+      Type: direct | Sections: Flight Delays and Cancellations → Ticket Confirmation
+
+Q413 | Will I receive a new electronic ticket after self-rebooking?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → Ticket Confirmation
+
+Q414 | Which ticket types are supported by the Self-Rebooking Service?
+      Type: direct | Sections: Flight Delays and Cancellations → Supported Ticket Types
+
+Q415 | Can revenue tickets be self-rebooked after a flight disruption?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → Supported Ticket Types
+
+Q416 | Can award tickets be rebooked using the Self-Rebooking Service?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → Supported Ticket Types, Flight Delays and Cancellations → FAQs → Award tickets
+
+Q417 | Can eligible partner airline tickets be self-rebooked?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → Supported Ticket Types
+
+Q418 | What may happen to an eligible partner airline ticket when it is self-rebooked?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → Supported Ticket Types
+
+Q419 | How many times can I use Self-Rebooking if my flight is disrupted more than once?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → Multiple Flight Disruptions
+
+Q420 | If my outbound flight is disrupted, can I also change my unaffected inbound flight for free?
+      Type: scenario | Sections: Flight Delays and Cancellations → FAQs → Outbound and inbound flight changes
+
+Q421 | What should I do if I need to change an unaffected inbound flight?
+      Type: scenario | Sections: Flight Delays and Cancellations → FAQs → Outbound and inbound flight changes
+
+Q422 | What happens if a passenger selects Decline Changes during the self-rebooking process?
+      Type: specific_detail | Sections: Flight Delays and Cancellations → FAQs → What happens if I do not rebook my flight?
+
+Q423 | A passenger's flight has been cancelled. Can they use Self-Rebooking, and what information will they need?
+      Type: scenario | Sections: Flight Delays and Cancellations → Eligibility, Flight Delays and Cancellations → FAQs → What do I need to rebook my flight?
+
+Q424 | A passenger has already checked in and their flight is disrupted. What happens to their checked baggage if they select another flight?
+      Type: scenario | Sections: Flight Delays and Cancellations → Checked Baggage, Flight Delays and Cancellations → FAQs → Already checked in
+
+Q425 | A passenger wants to choose another flight after being automatically rebooked. What should they do?
+      Type: scenario | Sections: Flight Delays and Cancellations → Automatic Rebooking
+
+Q426 | Why is a passenger unable to use Self-Rebooking for an unaffected flight?
+      Type: reasoning | Sections: Flight Delays and Cancellations → Eligibility, Internal customer-service procedure
+
+Q427 | What should a customer service agent confirm first when assisting a passenger affected by a flight disruption?
+      Type: specific_detail | Sections: Customer Service Procedure for Flight Disruptions → Procedure → Step 1
+
+Q428 | What information should an agent verify using the approved airline system?
+      Type: specific_detail | Sections: Customer Service Procedure for Flight Disruptions → Procedure → Step 2
+
+Q429 | What should an agent explain to a passenger affected by a flight disruption?
+      Type: direct | Sections: Customer Service Procedure for Flight Disruptions → Procedure → Step 3
+
+Q430 | When should an agent assist a passenger with an alternative flight?
+      Type: specific_detail | Sections: Customer Service Procedure for Flight Disruptions → Procedure → Step 4
+
+Q431 | What should the agent confirm after completing a disruption-related rebooking?
+      Type: specific_detail | Sections: Customer Service Procedure for Flight Disruptions → Procedure → Step 5
+
+Q432 | What should an agent do if a passenger requires a refund after a flight disruption?
+      Type: scenario | Sections: Customer Service Procedure for Flight Disruptions → Procedure → Step 6
+
+Q433 | When should a flight disruption case be escalated?
+      Type: direct | Sections: Customer Service Procedure for Flight Disruptions → Escalation
+
+Q434 | What should an agent do if no suitable alternative flight is available?
+      Type: scenario | Sections: Customer Service Procedure for Flight Disruptions → Escalation
+
+Q435 | Should an agent escalate a passenger's request for compensation or an exception?
+      Type: specific_detail | Sections: Customer Service Procedure for Flight Disruptions → Escalation
+
+Q436 | What should an agent do when a disrupted booking involves another airline?
+      Type: scenario | Sections: Customer Service Procedure for Flight Disruptions → Escalation
+
+Q437 | When should an agent escalate a disruption that cannot be resolved through the rebooking system?
+      Type: specific_detail | Sections: Customer Service Procedure for Flight Disruptions → Escalation
+
+Q438 | Can a customer service agent promise compensation to a passenger affected by a disruption?
+      Type: specific_detail | Sections: Customer Service Procedure for Flight Disruptions → Escalation
+
+Q439 | Can an agent waive applicable charges without authorization?
+      Type: specific_detail | Sections: Customer Service Procedure for Flight Disruptions → Escalation
+
+Q440 | What is the complete procedure an agent should follow when assisting a passenger affected by a flight disruption?
+      Type: multi-step | Sections: Customer Service Procedure for Flight Disruptions → Procedure → Steps 1–6
+
+Q441 | A passenger's flight has been cancelled and no suitable alternative is available. What should the customer service agent do?
+      Type: scenario | Sections: Customer Service Procedure for Flight Disruptions → Procedure, Customer Service Procedure for Flight Disruptions → Escalation
+
+Q442 | A passenger requests compensation after a flight disruption. How should the agent handle the request?
+      Type: scenario | Sections: Customer Service Procedure for Flight Disruptions → Procedure → Step 6, Customer Service Procedure for Flight Disruptions → Escalation
+
+Q443 | A passenger's disrupted booking involves another airline. What should the agent do?
+      Type: scenario | Sections: Customer Service Procedure for Flight Disruptions → Escalation
+
+Q444 | A passenger needs a refund following a disruption. What should the agent explain?
+      Type: scenario | Sections: Customer Service Procedure for Flight Disruptions → Procedure → Step 6
+
+Q445 | What information should an agent confirm before explaining rebooking options to a passenger?
+      Type: multi-step | Sections: Customer Service Procedure for Flight Disruptions → Procedure → Steps 1–3
+
+Q446 | How does the customer service disruption procedure differ from the Self-Rebooking Service?
+      Type: comparison | Sections: Customer Service Procedure for Flight Disruptions → Procedure, Flight Delays and Cancellations → Self-Rebooking Service
+
+Q447 | A passenger can use the Self-Rebooking Service but contacts customer support instead. What should the agent assist with?
+      Type: scenario | Sections: Customer Service Procedure for Flight Disruptions → Procedure
+
+Q448 | What should agents avoid promising when handling flight disruption cases?
+      Type: specific_detail | Sections: Customer Service Procedure for Flight Disruptions → Escalation
+
+Q449 | What are the main situations in which a disrupted-flight enquiry should be escalated?
+      Type: multi-section | Sections: Customer Service Procedure for Flight Disruptions → Escalation
+
+Q450 | A passenger has a disrupted flight and wants a refund rather than rebooking. What should the customer service agent do?
+      Type: scenario | Sections: Customer Service Procedure for Flight Disruptions → Procedure → Step 6
+
+Q451 | Is wheelchair assistance available for passengers with reduced mobility?
+      Type: direct | Sections: Wheelchair Assistance
+
+Q452 | How much does wheelchair assistance cost?
+      Type: specific_detail | Sections: Wheelchair Assistance
+
+Q453 | How far in advance should I request wheelchair assistance for flights to London or Paris?
+      Type: specific_detail | Sections: Requesting Wheelchair Assistance
+
+Q454 | What happens if I request wheelchair assistance less than 48 hours before departure?
+      Type: reasoning/detail | Sections: Requesting Wheelchair Assistance
+
+Q455 | Can I bring my own wheelchair when travelling with Kenya Airways?
+      Type: direct | Sections: Bringing Personal Wheelchairs and Mobility Devices
+
+Q456 | Do I need to make a reservation for my personal mobility device?
+      Type: specific_detail | Sections: Bringing Personal Wheelchairs and Mobility Devices
+
+Q457 | Can a manual wheelchair be carried in the aircraft cabin?
+      Type: specific_detail | Sections: Wheelchair Transportation
+
+Q458 | What happens to wheelchairs that cannot be carried as cabin baggage?
+      Type: indirect | Sections: Wheelchair Transportation
+
+Q459 | What are the wheelchair size limits for a Boeing 787?
+      Type: specific_detail | Sections: Wheelchair Size Limits, Boeing 787
+
+Q460 | What are the maximum wheelchair dimensions for Boeing 737 aircraft?
+      Type: specific_detail | Sections: Wheelchair Size Limits, Boeing 737-300 / 737-700 / 737-800
+
+Q461 | What is the maximum weight allowed for a wheelchair on an Embraer 190?
+      Type: specific_detail | Sections: Wheelchair Size Limits, Embraer 190
+
+Q462 | Can a passenger with reduced mobility travel alone?
+      Type: direct | Sections: Passengers with Reduced Mobility Travelling Alone
+
+Q463 | What activities must a passenger with reduced mobility be able to perform independently when travelling alone?
+      Type: specific_detail | Sections: Passengers with Reduced Mobility Travelling Alone
+
+Q464 | When does a passenger with reduced mobility need a companion or personal care attendant?
+      Type: reasoning | Sections: Passengers with Reduced Mobility Travelling Alone
+
+Q465 | Are there special arrangements for groups of passengers with reduced mobility?
+      Type: direct | Sections: Groups of Passengers with Reduced Mobility
+
+Q466 | How many passengers with reduced mobility require advance arrangements?
+      Type: specific_detail | Sections: Groups of Passengers with Reduced Mobility
+
+Q467 | Can a person under 18 act as an attendant for passengers with reduced mobility?
+      Type: specific_detail | Sections: Groups of Passengers with Reduced Mobility
+
+Q468 | What determines the number of attendants required for a group of passengers with reduced mobility?
+      Type: reasoning/detail | Sections: Groups of Passengers with Reduced Mobility
+
+Q469 | When should passengers provide their mobility requirements to Kenya Airways?
+      Type: indirect | Sections: Important Notes
+
+Q470 | Does the availability of reduced-mobility assistance depend on the aircraft and airport?
+      Type: reasoning/detail | Sections: Important Notes
+
+Q471 | What should pregnant passengers do before travelling with Kenya Airways?
+      Type: direct | Sections: Overview, Pregnancy Travel Preparation
+
+Q472 | When is a medical clearance certificate required for passengers with a single uncomplicated pregnancy?
+      Type: specific_detail | Sections: Pregnancy Travel Restrictions, Single Uncomplicated Pregnancy
+
+Q473 | How many weeks pregnant can a passenger with a single uncomplicated pregnancy travel?
+      Type: specific_detail | Sections: Pregnancy Travel Restrictions, Single Uncomplicated Pregnancy
+
+Q474 | When does Kenya Airways stop accepting passengers with a single uncomplicated pregnancy?
+      Type: direct | Sections: Single Uncomplicated Pregnancy
+
+Q475 | What are the pregnancy travel limits for multiple pregnancies?
+      Type: specific_detail | Sections: Multiple Uncomplicated Pregnancy
+
+Q476 | When is medical clearance required for a passenger with multiple pregnancy?
+      Type: specific_detail | Sections: Multiple Uncomplicated Pregnancy
+
+Q477 | What happens if a passenger has a complicated pregnancy?
+      Type: reasoning | Sections: Complicated Pregnancy
+
+Q478 | Does a doctor's letter replace a required Kenya Airways medical clearance certificate?
+      Type: reasoning/detail | Sections: Medical Documentation Requirements
+
+Q479 | How recent must a medical letter be for flights to or from the United States?
+      Type: specific_detail | Sections: Medical Documentation Requirements
+
+Q480 | What should expectant passengers carry with them during travel?
+      Type: specific_detail | Sections: Medical Documentation Requirements, Pregnancy Travel Preparation
+
+Q481 | What are some ways pregnant passengers can prepare for their flight?
+      Type: direct | Sections: Pregnancy Travel Preparation
+
+Q482 | Can pregnant passengers select seats with additional space?
+      Type: specific_detail | Sections: Seat Selection and Comfort
+
+Q483 | What can expectant passengers do during the flight to improve circulation?
+      Type: specific_detail | Sections: In-Flight Safety and Assistance
+
+Q484 | What should pregnant passengers consider when planning their destination?
+      Type: specific_detail | Sections: Destination Planning
+
+Q485 | Are pregnancy travel restrictions based on the stage of pregnancy?
+      Type: reasoning | Sections: Important Notes
+
+
+Q486 | What assistance does Kenya Airways provide to families travelling with infants?
+      Type: direct | Sections: Overview, Boarding and Seating, Cabin Crew Assistance
+
+Q487 | Can families travelling with infants receive priority boarding?
+      Type: direct | Sections: Boarding and Seating
+
+Q488 | Are bassinets available for infants on Kenya Airways flights?
+      Type: direct | Sections: Boarding and Seating
+
+Q489 | How can I request a bassinet for my infant?
+      Type: indirect | Sections: Boarding and Seating
+
+Q490 | Are bassinets available on every Kenya Airways aircraft?
+      Type: specific_detail | Sections: Boarding and Seating, Important Notes
+
+Q491 | What facilities are available for families with infants during the flight?
+      Type: direct | Sections: In-Flight Facilities
+
+Q492 | Can cabin crew help with warming a baby's bottle?
+      Type: direct | Sections: Cabin Crew Assistance
+
+Q493 | Can Kenya Airways provide baby meals?
+      Type: direct | Sections: Meals
+
+Q494 | When should I request a special baby meal?
+      Type: specific_detail | Sections: Meals
+
+Q495 | What does the lap infant policy cover?
+      Type: direct | Sections: Lap Infant Policy
+
+Q496 | What can parents do to reduce an infant's ear discomfort during takeoff and landing?
+      Type: specific_detail | Sections: Comfort During the Flight
+
+Q497 | Can cabin crew assist if an infant experiences discomfort during the flight?
+      Type: indirect | Sections: Comfort During the Flight, Cabin Crew Assistance
+
+Q498 | What guidance does cabin crew provide regarding infant safety?
+      Type: specific_detail | Sections: Safety
+
+Q499 | Are baby meals and bassinets guaranteed to be available?
+      Type: reasoning | Sections: Meals, Important Notes
+
+Q500 | What should passengers travelling with lap infants review before travelling?
+      Type: specific_detail | Sections: Lap Infant Policy, Important Notes
+
+
+Q501 | What medical assistance services does Kenya Airways provide?
+      Type: direct | Sections: Overview, Ground Medical Support, Oxygen Assistance, Stretcher Services
+
+Q502 | Which passengers may require medical clearance before flying?
+      Type: direct | Sections: Medical Clearance Requirements
+
+Q503 | Do passengers who recently had major medical conditions need medical clearance?
+      Type: reasoning | Sections: Medical Clearance Requirements
+
+Q504 | Is medical clearance required after recent surgery?
+      Type: specific_detail | Sections: Medical Clearance Requirements
+
+Q505 | What form must passengers complete when medical clearance is required?
+      Type: direct | Sections: Medical Clearance Requirements, Medical Clearance Process
+
+Q506 | What is the process for obtaining medical clearance?
+      Type: direct | Sections: Medical Clearance Process
+
+Q507 | What happens after Kenya Airways approves a passenger's medical clearance?
+      Type: indirect | Sections: Medical Clearance Process
+
+Q508 | What are the requirements for completing a MEDIF form?
+      Type: specific_detail | Sections: MEDIF Requirements
+
+Q509 | Can an incomplete MEDIF delay the medical clearance process?
+      Type: reasoning/detail | Sections: MEDIF Requirements
+
+Q510 | Is a new MEDIF required for a return journey?
+      Type: specific_detail | Sections: MEDIF Requirements
+
+Q511 | What medical support can passengers arrange before, during, or after travel?
+      Type: direct | Sections: Ground Medical Support
+
+Q512 | How far in advance must medical equipment required during a flight receive approval?
+      Type: specific_detail | Sections: Ground Medical Support
+
+Q513 | What requirements apply to passengers travelling with medical devices?
+      Type: direct | Sections: Medical Devices
+
+Q514 | How long must batteries for medical equipment be able to power the equipment?
+      Type: specific_detail | Sections: Medical Devices
+
+Q515 | What approval is required for passengers travelling with portable oxygen concentrators?
+      Type: specific_detail | Sections: Portable Oxygen Concentrators (POC)
+
+Q516 | What should a passenger do with a POC battery when the device is carried as cabin baggage but will not be used during the flight?
+      Type: specific_detail | Sections: Portable Oxygen Concentrators (POC)
+
+Q517 | What requirements apply to passengers travelling with ventilators?
+      Type: direct | Sections: Ventilators and Medical Equipment
+
+Q518 | Can passengers carry medication in their cabin baggage?
+      Type: direct | Sections: Medication on Board
+
+Q519 | Should passengers carry prescriptions or doctor's letters when travelling with medication?
+      Type: specific_detail | Sections: Medication on Board
+
+Q520 | Can medication be refrigerated onboard the aircraft?
+      Type: specific_detail | Sections: Medication on Board
+
+Q521 | Does Kenya Airways provide medical oxygen during flights?
+      Type: direct | Sections: Oxygen Assistance
+
+Q522 | What requirements apply to passengers requesting stretcher services?
+      Type: direct | Sections: Stretcher Services
+
+Q523 | How far in advance should stretcher services be requested?
+      Type: specific_detail | Sections: Stretcher Services
+
+Q524 | Who may need a medical escort when travelling?
+      Type: direct | Sections: Medical Escort Services
+
+Q525 | How far in advance should passengers notify Kenya Airways about medical escort requirements?
+      Type: specific_detail | Sections: Medical Escort Services
+
+Q526 | Are medical assistance services subject to additional fees?
+      Type: direct | Sections: Medical Facilitation Fees
+
+Q527 | What types of medical services may attract additional charges?
+      Type: specific_detail | Sections: Medical Facilitation Fees
+
+Q528 | Does Kenya Airways allow service dogs for passengers with disabilities?
+      Type: direct | Sections: Service Animals
+
+Q529 | Which animals are not considered service animals under the policy?
+      Type: specific_detail | Sections: Service Animals
+
+Q530 | How far in advance must passengers reserve a service dog?
+      Type: specific_detail | Sections: Service Animal Booking Requirements
+
+Q531 | What documentation may be required for a service dog?
+      Type: specific_detail | Sections: Service Animal Documentation
+
+Q532 | How old can service animal documentation be?
+      Type: specific_detail | Sections: Service Animal Documentation
+
+Q533 | How many service dogs can travel on narrow-body and wide-body aircraft?
+      Type: specific_detail | Sections: Service Animal Conditions
+
+Q534 | Can a service dog occupy an emergency exit seat?
+      Type: specific_detail | Sections: Service Animal Conditions
+
+Q535 | What should passengers do if they require medical assistance before travelling?
+      Type: direct | Sections: Important Notes
+
+Q536 | Does the destination country affect medical travel requirements?
+      Type: reasoning | Sections: Important Notes
+
+
+Q537 | What is the Kenya Airways Unaccompanied Minor service?
+      Type: direct | Sections: Overview
+
+Q538 | What age range is eligible for the Unaccompanied Minor service?
+      Type: specific_detail | Sections: Eligibility
+
+Q539 | Can a child under 5 years old travel alone on Kenya Airways?
+      Type: direct | Sections: Eligibility
+
+Q540 | Can passengers aged 15 to 17 use the Unaccompanied Minor service?
+      Type: specific_detail | Sections: Eligibility
+
+Q541 | Is the Unaccompanied Minor service available on partner airline flights?
+      Type: specific_detail | Sections: Eligibility, Travel Guidelines
+
+Q542 | What documents are required for an unaccompanied minor?
+      Type: direct | Sections: Required Documentation
+
+Q543 | What information must be provided on the Unaccompanied Minor Form?
+      Type: specific_detail | Sections: Required Documentation
+
+Q544 | Does the Unaccompanied Minor service have a fee?
+      Type: direct | Sections: Fees
+
+Q545 | When is the Unaccompanied Minor service fee waived?
+      Type: specific_detail | Sections: Fees
+
+Q546 | Which domestic routes have waived Unaccompanied Minor fees?
+      Type: specific_detail | Sections: Fees
+
+Q547 | Are there special rules for groups of unaccompanied minors?
+      Type: direct | Sections: Fees
+
+Q548 | What type of flights are recommended for children travelling alone?
+      Type: specific_detail | Sections: Travel Guidelines
+
+Q549 | Are overnight flight connections allowed for unaccompanied minors?
+      Type: direct | Sections: Travel Guidelines
+
+Q550 | What happens to the Unaccompanied Minor service when the onward flight is operated by another airline?
+      Type: indirect | Sections: Travel Guidelines
+
+Q551 | What assistance does Kenya Airways provide to unaccompanied minors at the airport?
+      Type: direct | Sections: Airport and In-Flight Assistance
+
+Q552 | Does cabin crew supervise unaccompanied minors during the flight?
+      Type: direct | Sections: Airport and In-Flight Assistance
+
+Q553 | Can special meals be provided to an unaccompanied minor?
+      Type: specific_detail | Sections: Airport and In-Flight Assistance
+
+Q554 | What are the requirements for the person collecting an unaccompanied minor?
+      Type: direct | Sections: Pick-up Requirements
+
+Q555 | When should the designated person arrive to collect the child?
+      Type: specific_detail | Sections: Pick-up Requirements
+
+Q556 | What contact information should an unaccompanied minor have?
+      Type: specific_detail | Sections: Pick-up Requirements
+
+Q557 | What is the KOOLFLYERS requirement for children using the Unaccompanied Minor service?
+      Type: specific_detail | Sections: Special Programs
+
+Q558 | What happens if an unaccompanied minor's journey is disrupted unexpectedly?
+      Type: indirect | Sections: Service Disruptions
+
+Q559 | Who is kept informed when an unaccompanied minor's journey is disrupted?
+      Type: specific_detail | Sections: Service Disruptions
+
+Q560 | What are the most important requirements for using the Unaccompanied Minor service?
+      Type: multi-section | Sections: Eligibility, Required Documentation, Travel Guidelines, Important Notes
+
+Q561 | What is Kenya Airways Business Class also known as?
+      Type: specific_detail | Sections: Business Class (Premier World)
+
+Q562 | What benefits do Kenya Airways Business Class passengers receive?
+      Type: multiple_details | Sections: Business Class (Premier World)
+
+Q563 | What services are provided to Kenya Airways Economy Class passengers?
+      Type: multiple_details | Sections: Economy Class
+
+Q564 | What are Economy Comfort Seats?
+      Type: specific_detail | Sections: Economy Comfort Seats
+
+Q565 | What benefits may be included in Kenya Airways Priority Travel services?
+      Type: multiple_details | Sections: Priority Travel Services
+
+Q566 | Does Kenya Airways offer extra legroom seats?
+      Type: yes_no | Sections: Common Passenger Questions, Economy Comfort Seats
+
+Q567 | What is the difference between Business Class and Economy Class?
+      Type: comparison | Sections: Common Passenger Questions, Business Class (Premier World), Economy Class
+
+Q568 | What factors determine Kenya Airways onboard meal services?
+      Type: multiple_details | Sections: Overview
+
+Q569 | What is served to Business Class passengers on short-haul flights?
+      Type: specific_detail | Sections: Meals in Business Class, Short Haul Flights
+
+Q570 | What meal is provided to Business Class passengers on medium-haul flights?
+      Type: specific_detail | Sections: Meals in Business Class, Medium Haul Flights
+
+Q571 | How many meal services are provided on long-haul Business Class flights?
+      Type: specific_detail | Sections: Meals in Business Class, Long Haul Flights
+
+Q572 | How many meal services are provided on super long-haul Business Class flights?
+      Type: specific_detail | Sections: Meals in Business Class, Super Long Haul Flights
+
+Q573 | What is served to Economy Class passengers on short-haul flights?
+      Type: specific_detail | Sections: Meals in Economy Class, Short Haul Flights
+
+Q574 | What meal is provided to Economy Class passengers on medium-haul flights?
+      Type: specific_detail | Sections: Meals in Economy Class, Medium Haul Flights
+
+Q575 | How many meal services are provided on long-haul Economy Class flights?
+      Type: specific_detail | Sections: Meals in Economy Class, Long Haul Flights
+
+Q576 | How many meal services are provided on super long-haul Economy Class flights?
+      Type: specific_detail | Sections: Meals in Economy Class, Super Long Haul Flights
+
+Q577 | What types of special meals does Kenya Airways provide?
+      Type: multiple_details | Sections: Special Meal Requests
+
+
+Q578 | How far in advance should passengers request a Kosher meal?
+      Type: specific_detail | Sections: Religious Meals, Kosher Meal (KSML)
+
+Q579 | What is a Hindu meal (HNML)?
+      Type: specific_detail | Sections: Religious Meals, Hindu Meal (HNML)
+
+Q580 | What is a Moslem meal (MOML)?
+      Type: specific_detail | Sections: Religious Meals, Moslem Meal (MOML)
+
+Q581 | What foods are excluded from a Jain meal?
+      Type: multiple_details | Sections: Religious Meals, Jain Meal (VJML)
+
+Q582 | What is an Asian Vegetarian Meal (AVML)?
+      Type: specific_detail | Sections: Vegetarian Meals, Asian Vegetarian Meal (AVML)
+
+Q583 | What is a Vegetarian Vegan Meal (VGML)?
+      Type: specific_detail | Sections: Vegetarian Meals, Vegetarian Vegan Meal (VGML)
+
+Q584 | What is a Vegetarian Raw Meal (RVML)?
+      Type: specific_detail | Sections: Vegetarian Meals, Vegetarian Raw Meal (RVML)
+
+Q585 | What is a Lacto-Ovo Vegetarian Meal (VLML)?
+      Type: specific_detail | Sections: Vegetarian Meals, Lacto-Ovo Vegetarian Meal (VLML)
+
+Q586 | What is a Vegetarian Oriental Meal (VOML)?
+      Type: specific_detail | Sections: Vegetarian Meals, Vegetarian Oriental Meal (VOML)
+
+
+Q587 | What is a Gluten Intolerant Meal (GFML)?
+      Type: specific_detail | Sections: Medical and Dietary Meals, Gluten Intolerant Meal (GFML)
+
+Q588 | What is a Bland Meal (BLML)?
+      Type: specific_detail | Sections: Medical and Dietary Meals, Bland Meal (BLML)
+
+Q589 | What is a Diabetic Meal (DBML)?
+      Type: specific_detail | Sections: Medical and Dietary Meals, Diabetic Meal (DBML)
+
+Q590 | What is a Low Fat Meal (LFML)?
+      Type: specific_detail | Sections: Medical and Dietary Meals, Low Fat Meal (LFML)
+
+Q591 | What is a Low Lactose Meal (NLML)?
+      Type: specific_detail | Sections: Medical and Dietary Meals, Low Lactose Meal (NLML)
+
+Q592 | What is a Low Salt Meal (LSML)?
+      Type: specific_detail | Sections: Medical and Dietary Meals, Low Salt Meal (LSML)
+
+
+Q593 | What is a Baby Meal (BBML)?
+      Type: specific_detail | Sections: Baby and Child Meals, Baby Meal (BBML)
+
+Q594 | What is a Child Meal (CHML)?
+      Type: specific_detail | Sections: Baby and Child Meals, Child Meal (CHML)
+
+Q595 | What is a Fruit Platter (FPML)?
+      Type: specific_detail | Sections: Other Special Meals, Fruit Platter (FPML)
+
+Q596 | What is a Seafood Meal (SFML)?
+      Type: specific_detail | Sections: Other Special Meals, Seafood Meal (SFML)
+
+Q597 | What is a Special Meal (SPML)?
+      Type: specific_detail | Sections: Other Special Meals, Special Meal (SPML)
+
+Q598 | Can Kenya Airways guarantee a completely nut-free environment?
+      Type: yes_no | Sections: Nut Allergies
+
+Q599 | How far in advance should passengers request special meals?
+      Type: specific_detail | Sections: Requesting Special Meals
+
+Q600 | Where can passengers request special meals?
+      Type: multiple_details | Sections: Requesting Special Meals
+
+
+Q601 | What should a customer service agent do when a passenger requests an additional travel service?
+      Type: procedural | Sections: Procedure
+
+Q602 | What should an agent do if the requested travel service is unavailable?
+      Type: conditional_procedure | Sections: Escalation
+
+Q603 | When should a travel service request be escalated?
+      Type: conditional_procedure | Sections: Escalation
+
+Q604 | What should an agent do if a travel service requires special authorization?
+      Type: conditional_procedure | Sections: Escalation
+
+Q605 | What should an agent do if the system cannot add a requested travel service?
+      Type: conditional_procedure | Sections: Escalation
+
+Q606 | What should an agent do if a passenger disputes an applicable charge?
+      Type: conditional_procedure | Sections: Escalation
+
+Q607 | What should an agent confirm before processing a travel service request?
+      Type: specific_detail | Sections: Procedure
+
+Q608 | What should an agent do after successfully adding a requested travel service?
+      Type: procedural | Sections: Procedure
+
