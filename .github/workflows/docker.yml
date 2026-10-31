@@ -1,0 +1,181 @@
+name: Docker Integration Tests
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - "feature/**"
+
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build-and-test:
+    name: Build images and test service communication
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the repository
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # 2. Build frontend image
+      - name: Build frontend image
+        run: |
+          docker build \
+            --build-arg VITE_API_URL=http://localhost:3000/api/v1 \
+            -t airline-frontend:ci \
+            ./frontend
+
+      # 3. Build backend image
+      - name: Build backend image
+        run: |
+          docker build \
+            -t airline-backend:ci \
+            ./backend/application-backend
+
+      # 4. Build RAG service image
+      - name: Build RAG image
+        run: |
+          docker build \
+            -t airline-rag:ci \
+            ./backend/rag-service
+
+      # 5. Create a shared Docker network
+      - name: Create Docker network
+        run: docker network create airline-ci-network
+
+      # 6. Start PostgreSQL
+      - name: Start PostgreSQL
+        run: |
+          docker run -d \
+            --name postgres \
+            --network airline-ci-network \
+            -e POSTGRES_USER=postgres \
+            -e POSTGRES_PASSWORD=ci-password \
+            -e POSTGRES_DB=airline_test \
+            postgres:16
+
+      # 7. Start Redis
+      - name: Start Redis
+        run: |
+          docker run -d \
+            --name redis \
+            --network airline-ci-network \
+            redis:7-alpine \
+            redis-server --requirepass ci-redis-password
+
+      # 8. Wait for PostgreSQL and Redis
+      - name: Wait for databases
+        run: |
+          for i in {1..30}; do
+            if docker exec postgres pg_isready -U postgres -d airline_test; then
+              break
+            fi
+            sleep 2
+          done
+
+          docker exec postgres pg_isready -U postgres -d airline_test
+
+          for i in {1..30}; do
+            if docker exec redis redis-cli -a ci-redis-password ping 2>/dev/null | grep -q PONG; then
+              break
+            fi
+            sleep 2
+          done
+
+          docker exec redis redis-cli -a ci-redis-password ping
+
+      # 9. Start RAG service
+      - name: Start RAG service
+        run: |
+          docker run -d \
+            --name rag-service \
+            --network airline-ci-network \
+            -p 5001:5001 \
+            airline-rag:ci
+
+      # 10. Start backend
+      - name: Start backend
+        run: |
+          docker run -d \
+            --name application-backend \
+            --network airline-ci-network \
+            -p 3000:3000 \
+            -e NODE_ENV=production \
+            -e PORT=3000 \
+            -e DATABASE_URL=postgresql://postgres:ci-password@postgres:5432/airline_test \
+            -e REDIS_HOST=redis \
+            -e REDIS_PORT=6379 \
+            -e REDIS_PASSWORD=ci-redis-password \
+            -e SESSION_SECRET=ci-session-secret \
+            -e RAG_SERVICE_URL=http://rag-service:5001 \
+            -e FRONTEND_URL=http://localhost:8080 \
+            airline-backend:ci
+
+      # 11. Check backend startup
+      - name: Check backend startup
+        run: |
+          for i in {1..30}; do
+            if docker logs application-backend 2>&1 | grep -q "Server is running on port 3000"; then
+              echo "Backend started successfully."
+              exit 0
+            fi
+
+            if [ "$(docker inspect -f '{{.State.Running}}' application-backend)" != "true" ]; then
+              echo "Backend container stopped unexpectedly."
+              docker logs application-backend
+              exit 1
+            fi
+
+            sleep 2
+          done
+
+          echo "Backend did not start within 60 seconds."
+          docker logs application-backend
+          exit 1
+
+      # 12. Start frontend
+      - name: Start frontend
+        run: |
+          docker run -d \
+            --name frontend \
+            --network airline-ci-network \
+            -p 8080:80 \
+            airline-frontend:ci
+
+      # 13. Check frontend availability
+      - name: Check frontend availability
+        run: |
+          for i in {1..30}; do
+            if curl --fail http://localhost:8080; then
+              echo "Frontend is responding."
+              exit 0
+            fi
+
+            sleep 2
+          done
+
+          echo "Frontend did not become available."
+          docker logs frontend
+          exit 1
+
+      # 14. Display logs if a step fails
+      - name: Show container logs on failure
+        if: failure()
+        run: |
+          docker logs postgres || true
+          docker logs redis || true
+          docker logs rag-service || true
+          docker logs application-backend || true
+          docker logs frontend || true
+
+      # 15. Clean up containers and network
+      - name: Clean up
+        if: always()
+        run: |
+          docker rm -f frontend application-backend rag-service redis postgres || true
+          docker network rm airline-ci-network || true
