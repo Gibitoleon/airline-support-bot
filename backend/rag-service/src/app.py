@@ -30,7 +30,14 @@ retrievalService = RetrievalService(
 )
 
 
+@app.route("/health", methods=["GET"])
+def health_check():
+    return jsonify({
+        "status": "healthy",
+        "service": "rag-service"
+    }), 200
 @app.route("/retrieve", methods=["POST"])
+
 def retrieve():
 
     data = request.get_json()

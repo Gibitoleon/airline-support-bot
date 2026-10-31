@@ -22,6 +22,7 @@ import {
 import apiLimiter from "../middleware/Ratelimiter.js";
 import dashboardRoutes from "../routes/Dashboard.routes.js";
 import userRoutes from "../routes/User.routes.js";
+import healthRoutes from "../routes/Health.routes.js";
 
 const app = express();
 
@@ -50,6 +51,9 @@ app.use("/api/v1/chat", getCustomerSession, chatRoutes);
 
 // feedback routes
 app.use("/api/v1/feedback", feedbackRoutes);
+
+// health routes
+app.use("/api/v1/health", healthRoutes);
 
 // invitation routes
 app.use("/api/v1/invitation", getSessionData, invitationRoutes);
