@@ -124,9 +124,34 @@ jobs:
             -p 5001:5001 \
             -e GEMINI_API_KEY \
             -e GROQ_API_KEY \
+            -e REDIS_HOST=redis \
+            -e REDIS_PORT=6379 \
+            -e REDIS_PASSWORD=ci-redis-password \
             airline-rag:ci
 
-      # 11. Start backend
+      # 11. Check RAG service startup
+      - name: Check RAG service startup
+        run: |
+          for i in {1..30}; do
+            if [ "$(docker inspect -f '{{.State.Running}}' rag-service)" != "true" ]; then
+              echo "RAG container stopped unexpectedly."
+              docker logs rag-service
+              exit 1
+            fi
+
+            if docker logs rag-service 2>&1 | grep -q "Running on"; then
+              echo "RAG service started successfully."
+              exit 0
+            fi
+
+            sleep 2
+          done
+
+          echo "RAG service did not start within 60 seconds."
+          docker logs rag-service
+          exit 1
+
+      # 12. Start backend
       - name: Start backend
         run: |
           docker run -d \
@@ -144,7 +169,7 @@ jobs:
             -e FRONTEND_URL=http://localhost:8080 \
             airline-backend:ci
 
-      # 12. Check backend startup
+      # 13. Check backend startup
       - name: Check backend startup
         run: |
           for i in {1..30}; do
@@ -166,7 +191,7 @@ jobs:
           docker logs application-backend
           exit 1
 
-      # 13. Check backend-to-RAG communication
+      # 14. Check backend-to-RAG communication
       - name: Check backend and RAG health
         run: |
           for i in {1..30}; do
@@ -185,7 +210,7 @@ jobs:
           docker logs rag-service
           exit 1
 
-      # 14. Start frontend
+      # 15. Start frontend
       - name: Start frontend
         run: |
           docker run -d \
@@ -194,7 +219,7 @@ jobs:
             -p 8080:80 \
             airline-frontend:ci
 
-      # 15. Check frontend availability
+      # 16. Check frontend availability
       - name: Check frontend availability
         run: |
           for i in {1..30}; do
@@ -210,7 +235,7 @@ jobs:
           docker logs frontend
           exit 1
 
-      # 16. Display logs if a step fails
+      # 17. Display logs if a step fails
       - name: Show container logs on failure
         if: failure()
         run: |
@@ -220,7 +245,7 @@ jobs:
           docker logs application-backend || true
           docker logs frontend || true
 
-      # 17. Clean up containers and network
+      # 18. Clean up containers and network
       - name: Clean up
         if: always()
         run: |
