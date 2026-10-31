@@ -114,11 +114,16 @@ jobs:
 
       # 10. Start RAG service
       - name: Start RAG service
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
           docker run -d \
             --name rag-service \
             --network airline-ci-network \
             -p 5001:5001 \
+            -e GEMINI_API_KEY \
+            -e GROQ_API_KEY \
             airline-rag:ci
 
       # 11. Start backend
@@ -166,7 +171,7 @@ jobs:
         run: |
           for i in {1..30}; do
             if curl --fail --silent --show-error \
-              http://localhost:3000/api/v1/health; then
+              http://localhost:3000/api/v1/health/gethealth; then
               echo "Backend and RAG health checks passed."
               exit 0
             fi
