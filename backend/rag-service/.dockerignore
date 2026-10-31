@@ -30,7 +30,3 @@ htmlcov/
 # Log files
 
 \*.log
-
-# Existing ChromaDB persistence directory
-
-data/processed/vector_store/
