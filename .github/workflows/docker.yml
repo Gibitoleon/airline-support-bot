@@ -22,7 +22,30 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # 2. Build frontend image
+      # 2. Download ChromaDB vector store from Supabase
+      - name: Download ChromaDB vector store
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          mkdir -p backend/rag-service/data/processed/vector_store
+
+          curl --fail --silent --show-error \
+            -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
+            "$SUPABASE_URL/storage/v1/object/authenticated/rag-vector-store/vector_store.zip" \
+            -o vector_store.zip
+
+          unzip -q vector_store.zip \
+            -d backend/rag-service/data/processed/vector_store
+
+          rm vector_store.zip
+
+          echo "Vector store downloaded and extracted successfully."
+
+          ls -la backend/rag-service/data/processed/vector_store
+
+      # 3. Build frontend image
       - name: Build frontend image
         run: |
           docker build \
@@ -30,25 +53,25 @@ jobs:
             -t airline-frontend:ci \
             ./frontend
 
-      # 3. Build backend image
+      # 4. Build backend image
       - name: Build backend image
         run: |
           docker build \
             -t airline-backend:ci \
             ./backend/application-backend
 
-      # 4. Build RAG service image
+      # 5. Build RAG service image
       - name: Build RAG image
         run: |
           docker build \
             -t airline-rag:ci \
             ./backend/rag-service
 
-      # 5. Create a shared Docker network
+      # 6. Create a shared Docker network
       - name: Create Docker network
         run: docker network create airline-ci-network
 
-      # 6. Start PostgreSQL
+      # 7. Start PostgreSQL
       - name: Start PostgreSQL
         run: |
           docker run -d \
@@ -59,7 +82,7 @@ jobs:
             -e POSTGRES_DB=airline_test \
             postgres:16
 
-      # 7. Start Redis
+      # 8. Start Redis
       - name: Start Redis
         run: |
           docker run -d \
@@ -68,7 +91,7 @@ jobs:
             redis:7-alpine \
             redis-server --requirepass ci-redis-password
 
-      # 8. Wait for PostgreSQL and Redis
+      # 9. Wait for PostgreSQL and Redis
       - name: Wait for databases
         run: |
           for i in {1..30}; do
@@ -89,7 +112,7 @@ jobs:
 
           docker exec redis redis-cli -a ci-redis-password ping
 
-      # 9. Start RAG service
+      # 10. Start RAG service
       - name: Start RAG service
         run: |
           docker run -d \
@@ -98,7 +121,7 @@ jobs:
             -p 5001:5001 \
             airline-rag:ci
 
-      # 10. Start backend
+      # 11. Start backend
       - name: Start backend
         run: |
           docker run -d \
@@ -116,7 +139,7 @@ jobs:
             -e FRONTEND_URL=http://localhost:8080 \
             airline-backend:ci
 
-      # 11. Check backend startup
+      # 12. Check backend startup
       - name: Check backend startup
         run: |
           for i in {1..30}; do
@@ -138,7 +161,7 @@ jobs:
           docker logs application-backend
           exit 1
 
-      # 12. Start frontend
+      # 13. Start frontend
       - name: Start frontend
         run: |
           docker run -d \
@@ -147,7 +170,7 @@ jobs:
             -p 8080:80 \
             airline-frontend:ci
 
-      # 13. Check frontend availability
+      # 14. Check frontend availability
       - name: Check frontend availability
         run: |
           for i in {1..30}; do
@@ -163,7 +186,7 @@ jobs:
           docker logs frontend
           exit 1
 
-      # 14. Display logs if a step fails
+      # 15. Display logs if a step fails
       - name: Show container logs on failure
         if: failure()
         run: |
@@ -173,7 +196,7 @@ jobs:
           docker logs application-backend || true
           docker logs frontend || true
 
-      # 15. Clean up containers and network
+      # 16. Clean up containers and network
       - name: Clean up
         if: always()
         run: |
