@@ -161,7 +161,26 @@ jobs:
           docker logs application-backend
           exit 1
 
-      # 13. Start frontend
+      # 13. Check backend-to-RAG communication
+      - name: Check backend and RAG health
+        run: |
+          for i in {1..30}; do
+            if curl --fail --silent --show-error \
+              http://localhost:3000/api/v1/health; then
+              echo "Backend and RAG health checks passed."
+              exit 0
+            fi
+
+            echo "Waiting for backend and RAG services..."
+            sleep 2
+          done
+
+          echo "Backend or RAG health check failed."
+          docker logs application-backend
+          docker logs rag-service
+          exit 1
+
+      # 14. Start frontend
       - name: Start frontend
         run: |
           docker run -d \
@@ -170,11 +189,11 @@ jobs:
             -p 8080:80 \
             airline-frontend:ci
 
-      # 14. Check frontend availability
+      # 15. Check frontend availability
       - name: Check frontend availability
         run: |
           for i in {1..30}; do
-            if curl --fail http://localhost:8080; then
+            if curl --fail --silent http://localhost:8080; then
               echo "Frontend is responding."
               exit 0
             fi
@@ -186,7 +205,7 @@ jobs:
           docker logs frontend
           exit 1
 
-      # 15. Display logs if a step fails
+      # 16. Display logs if a step fails
       - name: Show container logs on failure
         if: failure()
         run: |
@@ -196,7 +215,7 @@ jobs:
           docker logs application-backend || true
           docker logs frontend || true
 
-      # 16. Clean up containers and network
+      # 17. Clean up containers and network
       - name: Clean up
         if: always()
         run: |
