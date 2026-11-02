@@ -1,0 +1,182 @@
+[
+    {
+        "question_id": "Q001",
+        "question": "What are the steps for booking a Kenya Airways flight online?",
+        "answers": {
+            "All-MiniLM + Reranking": "The information provided outlines the steps for using the Kenya Airways Self‑Rebooking portal, not the process for booking a new flight online. Therefore, the steps for booking a Kenya Airways flight online are not available in the given context.",
+            "Gemini + Reranking": "The information provided outlines the steps for using the Kenya Airways Self‑Rebooking portal, not the process for booking a new flight online. Therefore, the steps for booking a Kenya Airways flight online are not available in the given context.",
+            "Contextual Gemini + Reranking": "To book a Kenya Airways flight online, follow these steps:\n\n1. Enter the departure airport or city.  \n2. Enter the destination airport or city.  \n3. Select the trip type (One‑way, Return, or Multi‑city).  \n4. Choose your travel dates.  \n5. Select the cabin class.  \n6. Enter the number of passengers.  \n7. Click **Search Flights** to view available options.  \n8. Compare the fares and choose the one that best fits your travel plans.  \n9. Complete the booking by following the remaining booking and payment steps."
+        }
+    },
+    {
+        "question_id": "Q002",
+        "question": "What types of trips can I book online?",
+        "answers": {
+            "All-MiniLM + Reranking": "You can book the following trip types online:\n\n- **One‑way**\n- **Return**\n- **Multi‑city**",
+            "Gemini + Reranking": "You can book the following trip types online:\n\n- **One‑way**\n- **Return**\n- **Multi‑city**",
+            "Contextual Gemini + Reranking": "You can book the following types of trips online:\n\n- One‑way  \n- Return  \n- Multi‑city  "
+        }
+    },
+    {
+        "question_id": "Q003",
+        "question": "Can I book a one-way or multi-city flight?",
+        "answers": {
+            "All-MiniLM + Reranking": "Yes. When booking online, you can select **One‑way** or **Multi‑city** as the trip type.",
+            "Gemini + Reranking": "Yes. When booking online, you can select **One‑way** or **Multi‑city** as the trip type.",
+            "Contextual Gemini + Reranking": "Yes, you can select either a one‑way or a multi‑city flight when booking online."
+        }
+    },
+    {
+        "question_id": "Q004",
+        "question": "What information do I need to provide when searching for a flight?",
+        "answers": {
+            "All-MiniLM + Reranking": "The provided information does not include details about what is required when searching for a flight.",
+            "Gemini + Reranking": "When searching for a flight, you need to provide:\n\n1. **Departure airport or city**  \n2. **Destination airport or city**  \n3. **Trip type** (one‑way, return, or multi‑city)  \n4. **Travel dates** (departure and, if applicable, return dates)  \n5. **Cabin class** (e.g., Economy, Business)  \n6. **Number of passengers**  \n\nThese details allow the system to display the available flight options.",
+            "Contextual Gemini + Reranking": "To search for a flight, you need to provide:\n\n- Your booking reference **or** electronic ticket number  \n- Your last name"
+        }
+    },
+    {
+        "question_id": "Q005",
+        "question": "How can I change my seat after making a booking?",
+        "answers": {
+            "All-MiniLM + Reranking": "You can change your seat through Kenya Airways’ **Manage Booking** service:\n\n1. Visit the Kenya Airways website and select **Manage Booking**.  \n2. Log in using your booking reference and passenger details.  \n3. Choose the option to **Select/Change Seats**.  \n4. Pick an available seat and confirm the change.  \n\nNote that seat changes are subject to availability and any fare conditions that may apply.",
+            "Gemini + Reranking": "You can change your seat through Kenya Airways’ **Manage Booking** service:\n\n1. Visit the Kenya Airways website and select **Manage Booking**.  \n2. Log in using your booking reference and passenger details.  \n3. Choose the option to **Select/Change Seats**.  \n4. Pick an available seat and confirm the change.  \n\nNote that seat changes are subject to availability and any fare conditions that may apply.",
+            "Contextual Gemini + Reranking": "To change your seat, log in to Kenya Airways’ **Manage Booking** service using your booking details. Once logged in, choose the option to select or change seats and pick your preferred seat, subject to availability and fare conditions."
+        }
+    },
+    {
+        "question_id": "Q006",
+        "question": "What can I do through Manage Booking?",
+        "answers": {
+            "All-MiniLM + Reranking": "Through Kenya Airways’ **Manage Booking** service you can:\n\n- Customize your existing reservation  \n- Select or change your seats  \n- Request special meals  \n- Purchase eligible upgrades  \n\nPlease note that some changes may be subject to fare conditions and availability.",
+            "Gemini + Reranking": "Through Kenya Airways’ **Manage Booking** service you can:\n\n- Customize your existing reservation  \n- Select or change your seats  \n- Request special meals  \n- Purchase eligible upgrades  \n\nPlease note that some changes may be subject to fare conditions and availability.",
+            "Contextual Gemini + Reranking": "Through the Kenya Airways **Manage Booking** service you can:\n\n- Customize your existing reservation  \n- Select or change your seats  \n- Request special meals  \n- Purchase eligible upgrades  \n\nYou’ll need to log in with your booking details to access these options."
+        }
+    },
+    {
+        "question_id": "Q007",
+        "question": "Can I modify an existing booking and purchase an upgrade?",
+        "answers": {
+            "All-MiniLM + Reranking": "Yes. By using Kenya Airways’ **Manage Booking** service you can log in with your booking details and both modify your reservation (e.g., change seats, request special meals) and purchase any eligible upgrades. Availability and fare conditions may apply.",
+            "Gemini + Reranking": "I’m sorry, but the information needed to answer that question isn’t available.",
+            "Contextual Gemini + Reranking": "Yes. You can upgrade an existing reservation to Business Class by paying the fare difference between the Economy fare you booked and the available Business Class fare, provided there is availability."
+        }
+    },
+    {
+        "question_id": "Q008",
+        "question": "What factors can affect the changes I make to an existing booking?",
+        "answers": {
+            "All-MiniLM + Reranking": "Changes to an existing booking can be limited by the fare conditions attached to your ticket and by the availability of the service you want—such as seats, special meals, or eligible upgrades. If the fare rules or the required inventory aren’t available, the change may not be possible.",
+            "Gemini + Reranking": "Several factors determine whether and how you can change an existing Kenya Airways booking:\n\n1. **Ticket conditions / fare rules** – Some fares allow changes freely, while others restrict changes or prohibit them altogether.  \n2. **Availability of alternative flights** – A new date or flight must have seats open for your fare class.  \n3. **Fare difference** – If the new flight is priced higher (or lower), you may need to pay the difference (or receive a credit, depending on the fare rules).  \n4. **Change fees** – Certain fare types incur a specific change charge in addition to any fare difference.  \n5. **Verification of booking reference and passenger identity** – The change can only be processed after confirming the correct booking and passenger details.  \n\nThese elements are evaluated before any modification is approved and finalized.",
+            "Contextual Gemini + Reranking": "The outcome of a booking change depends on several factors:\n\n- **Ticket and fare conditions** – whether the fare rules allow the requested modification.  \n- **Availability of alternative flights** – if there are seats on the new date or route you want.  \n- **Fare difference** – any price increase (or decrease) between the original and new itinerary.  \n- **Change charges** – any applicable fees for altering the reservation.  \n\nThese elements determine if a change can be made and what additional costs may apply."
+        }
+    },
+    {
+        "question_id": "Q009",
+        "question": "Why might the fares shown when booking a flight be different?",
+        "answers": {
+            "All-MiniLM + Reranking": "The fares you see can change because they depend on factors such as the travel dates you select, the destination, current demand for seats, and the specific fare conditions attached to each ticket. These variables cause the available fares to vary at the time of booking.",
+            "Gemini + Reranking": "The fares you see can change because they depend on the specific travel dates and destination you select, as well as current demand and the particular fare conditions that apply to each flight. These factors cause the available fares to vary at the time of booking.",
+            "Contextual Gemini + Reranking": "The fares you see can change because they depend on the demand for the flight and the specific fare conditions that apply. Additionally, the travel dates and destination you select influence which fares are available."
+        }
+    },
+    {
+        "question_id": "Q010",
+        "question": "What determines whether a flight is available?",
+        "answers": {
+            "All-MiniLM + Reranking": "Flight availability is determined by the travel dates you select and the destination you choose.",
+            "Gemini + Reranking": "Flight availability is determined by the travel dates you select and the destination you choose.",
+            "Contextual Gemini + Reranking": "A flight is eligible for self‑rebooking only if it has been affected by a delay, a cancellation, or a schedule change. If none of these occur, self‑rebooking is not available."
+        }
+    },
+    {
+        "question_id": "Q011",
+        "question": "What information should a customer service agent confirm before assisting with a flight booking?",
+        "answers": {
+            "All-MiniLM + Reranking": "The provided information does not include the specific details about what a customer service agent must confirm before assisting with a flight booking.",
+            "Gemini + Reranking": "The provided information does not specify which details a customer service agent must confirm before assisting with a flight booking.",
+            "Contextual Gemini + Reranking": "A customer service agent should confirm the following details before assisting with a flight booking:\n\n1. The passenger’s preferred departure location and destination.  \n2. The intended travel dates.  \n3. The trip type (one‑way, return, or multi‑city).  \n4. The preferred travel class.  \n5. The number of passengers."
+        }
+    },
+    {
+        "question_id": "Q012",
+        "question": "What departure and destination information should the agent confirm?",
+        "answers": {
+            "All-MiniLM + Reranking": "The agent should confirm the passenger’s **preferred departure location** and the **desired destination**.",
+            "Gemini + Reranking": "The agent should confirm the passenger’s **preferred departure location** and the **desired destination**.",
+            "Contextual Gemini + Reranking": "The agent should confirm the passenger’s preferred **departure location** and **destination**."
+        }
+    },
+    {
+        "question_id": "Q013",
+        "question": "What travel dates should the agent confirm with the passenger?",
+        "answers": {
+            "All-MiniLM + Reranking": "The agent should confirm the passenger’s flight date (the travel date) along with the destination.",
+            "Gemini + Reranking": "The information about the specific travel dates the agent should confirm with the passenger is not provided.",
+            "Contextual Gemini + Reranking": "The agent should confirm the passenger’s intended travel dates."
+        }
+    },
+    {
+        "question_id": "Q014",
+        "question": "What trip types can a passenger choose when making a booking?",
+        "answers": {
+            "All-MiniLM + Reranking": "The provided information does not include details about the trip types available for selection when making a booking.",
+            "Gemini + Reranking": "The provided information does not include details about the trip types that a passenger can choose when making a booking.",
+            "Contextual Gemini + Reranking": "A passenger can select one of the following trip types when booking:\n\n- One‑way  \n- Return  \n- Multi‑city"
+        }
+    },
+    {
+        "question_id": "Q015",
+        "question": "What travel class should the agent confirm?",
+        "answers": {
+            "All-MiniLM + Reranking": "The provided information does not specify which travel class the agent should confirm.",
+            "Gemini + Reranking": "The agent should confirm the passenger’s preferred travel class, but the specific class (e.g., Economy, Business, First) is not provided in the information you shared.",
+            "Contextual Gemini + Reranking": "The agent should confirm the passenger’s preferred travel class."
+        }
+    },
+    {
+        "question_id": "Q016",
+        "question": "How should an agent check available flights and fares?",
+        "answers": {
+            "All-MiniLM + Reranking": "The provided information does not include details on the procedure for agents to check available flights and fares.",
+            "Gemini + Reranking": "The provided information does not include details on the procedure for checking available flights and fares. If you need guidance on that process, please refer to the relevant Kenya Airways operational manuals or contact a supervisor for the appropriate steps.",
+            "Contextual Gemini + Reranking": "The agent should use the airline’s approved booking system to look up and review the available flights and their corresponding fares."
+        }
+    },
+    {
+        "question_id": "Q017",
+        "question": "What should an agent explain to a passenger about available flight options and fare conditions?",
+        "answers": {
+            "All-MiniLM + Reranking": "An agent should tell the passenger what flights are currently shown in the system, including the dates, times and any class‑of‑service options that are available. For each option the agent should also explain the key fare conditions – such as change or cancellation rules, baggage allowances and any restrictions that apply to the fare.\n\nThe agent must make clear that the information provided is provisional; availability and the exact fare price cannot be guaranteed until the booking is confirmed. If the system cannot show a suitable flight, displays inconsistent details, the passenger needs an exception to the standard conditions, or a payment/ticketing problem prevents completion, the enquiry should be escalated for further handling.",
+            "Gemini + Reranking": "An agent should tell the passenger what flights are currently shown in the system, including the dates, times, routes and any fare classes that are available. For each option the agent should explain the key fare conditions – such as change or cancellation rules, baggage allowances, refund eligibility and any restrictions that apply to that fare.\n\nThe agent must also make it clear that availability and the exact fare price cannot be guaranteed until the booking is confirmed. If the system cannot provide a suitable flight, shows inconsistent information, the passenger needs an exception to the standard conditions, or a payment/ticketing problem prevents completion, the enquiry should be escalated for further handling.",
+            "Contextual Gemini + Reranking": "The agent should clearly describe the flight options that are available for the passenger’s requested route and dates, and explain the specific fare conditions that apply to each option (such as refundability, change fees, baggage allowances, and any other restrictions). This ensures the passenger understands the choices and the terms associated with each fare."
+        }
+    },
+    {
+        "question_id": "Q018",
+        "question": "When should a customer service agent assist a passenger with the booking process?",
+        "answers": {
+            "All-MiniLM + Reranking": "The provided information does not include details on when a customer service agent should assist a passenger with the booking process.",
+            "Gemini + Reranking": "The provided information does not specify when a customer service agent should assist a passenger with the booking process.",
+            "Contextual Gemini + Reranking": "A customer service agent should assist a passenger whenever the passenger has a flight‑booking enquiry. This is the point at which the outlined procedure for assisting with the booking process is applied."
+        }
+    },
+    {
+        "question_id": "Q019",
+        "question": "When should a flight booking enquiry be escalated?",
+        "answers": {
+            "All-MiniLM + Reranking": "A flight booking enquiry should be escalated when:\n\n- No suitable flight is available.  \n- The booking system displays inconsistent information.  \n- The passenger needs an exception to standard booking conditions.  \n- A payment or ticketing issue prevents the booking from being completed.",
+            "Gemini + Reranking": "A flight booking enquiry should be escalated when:\n\n- No suitable flight is available.  \n- The booking system displays inconsistent information.  \n- The passenger needs an exception to standard booking conditions.  \n- A payment or ticketing issue prevents the booking from being completed.",
+            "Contextual Gemini + Reranking": "A flight‑booking enquiry should be escalated when any of the following occurs:\n\n- No suitable flight is available.  \n- The booking system displays inconsistent or contradictory information.  \n- The passenger needs an exception to the standard booking conditions.  \n- A payment or ticketing problem prevents the booking from being completed."
+        }
+    },
+    {
+        "question_id": "Q020",
+        "question": "What should an agent do if no suitable flight is available?",
+        "answers": {
+            "All-MiniLM + Reranking": "If no suitable flight is available, the agent should **escalate the enquiry**.",
+            "Gemini + Reranking": "If no suitable flight is available, the agent should **escalate the enquiry**.",
+            "Contextual Gemini + Reranking": "If no suitable alternative flight is available, the agent should escalate the case to a higher‑level support team for further handling."
+        }
+    }
+]

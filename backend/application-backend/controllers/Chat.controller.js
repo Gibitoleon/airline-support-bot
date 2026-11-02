@@ -9,7 +9,7 @@ const sendchatQuery = async (req, res) => {
     conversationContext,
   } = req.user;
   const sessionId = req.sessionID;
-  console.log(sessionId);
+
   //const conversationContext = req.session.conversationContext ?? [];
   const createdQuery = await ChatService.createChatQuery(
     userId,
@@ -36,12 +36,10 @@ const sendchatQuery = async (req, res) => {
 
 const getChats = async (req, res) => {
   const { conversationContext } = req.user;
-  res
-    .status(StatusCodes.OK)
-    .json({
-      message: "Chats retrieved successfully",
-      conversationContext: conversationContext,
-    });
+  res.status(StatusCodes.OK).json({
+    message: "Chats retrieved successfully",
+    conversationContext: conversationContext,
+  });
 };
 
 export { sendchatQuery, getChats };
