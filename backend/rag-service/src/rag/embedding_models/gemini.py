@@ -7,7 +7,7 @@ from google.genai import types
 from .interface import EmbeddingManager
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[4]
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 ENV_FILE = PROJECT_ROOT / ".env"
 
 load_dotenv(ENV_FILE)
@@ -75,16 +75,17 @@ class GeminiEmbeddingManager(EmbeddingManager):
         return all_embeddings
 
     def create_query_embedding(self, query):
+        
         content = types.Content(parts=[types.Part(text=query)])
         response = self.client.models.embed_content(
             model="gemini-embedding-2",
             contents=content,
         )
         return response.embeddings[0].values
+    
         """
         Embed a list of query strings.
         Returns embeddings in the same order as the input list.
-        
         all_embeddings = []
         batch_size = 100
 
