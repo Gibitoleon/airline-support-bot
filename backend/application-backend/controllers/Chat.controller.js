@@ -31,7 +31,7 @@ const sendchatQuery = async (req, res) => {
     updatedQuery.response,
   );
 
-  res.status(StatusCodes.OK).json(result);
+  res.status(StatusCodes.OK).json({ ...result, queryId: updatedQuery.id });
 };
 
 const getChats = async (req, res) => {
