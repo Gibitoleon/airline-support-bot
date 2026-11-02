@@ -1,27 +1,30 @@
- 
- import AuthenticationService from '../services/AuthenticationService.js';
- import AuthorizationService from '../services/AuthorizationService.js';
- import SessionService from '../services/ExpressSessionService.js';
- import { StatusCodes } from 'http-status-codes';
+import AuthenticationService from "../services/AuthenticationService.js";
+import AuthorizationService from "../services/AuthorizationService.js";
+import SessionService from "../services/ExpressSessionService.js";
+import { StatusCodes } from "http-status-codes";
 
- const login = async (req, res) => {
-    const { email, password } = req.body;
-    const user = await AuthenticationService.authenticateUser(email, password);
-    const authorization = await AuthorizationService.getUserAuthorization(user.id)
-    const {role:{name}} = authorization
-    SessionService.createAuthenticatedSession(req,user,authorization);
+const login = async (req, res) => {
+  const { email, password } = req.body;
+  const user = await AuthenticationService.authenticateUser(email, password);
+  const authorization = await AuthorizationService.getUserAuthorization(
+    user.id,
+  );
+  const {
+    role: { name },
+  } = authorization;
+  SessionService.createAuthenticatedSession(req, user, authorization);
 
-   return res.status(StatusCodes.OK).json({
-     message: 'Login successful',
-     user: {userid:user.id, role:name}
-});
- }
+  return res.status(StatusCodes.OK).json({
+    message: "Login successful",
+    user: { userid: user.id, role: name, email: user.email },
+  });
+};
 
- const logout = async (req, res) => {
-    await SessionService.destroySession(req);
-    res.status(StatusCodes.OK).json({
-    message: 'Logout successful'
-});
- }
+const logout = async (req, res) => {
+  await SessionService.destroySession(req);
+  res.status(StatusCodes.OK).json({
+    message: "Logout successful",
+  });
+};
 
- export { login, logout }
+export { login, logout };
