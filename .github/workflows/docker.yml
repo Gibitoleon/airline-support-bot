@@ -1,12 +1,6 @@
 name: Docker Integration Tests
 
 on:
-  push:
-    branches:
-      - main
-      - develop
-      - "feature/**"
-
   pull_request:
     branches:
       - main

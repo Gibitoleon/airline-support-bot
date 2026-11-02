@@ -3,9 +3,23 @@ import { Loader2, X } from "lucide-react";
 import { navigationItems } from "../../data/data.js";
 import logo from "../assets/images/logos/Kenya-Airways-Logo.svg";
 import useLogout from "../customhooks/useLogout.js";
+import useAuthStore from "../stores/useLoginStore.js";
+
+const getInitials = (email) => {
+  if (!email) return "KA";
+  const namePart = email.split("@")[0];
+  const parts = namePart.split(/[._-]/);
+  if (parts.length > 1) {
+    return (parts[0][0] + parts[1][0]).toUpperCase();
+  }
+  return namePart.slice(0, 2).toUpperCase();
+};
 
 const Sidebar = ({ isOpen, onClose }) => {
   const { logout, isPending } = useLogout();
+
+  // Get the logged-in user
+  const user = useAuthStore((state) => state.user);
 
   const links = navigationItems.filter((item) => item.to);
   const actions = navigationItems.filter((item) => !item.to);
@@ -38,6 +52,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           <X className="h-5 w-5" />
         </button>
 
+        {/* Logo */}
         <div className="relative h-16 mb-4 overflow-hidden">
           <img
             src={logo}
@@ -46,6 +61,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           />
         </div>
 
+        {/* Nav Links */}
         <nav className="flex-1 space-y-0.5 overflow-y-auto">
           {links.map(({ label, to, icon: Icon }) => (
             <NavLink
@@ -77,6 +93,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             </NavLink>
           ))}
 
+          {/* Logout Action */}
           {actions.map(({ label, icon: Icon }) => (
             <button
               key={label}
@@ -97,11 +114,25 @@ const Sidebar = ({ isOpen, onClose }) => {
           ))}
         </nav>
 
-        <div className="rounded-lg border border-border bg-elevated p-3.5 mb-4">
-          <p className="text-sm text-muted">Signed in as</p>
-          <p className="truncate text-base font-medium">
-            agent@kenya-airways.com
-          </p>
+        {/* Sleek User Profile Footer */}
+        <div className="mt-auto rounded-xl border border-border bg-elevated p-3 mb-4">
+          <div className="flex items-center gap-3">
+            {/* Avatar Circle with Initials */}
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/20 text-sm font-bold text-primary">
+              {getInitials(user?.email)}
+            </div>
+
+            {/* User Info */}
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-medium text-muted">Signed in as</p>
+              <p
+                className="truncate text-sm font-semibold text-text"
+                title={user?.email}
+              >
+                {user?.email}
+              </p>
+            </div>
+          </div>
         </div>
       </aside>
     </>
