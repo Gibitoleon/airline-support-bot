@@ -3,99 +3,92 @@ import db from "../../models/index.js";
 const { Document } = db;
 
 export default class DocumentAnalyticsService {
+  static async getOverview() {
+    // Wrap in Number() to ensure they are numbers
+    const totalDocuments = Number(await Document.count());
+    const activeDocuments = Number(
+      await Document.count({
+        where: { status: "ACTIVE" },
+      }),
+    );
 
-    static async getOverview() {
+    return {
+      totalDocuments,
+      activeDocuments,
+    };
+  }
 
-        const totalDocuments = await Document.count();
+  static async getDocumentsByDomain() {
+    return await Document.findAll({
+      attributes: [
+        "domain",
+        [
+          // FIX: Cast the COUNT to INTEGER
+          db.sequelize.cast(
+            db.sequelize.fn("COUNT", db.sequelize.col("id")),
+            "INTEGER",
+          ),
+          "count",
+        ],
+      ],
+      group: ["domain"],
+      order: [["count", "DESC"]],
+      raw: true,
+    });
+  }
 
-        const activeDocuments = await Document.count({
-            where: {
-                status: "ACTIVE"
-            }
-        });
+  static async getDocumentsByStatus() {
+    return await Document.findAll({
+      attributes: [
+        "status",
+        [
+          // FIX: Cast the COUNT to INTEGER
+          db.sequelize.cast(
+            db.sequelize.fn("COUNT", db.sequelize.col("id")),
+            "INTEGER",
+          ),
+          "count",
+        ],
+      ],
+      group: ["status"],
+      order: [["status", "ASC"]],
+      raw: true,
+    });
+  }
 
-        return {
-            totalDocuments,
-            activeDocuments
-        };
-    }
+  static async getDocumentsByAccess() {
+    return await Document.findAll({
+      attributes: [
+        "access",
+        [
+          // FIX: Cast the COUNT to INTEGER
+          db.sequelize.cast(
+            db.sequelize.fn("COUNT", db.sequelize.col("id")),
+            "INTEGER",
+          ),
+          "count",
+        ],
+      ],
+      group: ["access"],
+      order: [["access", "ASC"]],
+      raw: true,
+    });
+  }
 
-    static async getDocumentsByDomain() {
+  static async getDashboardAnalytics() {
+    const [overview, documentsByDomain, documentsByStatus, documentsByAccess] =
+      await Promise.all([
+        this.getOverview(),
+        this.getDocumentsByDomain(),
+        this.getDocumentsByStatus(),
+        this.getDocumentsByAccess(),
+      ]);
 
-        return await Document.findAll({
-            attributes: [
-                "domain",
-                [
-                    db.sequelize.fn(
-                        "COUNT",
-                        db.sequelize.col("id")
-                    ),
-                    "count"
-                ]
-            ],
-            group: ["domain"],
-            order: [["count", "DESC"]],
-            raw: true
-        });
-    }
-
-    static async getDocumentsByStatus() {
-
-        return await Document.findAll({
-            attributes: [
-                "status",
-                [
-                    db.sequelize.fn(
-                        "COUNT",
-                        db.sequelize.col("id")
-                    ),
-                    "count"
-                ]
-            ],
-            group: ["status"],
-            order: [["status", "ASC"]],
-            raw: true
-        });
-    }
-
-    static async getDocumentsByAccess() {
-
-        return await Document.findAll({
-            attributes: [
-                "access",
-                [
-                    db.sequelize.fn(
-                        "COUNT",
-                        db.sequelize.col("id")
-                    ),
-                    "count"
-                ]
-            ],
-            group: ["access"],
-            order: [["access", "ASC"]],
-            raw: true
-        });
-    }
-
-    static async getDashboardAnalytics() {
-
-        const [
-            overview,
-            documentsByDomain,
-            documentsByStatus,
-            documentsByAccess
-        ] = await Promise.all([
-            this.getOverview(),
-            this.getDocumentsByDomain(),
-            this.getDocumentsByStatus(),
-            this.getDocumentsByAccess()
-        ]);
-
-        return {
-            overview,
-            documentsByDomain,
-            documentsByStatus,
-            documentsByAccess
-        };
-    }
+    return {
+      overview,
+      documentsByDomain,
+      documentsByStatus,
+      documentsByAccess,
+    };
+  }
 }
