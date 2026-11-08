@@ -1,58 +1,56 @@
-
-import db from '../models/index.js';
+import db from "../models/index.js";
 import { apiRequest } from "../utils/apiRequest.js";
-import ForbiddenError from '../errors/Forbiddenerror.js';
-import { StatusCodes } from 'http-status-codes';
-import "dotenv/config"
+import ForbiddenError from "../errors/Forbiddenerror.js";
+import { StatusCodes } from "http-status-codes";
+import "dotenv/config";
 
-const {Query} = db
+const { Query } = db;
 
 export default class ChatService {
-    static async createChatQuery(userId, query,sessionId) {
-        return await Query.create({
-            user_id: userId,
-            session_id: sessionId,
-            question: query,
-            status: 'pending'
-        });
-    }
-   static async updateChatQuery(queryId, response) {
+  static async createChatQuery(userId, query, sessionId) {
+    return await Query.create({
+      user_id: userId,
+      session_id: sessionId,
+      question: query,
+      status: "pending",
+    });
+  }
+  static async updateChatQuery(queryId, response) {
     await Query.update(
-        {
-            response,
-            status: "answered"
+      {
+        response,
+        status: "answered",
+      },
+      {
+        where: {
+          id: queryId,
         },
-        {
-            where: {
-                id: queryId
-            }
-        }
+      },
     );
 
     return await Query.findByPk(queryId);
-}
-    static async sendChatQuery(query, permissions) {
+  }
+  static async sendChatQuery(query, permissions, conversationContext) {
     try {
-        const responseData = await apiRequest({
-            url: "/retrieve",
-            method: "POST",
-            data: {
-                query,
-                permissions
-            },
-            baseURL: process.env.RAG_SERVICE_URL
-        });
+      const responseData = await apiRequest({
+        url: "/retrieve",
+        method: "POST",
+        data: {
+          query,
+          permissions,
+          history: conversationContext,
+        },
+        baseURL: process.env.RAG_SERVICE_URL,
+      });
 
-        return responseData;
+      return responseData;
     } catch (error) {
-            if (error.response?.status === StatusCodes.FORBIDDEN) {
-                throw new ForbiddenError(
-                    "Not authorized to access this info."
-                );
-            }
+      if (error.response?.status === StatusCodes.FORBIDDEN) {
+        throw new ForbiddenError("Not authorized to access this info.");
+      }
 
-        throw error;
+      throw error;
     }
-    }
-    static async getChats(userId) {}
+  }
+  static async getChats(userId) {}
 }
