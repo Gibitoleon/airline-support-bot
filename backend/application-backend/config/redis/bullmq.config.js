@@ -1,4 +1,5 @@
 // bullmq.config.js
+import "dotenv/config";
 
 const connection = {
   host: process.env.REDIS_HOST,
