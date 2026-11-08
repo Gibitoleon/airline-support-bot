@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --exec \"node --env-file=.env.development\" server/index.js",
     "start": "node server/index.js",
-    "worker": "node workers/email.worker.js",
+    "worker": "node --env-file=.env.development workers/email.worker.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "prisma skills sync || exit 0",
     "contract:emit": "prisma contract emit"
