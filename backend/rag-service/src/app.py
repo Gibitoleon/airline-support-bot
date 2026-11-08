@@ -13,7 +13,7 @@ from rag.rerankers.cross_encoder import MiniLMReranker
 from rag.retrieval import RetrievalService
 from rag.vector_store.chroma_store import ChromaVectorStore
 from services.documentservice import DocumentService
-
+from agents.orchestrator import AgentOrchestrator
 app = Flask(__name__)
 
 
@@ -28,7 +28,10 @@ llm = GroqManager()
 retrievalService = RetrievalService(
     embedding_manager=embedding_model, vector_store=vector_store, reranker=reranker
 )
-
+agent = AgentOrchestrator(
+    llm=llm,
+    retrieval_service=retrievalService
+)
 
 @app.route("/health", methods=["GET"])
 def health_check():
@@ -38,8 +41,42 @@ def health_check():
     }), 200
 @app.route("/retrieve", methods=["POST"])
 
+@app.route("/retrieve", methods=["POST"])
 def retrieve():
+    
+    data = request.get_json()
 
+    query = data.get("query")
+    permissions = data.get("permissions", [])
+    history = data.get("history", [])
+
+    if not query:
+        return jsonify({
+            "status": "ERROR",
+            "message": "Query is required."
+        }), 400
+
+    try:
+        response = agent.run(
+            query=query,
+            permissions=permissions,
+            history=history
+        )
+
+        return jsonify({
+            "status": "SUCCESS",
+            "query": query,
+            "response": response
+        }), 200
+
+    except (ValueError, KeyError) as e:
+        print(f"Agent orchestration error: {e}")
+
+        return jsonify({
+            "status": "ERROR",
+            "message": "An error occurred while processing your request."
+        }), 500
+    """
     data = request.get_json()
 
     query = data.get("query")
@@ -70,10 +107,19 @@ def retrieve():
     response = llm.generate_response(
         query=query, context=result["content"], prompt_name="response_prompt"
     )
+    print("QUERY:", query)
+
+    print("RETRIEVED CONTEXT:")
+    print(result["content"])
+
+    print("CONTEXT CHARACTERS:")
+    print(len(result["content"]))
+
+
 
     return jsonify({"status": "SUCCESS", "query": query, "response": response}), 200
 
-
+    """
 @app.route("/documents", methods=["POST"])
 def upload_document():
 
