@@ -9,7 +9,7 @@ const createFeedback = async (req, res) => {
   await FeedbackService.createFeedback(queryId, rating, comment, sessionId);
   return res
     .status(StatusCodes.CREATED)
-    .json({ success: true, message: "feedback created" });
+    .json({ success: true, message: "feedback sent" });
 };
 
 const getallFeedback = async (req, res) => {
