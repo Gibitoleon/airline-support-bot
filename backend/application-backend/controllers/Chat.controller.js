@@ -3,27 +3,34 @@ import ChatService from "../services/ChatService.js";
 import { StatusCodes } from "http-status-codes";
 const sendchatQuery = async (req, res) => {
   const { query } = req.body;
+
   const {
     userId,
     userPermissions: permissions,
-    conversationContext,
+    conversationContext = [],
   } = req.user;
+
   const sessionId = req.sessionID;
 
-  //const conversationContext = req.session.conversationContext ?? [];
   const createdQuery = await ChatService.createChatQuery(
     userId,
     query,
     sessionId,
   );
+
+  const recentContext = conversationContext.slice(-5);
+
   const result = await ChatService.sendChatQuery(
     createdQuery.question,
     permissions,
+    recentContext,
   );
+
   const updatedQuery = await ChatService.updateChatQuery(
     createdQuery.id,
     result.response,
   );
+
   SessionService.addConversationContext(
     req,
     conversationContext,
@@ -31,7 +38,10 @@ const sendchatQuery = async (req, res) => {
     updatedQuery.response,
   );
 
-  res.status(StatusCodes.OK).json({ ...result, queryId: updatedQuery.id });
+  res.status(StatusCodes.OK).json({
+    ...result,
+    queryId: updatedQuery.id,
+  });
 };
 
 const getChats = async (req, res) => {

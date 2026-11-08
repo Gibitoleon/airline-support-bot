@@ -4,7 +4,7 @@ from openai import OpenAI
 
 from .interface import LLMManager
 from .prompts.prompts import Prompts
-
+from typing import Any
 
 class GroqManager(LLMManager):
     MODEL = "openai/gpt-oss-120b"
@@ -62,3 +62,32 @@ class GroqManager(LLMManager):
         template = self.get_prompt("route_prompt")
         prompt = template.format(query=query)
         return self._generate(prompt, temperature=0.0, max_tokens=50).strip()
+
+    def chat_with_tools(
+        self,
+        messages: list[dict[str, Any]],
+        tools: list[dict[str, Any]],
+        tool_choice: str = "auto",
+        temperature: float = 0.1,
+        max_tokens: int = 1024,
+    ):
+        """
+        Send a conversation and available tool definitions to Groq.
+
+        Returns:
+            The complete Groq response, including any tool calls.
+        """
+
+        response = self.client.chat.completions.create(
+            model=self.MODEL,
+            messages=messages,
+            tools=tools,
+            tool_choice=tool_choice,
+            temperature=temperature,
+            max_tokens=max_tokens,
+        )
+
+        print("RAW GROQ RESPONSE:")
+        print(response.model_dump_json(indent=2))
+
+        return response
