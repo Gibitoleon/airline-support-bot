@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import {
   MessageCircle,
   X,
@@ -9,13 +8,9 @@ import {
   ShieldCheck,
   ChevronRight,
   Menu,
-  LogOut,
-  User,
 } from "lucide-react";
 import logo from "../assets/images/logos/Kenya-Airways-Logo.svg";
 import ChatWidget from "../components/chat/ChatWidget.jsx";
-import useAuthStore from "../stores/useLoginStore.js";
-import useLogout from "../customhooks/useLogout.js";
 
 const HERO_IMAGE =
   "https://upload.wikimedia.org/wikipedia/commons/9/93/5Y-KZA_%2818529035463%29.jpg";
@@ -23,12 +18,6 @@ const HERO_IMAGE =
 const Landing = () => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
-
-  // Auth state
-  const user = useAuthStore((state) => state.user);
-
-  // Logout hook
-  const { logout } = useLogout();
 
   const navLinks = [
     { label: "Book", href: "#" },
@@ -66,31 +55,6 @@ const Landing = () => {
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* DESKTOP AUTH STATE */}
-            {user ? (
-              <div className="hidden items-center gap-2 sm:flex">
-                <div className="flex max-w-[220px] items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2 text-sm font-medium text-muted">
-                  <User className="h-4 w-4 shrink-0 text-primary" />
-                  <span className="truncate">{user.email}</span>
-                </div>
-                <button
-                  onClick={logout}
-                  title="Log out"
-                  className="grid h-9 w-9 place-items-center rounded-lg border border-border bg-surface text-muted transition hover:bg-surface-light hover:text-primary"
-                >
-                  <LogOut className="h-4 w-4" />
-                </button>
-              </div>
-            ) : (
-              <Link
-                to="/login"
-                className="hidden rounded-lg border border-border bg-surface px-4 py-2 text-sm font-medium text-muted transition hover:bg-surface-light hover:text-text sm:inline-flex"
-              >
-                Sign In
-              </Link>
-            )}
-
-            {/* MOBILE MENU TOGGLE */}
             <button
               type="button"
               onClick={() => setMobileNavOpen((o) => !o)}
@@ -106,7 +70,6 @@ const Landing = () => {
           </div>
         </div>
 
-        {/* MOBILE NAV */}
         {mobileNavOpen && (
           <nav className="border-t border-border bg-surface px-4 py-4 sm:px-6 lg:hidden">
             <div className="flex flex-col gap-3">
@@ -120,33 +83,6 @@ const Landing = () => {
                   {l.label}
                 </a>
               ))}
-
-              {/* MOBILE AUTH STATE */}
-              {user ? (
-                <div className="mt-2 flex items-center justify-between gap-3 rounded-lg border border-border bg-elevated p-2 pl-4">
-                  <div className="flex items-center gap-2 overflow-hidden">
-                    <User className="h-4 w-4 shrink-0 text-primary" />
-                    <span className="truncate text-sm font-medium text-text">
-                      {user.email}
-                    </span>
-                  </div>
-                  <button
-                    onClick={logout}
-                    className="flex shrink-0 items-center gap-2 rounded-md bg-surface px-3 py-2 text-sm font-medium text-muted transition hover:text-primary"
-                  >
-                    <LogOut className="h-4 w-4" />
-                    Logout
-                  </button>
-                </div>
-              ) : (
-                <Link
-                  to="/login"
-                  onClick={() => setMobileNavOpen(false)}
-                  className="mt-2 inline-flex w-full items-center justify-center rounded-lg border border-border bg-elevated px-4 py-2.5 text-sm font-medium text-text transition hover:bg-surface-light"
-                >
-                  Sign In
-                </Link>
-              )}
             </div>
           </nav>
         )}

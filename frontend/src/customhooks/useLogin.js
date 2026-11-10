@@ -17,6 +17,8 @@ const useLogin = () => {
       // Route by role
       if (user.role === "KNOWLEDGE_BASE_ADMIN") {
         navigate("/admin/dashboard", { replace: true });
+      } else if (user.role === "STAFF") {
+        navigate("/staff/chat", { replace: true });
       } else {
         navigate("/", { replace: true });
       }
