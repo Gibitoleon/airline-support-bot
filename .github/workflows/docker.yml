@@ -119,6 +119,7 @@ jobs:
             -p 5001:5001 \
             -e GEMINI_API_KEY \
             -e GROQ_API_KEY \
+            -e JINA_API_KEY \
             -e REDIS_HOST=redis \
             -e REDIS_PORT=6379 \
             -e REDIS_PASSWORD=ci-redis-password \
