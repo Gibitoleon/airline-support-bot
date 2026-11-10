@@ -2,22 +2,27 @@
 
 import SessionService from "../services/ExpressSessionService.js";
 
+const getSessionData = (req, res, next) => {
+  console.log("SESSION DEBUG:", {
+    sessionID: req.sessionID,
+    session: req.session,
+    cookie: req.headers.cookie,
+  });
 
+  SessionService.setUserFromSession(req);
+  console.log("USER AFTER SESSION:", req.user);
 
- const getSessionData = (req, res, next) => {
-    SessionService.setUserFromSession(req);
-    next();
+  next();
 };
 
- const getCustomerSession = (req, res, next) => {
+const getCustomerSession = (req, res, next) => {
+  if (SessionService.hasNoSessionData(req)) {
+    SessionService.createAnonymousSession(req);
+  }
 
-    if (SessionService.hasNoSessionData(req)) {
-        SessionService.createAnonymousSession(req);
-    }
+  SessionService.setUserFromSession(req);
 
-    SessionService.setUserFromSession(req);
-
-    next();
+  next();
 };
 
-export { getCustomerSession, getSessionData}
+export { getCustomerSession, getSessionData };

@@ -26,6 +26,8 @@ import healthRoutes from "../routes/Health.routes.js";
 
 const app = express();
 
+app.set("trust proxy", 1);
+
 // cors
 app.use(
   cors({
