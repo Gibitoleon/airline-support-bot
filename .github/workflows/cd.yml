@@ -54,6 +54,8 @@ jobs:
         with:
           context: ./frontend
           push: true
+          build-args: |
+            VITE_API_URL=https://airline-support-backend.onrender.com/api/v1
           tags: |
             gableo/airline-support:frontend
             gableo/airline-support:frontend-${{ github.sha }}
