@@ -25,7 +25,6 @@ import DocumentDomainChart from "../components/charts/DocumentDomainChart.jsx";
 import { chartThemes as CHART } from "../themes/chart.themes.js";
 import useDashboard from "../customhooks/useDashboard.js";
 
-/* ---------- Chart.js registration ---------- */
 ChartJS.register(
   CategoryScale,
   LinearScale,
