@@ -14,12 +14,25 @@ const login = async (req, res) => {
   } = authorization;
   SessionService.createAuthenticatedSession(req, user, authorization);
 
-  return res.status(StatusCodes.OK).json({
-    message: "Login successful",
-    user: { userid: user.id, role: name, email: user.email },
+  req.session.save((error) => {
+    if (error) {
+      console.error("SESSION SAVE ERROR:", error);
+
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message: "Failed to establish session",
+      });
+    }
+
+    return res.status(StatusCodes.OK).json({
+      message: "Login successful",
+      user: {
+        userid: user.id,
+        role: name,
+        email: user.email,
+      },
+    });
   });
 };
-
 const logout = async (req, res) => {
   await SessionService.destroySession(req);
   res.status(StatusCodes.OK).json({
