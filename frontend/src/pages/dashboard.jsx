@@ -24,7 +24,7 @@ import DoughnutChart from "../components/charts/DoughnutChart.jsx";
 import DocumentDomainChart from "../components/charts/DocumentDomainChart.jsx";
 import { chartThemes as CHART } from "../themes/chart.themes.js";
 import useDashboard from "../customhooks/useDashboard.js";
-
+// chart registration
 ChartJS.register(
   CategoryScale,
   LinearScale,
