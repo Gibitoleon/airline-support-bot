@@ -1,5 +1,6 @@
 import json
-
+import os
+from dotenv import load_dotenv
 from flask import Flask, jsonify, request
 from jobs.document_jobs import ingest_document
 from jobs.document_jobs import delete_document_vectors
@@ -9,7 +10,8 @@ from rag.embedding_models.embedding_factory import EmbeddingFactory
 from rag.llms.llama import LlamaManager
 from rag.llms.gemini import GeminiManager
 from rag.llms.groq import GroqManager
-from rag.rerankers.cross_encoder import MiniLMReranker
+##from rag.rerankers.cross_encoder import MiniLMReranker
+from rag.rerankers.jina_reranker import JinaReranker
 from rag.retrieval import RetrievalService
 from rag.vector_store.chroma_store import ChromaVectorStore
 from services.documentservice import DocumentService
@@ -17,9 +19,22 @@ from agents.orchestrator import AgentOrchestrator
 app = Flask(__name__)
 
 
+import logging
+import sys
+
+logging.basicConfig(
+    level=logging.INFO,
+    stream=sys.stdout,
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+    force=True
+)
+
+
+load_dotenv()
+logger = logging.getLogger(__name__)
 embedding_model = EmbeddingFactory.create_embedding_model("gemini")
 
-reranker = MiniLMReranker()
+reranker = JinaReranker()
 
 vector_store = ChromaVectorStore(collection_name="kenya_airways_gemini")
 
@@ -76,6 +91,9 @@ def retrieve():
             "status": "ERROR",
             "message": "An error occurred while processing your request."
         }), 500
+    except Exception:
+     logger.exception("Retrieval failed")
+     raise
     """
     data = request.get_json()
 
@@ -180,4 +198,8 @@ def delete_document(documentId):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", "5001")),
+        debug=False
+    )
