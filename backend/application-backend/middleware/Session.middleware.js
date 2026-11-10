@@ -18,8 +18,9 @@ const getSessionData = (req, res, next) => {
 const getCustomerSession = (req, res, next) => {
   if (SessionService.hasNoSessionData(req)) {
     SessionService.createAnonymousSession(req);
+    console.log("Created anonymous session for customer:");
   }
-
+  console.log("session exists for customer:");
   SessionService.setUserFromSession(req);
 
   next();

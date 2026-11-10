@@ -10,6 +10,7 @@ import Documents from "./pages/Document.jsx";
 import Permissions from "./pages/Permission.jsx";
 import Groups from "./pages/Group.jsx";
 import Feedback from "./pages/Feedback.jsx";
+import StaffChat from "./pages/StaffChat.jsx";
 import Login from "./pages/Login.jsx";
 import UserDetail from "./components/user/UserDetail.jsx";
 import DocumentDetails from "./components/documents/DocumentDetails.jsx";
@@ -42,7 +43,6 @@ const AdminLayout = () => {
       />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        {/* Mobile top bar */}
         <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-border bg-surface/80 px-4 py-3 backdrop-blur-xl lg:hidden">
           <button
             type="button"
@@ -57,7 +57,6 @@ const AdminLayout = () => {
 
         <main className="relative min-w-0 flex-1 p-6 lg:p-10">
           <div className="mx-auto w-full max-w-[1600px]">
-            {/* This is where the Admin pages get injected */}
             <Outlet />
           </div>
         </main>
@@ -68,39 +67,51 @@ const AdminLayout = () => {
 
 /* ---------- Main App & Routing ---------- */
 function App() {
-  // We still track the full user object here
   const user = useAuthStore((state) => state.user);
 
-  // We use the role to protect the admin routes
   const isAdmin = user?.role === "KNOWLEDGE_BASE_ADMIN";
+
+  const isStaff = user?.role === "STAFF";
 
   return (
     <>
       <AppToaster />
 
       <Routes>
-        {/* Public & Staff Routes */}
+        {/* Public */}
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/accept-invitation" element={<AcceptInvitation />} />
 
-        {/* Admin Routes (Protected) */}
-        {/* If they are not an Admin, we redirect them. 
-            If they are logged in as Staff, they get sent back to the Landing page.
-            If they are logged out, they get sent to Login. */}
+        {/* ---------- Staff Chat — STAFF ONLY ---------- */}
+        <Route
+          path="/staff/chat"
+          element={
+            isStaff ? (
+              <StaffChat />
+            ) : user ? (
+              // logged in but wrong role → send to their correct home
+              <Navigate to={isAdmin ? "/admin/dashboard" : "/"} replace />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        {/* ---------- Admin Routes — ADMIN ONLY ---------- */}
         <Route
           path="/admin"
           element={
             isAdmin ? (
               <AdminLayout />
             ) : user ? (
-              <Navigate to="/" replace />
+              // logged in but not admin → staff to their chat, others to landing
+              <Navigate to={isStaff ? "/staff/chat" : "/"} replace />
             ) : (
               <Navigate to="/login" replace />
             )
           }
         >
-          {/* Nested Admin Routes */}
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="groups" element={<Groups />} />
@@ -113,7 +124,6 @@ function App() {
           <Route path="feedbacks" element={<Feedback />} />
         </Route>
 
-        {/* Catch-all fallback */}
         <Route path="*" element={<Landing />} />
       </Routes>
     </>
