@@ -1,3 +1,3 @@
-from .cross_encoder import MiniLMReranker
+#from .cross_encoder import MiniLMReranker
 
-reranker = MiniLMReranker()
+#reranker = MiniLMReranker()
