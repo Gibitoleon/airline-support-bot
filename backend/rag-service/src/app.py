@@ -54,7 +54,6 @@ def health_check():
         "status": "healthy",
         "service": "rag-service"
     }), 200
-@app.route("/retrieve", methods=["POST"])
 
 @app.route("/retrieve", methods=["POST"])
 def retrieve():
@@ -93,7 +92,11 @@ def retrieve():
         }), 500
     except Exception:
      logger.exception("Retrieval failed")
-     raise
+     return jsonify({
+        "status": "ERROR",
+        "message": "RAG service failed to process the request."
+    }), 503
+     
     """
     data = request.get_json()
 
