@@ -3,9 +3,7 @@ FROM python:3.12-slim
 WORKDIR /app
 
 COPY requirements.txt .
-
-RUN pip install --no-cache-dir --timeout=120 --retries=10 \
-    -r requirements.txt
+RUN pip install --no-cache-dir --timeout=120 --retries=10 -r requirements.txt
 
 COPY src/ ./src/
 COPY data/raw/ ./data/raw/
@@ -16,7 +14,6 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
 EXPOSE 5001
-
 WORKDIR /app/src
 
-CMD ["python", "app.py"]
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-5001} --workers 1 --threads 4 --timeout 120 app:app"]
