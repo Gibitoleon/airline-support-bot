@@ -2,6 +2,7 @@ services:
   frontend:
     build:
       context: ./frontend
+      dockerfile: Dockerfile.dev
     container_name: airline-frontend
     ports:
       - "5173:5173"
@@ -13,10 +14,11 @@ services:
     build:
       context: ./backend/application-backend
     container_name: airline-backend
-    command: npm run dev
+    command: node server/index.js
     env_file:
       - ./backend/application-backend/.env.development
     environment:
+      NODE_ENV: development
       RAG_SERVICE_URL: http://rag-service:5001
     ports:
       - "3000:3000"
@@ -24,14 +26,36 @@ services:
       - rag-service
     restart: unless-stopped
 
+  email-worker:
+    build:
+      context: ./backend/application-backend
+    container_name: airline-email-worker
+    command: node workers/email.worker.js
+    env_file:
+      - ./backend/application-backend/.env.development
+    restart: unless-stopped
+
   rag-service:
     build:
       context: ./backend/rag-service
+      dockerfile: Dockerfile.dev
     container_name: airline-rag-service
     env_file:
       - ./backend/rag-service/.env
     ports:
       - "5001:5001"
+    volumes:
+      - ./backend/rag-service/data/processed/vector_store:/app/data/processed/vector_store
+    restart: unless-stopped
+
+  rag-worker:
+    build:
+      context: ./backend/rag-service
+      dockerfile: Dockerfile.dev
+    container_name: airline-rag-worker
+    command: python -m worker.worker
+    env_file:
+      - ./backend/rag-service/.env
     volumes:
       - ./backend/rag-service/data/processed/vector_store:/app/data/processed/vector_store
     restart: unless-stopped
