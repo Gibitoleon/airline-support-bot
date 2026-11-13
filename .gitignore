@@ -1,2 +1,5 @@
 data/
 evaluation_artifacts/
+.env
+.env.*
+!.env.example
