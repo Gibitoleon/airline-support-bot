@@ -4,6 +4,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.dev
     container_name: airline-frontend
+    env_file:
+      - ./frontend/.env
     ports:
       - "5173:5173"
     depends_on:
@@ -13,6 +15,7 @@ services:
   application-backend:
     build:
       context: ./backend/application-backend
+      dockerfile: Dockerfile
     container_name: airline-backend
     command: node server/index.js
     env_file:
@@ -29,10 +32,16 @@ services:
   email-worker:
     build:
       context: ./backend/application-backend
+      dockerfile: Dockerfile
     container_name: airline-email-worker
     command: node workers/email.worker.js
     env_file:
       - ./backend/application-backend/.env
+    environment:
+      NODE_ENV: development
+      RAG_SERVICE_URL: http://rag-service:5001
+    depends_on:
+      - rag-service
     restart: unless-stopped
 
   rag-service:
