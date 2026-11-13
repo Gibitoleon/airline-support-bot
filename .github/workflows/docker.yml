@@ -36,7 +36,6 @@ jobs:
           rm vector_store.zip
 
           echo "Vector store downloaded and extracted successfully."
-
           ls -la backend/rag-service/data/processed/vector_store
 
       # 3. Build frontend image
@@ -129,21 +128,25 @@ jobs:
       - name: Check RAG service startup
         run: |
           for i in {1..30}; do
+
             if [ "$(docker inspect -f '{{.State.Running}}' rag-service)" != "true" ]; then
               echo "RAG container stopped unexpectedly."
               docker logs rag-service
               exit 1
             fi
 
-            if docker logs rag-service 2>&1 | grep -q "Running on"; then
-              echo "RAG service started successfully."
+            if docker exec rag-service python -c \
+              "import socket; s=socket.create_connection(('127.0.0.1', 5001), timeout=2); s.close()" \
+              2>/dev/null; then
+
+              echo "RAG service is listening on port 5001."
               exit 0
             fi
 
             sleep 2
           done
 
-          echo "RAG service did not start within 60 seconds."
+          echo "RAG service did not become available within 60 seconds."
           docker logs rag-service
           exit 1
 
@@ -169,15 +172,16 @@ jobs:
       - name: Check backend startup
         run: |
           for i in {1..30}; do
-            if docker logs application-backend 2>&1 | grep -q "Server is running on port 3000"; then
-              echo "Backend started successfully."
-              exit 0
-            fi
 
             if [ "$(docker inspect -f '{{.State.Running}}' application-backend)" != "true" ]; then
               echo "Backend container stopped unexpectedly."
               docker logs application-backend
               exit 1
+            fi
+
+            if docker logs application-backend 2>&1 | grep -q "Server is running on port 3000"; then
+              echo "Backend started successfully."
+              exit 0
             fi
 
             sleep 2
@@ -193,6 +197,7 @@ jobs:
           for i in {1..30}; do
             if curl --fail --silent --show-error \
               http://localhost:3000/api/v1/health/gethealth; then
+
               echo "Backend and RAG health checks passed."
               exit 0
             fi
@@ -219,6 +224,13 @@ jobs:
       - name: Check frontend availability
         run: |
           for i in {1..30}; do
+
+            if [ "$(docker inspect -f '{{.State.Running}}' frontend)" != "true" ]; then
+              echo "Frontend container stopped unexpectedly."
+              docker logs frontend
+              exit 1
+            fi
+
             if curl --fail --silent http://localhost:8080; then
               echo "Frontend is responding."
               exit 0
