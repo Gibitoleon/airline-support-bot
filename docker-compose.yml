@@ -16,12 +16,12 @@ services:
     container_name: airline-backend
     command: node server/index.js
     env_file:
-      - ./backend/application-backend/.env.development
+      - ./backend/application-backend/.env
     environment:
       NODE_ENV: development
       RAG_SERVICE_URL: http://rag-service:5001
     ports:
-      - "3000:3000"
+      - "${BACKEND_PORT:-3000}:3000"
     depends_on:
       - rag-service
     restart: unless-stopped
@@ -32,7 +32,7 @@ services:
     container_name: airline-email-worker
     command: node workers/email.worker.js
     env_file:
-      - ./backend/application-backend/.env.development
+      - ./backend/application-backend/.env
     restart: unless-stopped
 
   rag-service:
@@ -43,7 +43,7 @@ services:
     env_file:
       - ./backend/rag-service/.env
     ports:
-      - "5001:5001"
+      - "${RAG_PORT:-5001}:5001"
     volumes:
       - ./backend/rag-service/data/processed/vector_store:/app/data/processed/vector_store
     restart: unless-stopped
