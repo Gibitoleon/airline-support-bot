@@ -1,30 +1,13 @@
-// Seeder script to populate the 'users' table with initial data
 import bcrypt from "bcrypt";
 
 export default {
   async up(queryInterface) {
-    const {
-      INITIAL_ACCOUNT_PASSWORD,
-      INITIAL_STAFF_1_EMAIL,
-      INITIAL_STAFF_2_EMAIL,
-      INITIAL_ADMIN_EMAIL,
-    } = process.env;
+    // Local dummy account details
+    const INITIAL_ACCOUNT_PASSWORD = "LocalKQ123!";
 
-    // Validate required environment variables
-    const requiredVariables = {
-      INITIAL_ACCOUNT_PASSWORD,
-      INITIAL_STAFF_1_EMAIL,
-      INITIAL_STAFF_2_EMAIL,
-      INITIAL_ADMIN_EMAIL,
-    };
-
-    for (const [key, value] of Object.entries(requiredVariables)) {
-      if (!value?.trim()) {
-        throw new Error(
-          `${key} must be configured before running the users seeder.`,
-        );
-      }
-    }
+    const INITIAL_STAFF_1_EMAIL = "staff1.local@example.test";
+    const INITIAL_STAFF_2_EMAIL = "staff2.local@example.test";
+    const INITIAL_ADMIN_EMAIL = "kba.local@example.test";
 
     // Hash the shared initial password
     const passwordHash = await bcrypt.hash(INITIAL_ACCOUNT_PASSWORD, 10);
@@ -79,39 +62,40 @@ export default {
       },
     );
 
-    if (existingUsers.length > 0) {
-      throw new Error(
-        `Some initial accounts already exist: ${existingUsers
-          .map((user) => user.email)
-          .join(", ")}. No accounts were inserted.`,
-      );
+    const existingEmails = new Set(
+      existingUsers.map((user) => user.email.toLowerCase()),
+    );
+
+    const newAccounts = accounts.filter(
+      (account) => !existingEmails.has(account.email.toLowerCase()),
+    );
+
+    if (newAccounts.length === 0) {
+      console.log("All initial dummy accounts already exist.");
+      return;
     }
 
     const now = new Date();
 
     await queryInterface.bulkInsert(
       "users",
-      accounts.map((account) => ({
+      newAccounts.map((account) => ({
         ...account,
         password_hash: passwordHash,
         created_at: now,
         updated_at: now,
       })),
     );
+
+    console.log(`Created ${newAccounts.length} dummy account(s).`);
   },
 
   async down(queryInterface) {
     const emails = [
-      process.env.INITIAL_STAFF_1_EMAIL,
-      process.env.INITIAL_STAFF_2_EMAIL,
-      process.env.INITIAL_ADMIN_EMAIL,
+      "staff1.local@example.test",
+      "staff2.local@example.test",
+      "kba.local@example.test",
     ];
-
-    if (emails.some((email) => !email?.trim())) {
-      throw new Error(
-        "Initial account emails must be configured before reverting the users seeder.",
-      );
-    }
 
     await queryInterface.bulkDelete("users", {
       email: emails,
