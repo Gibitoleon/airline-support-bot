@@ -4,6 +4,7 @@ import { Loader2, MessageCircle, Send, Star, X } from "lucide-react";
 import useChatQuery from "../../customhooks/useChatQuery.js";
 import useChatHistory from "../../customhooks/useChatHistory.js";
 import useCreateFeedback from "../../customhooks/useCreateFeedback.js";
+import FetchApi from "../../utils/fetch.js";
 
 const WELCOME_MESSAGE = {
   id: "welcome",
@@ -15,8 +16,11 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([WELCOME_MESSAGE]);
 
+  /* ---------- RAG warm-up state ---------- */
+  // null = checking, false = warming, true = ready
+  const [ragReady, setRagReady] = useState(null);
+
   /* ---------- Feedback State ---------- */
-  // Stores the specific message object we are currently rating
   const [feedbackMessage, setFeedbackMessage] = useState(null);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
@@ -24,7 +28,6 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
   const { submitFeedback, isPending: isSubmittingFeedback } = useCreateFeedback(
     {
       onSuccess: () => {
-        // Close feedback view and reset form on success
         setFeedbackMessage(null);
         setRating(0);
         setComment("");
@@ -45,6 +48,58 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
     });
   }, [history]);
 
+  /* ---------- Warm-up polling (only while widget open) ---------- */
+  useEffect(() => {
+    if (!isOpen) {
+      // Reset so reopening re-checks — RAG may have slept while we were closed.
+      setRagReady(null);
+      return;
+    }
+
+    let cancelled = false;
+    let intervalId = null;
+    const startedAt = Date.now();
+
+    const check = async () => {
+      if (cancelled) return "cancelled";
+      if (Date.now() - startedAt > 180_000) {
+        // 3-minute bailout — RAG isn't coming up.
+        if (intervalId) clearInterval(intervalId);
+        return "timeout";
+      }
+      try {
+        const data = await FetchApi("/health/gethealth", "GET");
+        if (cancelled) return "cancelled";
+        if (data.services?.rag === "healthy") {
+          setRagReady(true);
+          if (intervalId) clearInterval(intervalId);
+          return "ready";
+        }
+        setRagReady(false);
+        return "not-ready";
+      } catch {
+        if (cancelled) return "cancelled";
+        setRagReady(false);
+        return "not-ready";
+      }
+    };
+
+    (async () => {
+      const result = await check();
+      if (cancelled || result === "ready" || result === "cancelled") return;
+      // Not ready yet — start polling every 5s until healthy.
+      intervalId = setInterval(async () => {
+        const r = await check();
+        if (r === "ready" && intervalId) clearInterval(intervalId);
+      }, 5000);
+    })();
+
+    return () => {
+      cancelled = true;
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [isOpen]);
+
   /* ---------- Send new queries ---------- */
   const { sendQuery, isPending } = useChatQuery({
     onSuccess: (data) => {
@@ -54,7 +109,6 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
           id: `a-${Date.now()}`,
           role: "assistant",
           text: data?.response ?? "Sorry, I couldn't generate a response.",
-          // Extract the queryId sent from the backend so we can rate this answer
           queryId: data?.queryId,
         },
       ]);
@@ -74,7 +128,8 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
 
   const handleSend = (e) => {
     e.preventDefault();
-    if (isPending || feedbackMessage) return;
+    // Guard: don't send while RAG is warming or a request is in flight.
+    if (isPending || feedbackMessage || ragReady !== true) return;
 
     const text = input.trim();
     if (!text) return;
@@ -84,14 +139,12 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
       { id: `q-${Date.now()}`, role: "user", text },
     ]);
     setInput("");
-
     sendQuery({ query: text });
   };
 
   const handleFeedbackSubmit = (e) => {
     e.preventDefault();
     if (!rating) return;
-
     submitFeedback({
       queryId: feedbackMessage.queryId,
       rating,
@@ -99,11 +152,25 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
     });
   };
 
-  // Helper to close the widget and reset feedback state
   const handleClose = () => {
     onOpenChange(false);
     setFeedbackMessage(null);
   };
+
+  /* ---------- Header status helpers ---------- */
+  const statusDot =
+    ragReady === true
+      ? "bg-emerald-400"
+      : ragReady === false
+        ? "bg-amber-400"
+        : "bg-gray-400";
+
+  const statusLabel =
+    ragReady === true
+      ? "Online"
+      : ragReady === false
+        ? "Warming up…"
+        : "Connecting…";
 
   return (
     <>
@@ -134,8 +201,10 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
                 Kenya Airways Support
               </p>
               <p className="flex items-center gap-1.5 truncate text-xs text-muted">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                Online
+                <span
+                  className={`inline-block h-1.5 w-1.5 rounded-full ${statusDot}`}
+                />
+                {statusLabel}
               </p>
             </div>
             <button
@@ -148,7 +217,7 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
             </button>
           </div>
 
-          {/* Feedback View (Replaces chat when active) */}
+          {/* Feedback View */}
           {feedbackMessage ? (
             <div className="flex flex-1 flex-col overflow-y-auto p-6 animate-in fade-in slide-in-from-bottom-2 duration-200">
               <h3 className="text-center text-base font-semibold text-text">
@@ -162,7 +231,6 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
                 onSubmit={handleFeedbackSubmit}
                 className="mt-6 flex flex-1 flex-col"
               >
-                {/* 5-Star Rating */}
                 <div className="flex justify-center gap-2">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <button
@@ -182,7 +250,6 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
                   ))}
                 </div>
 
-                {/* Comment Box */}
                 <div className="mt-6 flex-1">
                   <label htmlFor="feedback-comment" className="sr-only">
                     Comment
@@ -196,7 +263,6 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
                   />
                 </div>
 
-                {/* Actions */}
                 <div className="mt-4 flex flex-col gap-2">
                   <button
                     type="submit"
@@ -220,10 +286,9 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
               </form>
             </div>
           ) : (
-            /* Chat View (Default) */
+            /* Chat View */
             <>
               <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
-                {/* History skeleton */}
                 {historyLoading && (
                   <div className="space-y-3">
                     <div className="flex justify-start">
@@ -235,7 +300,6 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
                   </div>
                 )}
 
-                {/* Message list */}
                 {messages.map((m) => (
                   <div
                     key={m.id}
@@ -256,7 +320,6 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
                       {m.text}
                     </div>
 
-                    {/* Feedback trigger button — only shows if the message has a queryId */}
                     {m.role === "assistant" && m.queryId && (
                       <button
                         onClick={() => setFeedbackMessage(m)}
@@ -269,7 +332,6 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
                   </div>
                 ))}
 
-                {/* Typing indicator */}
                 {isPending && (
                   <div className="flex justify-start">
                     <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-md border border-border bg-elevated px-4 py-3">
@@ -281,6 +343,18 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
                 )}
               </div>
 
+              {/* Warm-up banner (only when not ready) */}
+              {ragReady !== true && (
+                <div className="flex items-center gap-2 border-t border-border bg-amber-50/60 px-4 py-2.5 text-xs text-amber-700">
+                  <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin" />
+                  <span>
+                    {ragReady === false
+                      ? "Warming up the assistant — this can take up to a minute on first use."
+                      : "Connecting…"}
+                  </span>
+                </div>
+              )}
+
               {/* Input Form */}
               <form
                 onSubmit={handleSend}
@@ -290,13 +364,15 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  disabled={isPending}
-                  placeholder="Ask a question..."
+                  disabled={isPending || ragReady !== true}
+                  placeholder={
+                    ragReady === true ? "Ask a question..." : "Warming up…"
+                  }
                   className="min-w-0 flex-1 rounded-lg border border-border bg-elevated px-3 py-2.5 text-sm text-text outline-none transition placeholder:text-muted focus:border-primary/50 focus:ring-2 focus:ring-ring/30 disabled:cursor-not-allowed disabled:opacity-60"
                 />
                 <button
                   type="submit"
-                  disabled={isPending || !input.trim()}
+                  disabled={isPending || !input.trim() || ragReady !== true}
                   aria-label="Send"
                   className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
                 >
