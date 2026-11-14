@@ -1,21 +1,10 @@
-// Seeder script to assign initial staff accounts to the CUSTOMER_SERVICE_AGENT group
-
 export default {
   async up(queryInterface) {
-    const { INITIAL_STAFF_1_EMAIL, INITIAL_STAFF_2_EMAIL } = process.env;
+    // Local dummy staff account details
+    const INITIAL_STAFF_1_EMAIL = "staff1.local@example.test";
+    const INITIAL_STAFF_2_EMAIL = "staff2.local@example.test";
 
     const staffEmails = [INITIAL_STAFF_1_EMAIL, INITIAL_STAFF_2_EMAIL];
-
-    // Validate required environment variables
-    if (staffEmails.some((email) => !email?.trim())) {
-      throw new Error(
-        "Both initial staff email addresses must be configured before running the user groups seeder.",
-      );
-    }
-
-    if (INITIAL_STAFF_1_EMAIL === INITIAL_STAFF_2_EMAIL) {
-      throw new Error("Initial staff email addresses must be different.");
-    }
 
     // Retrieve the initial staff accounts
     const [users] = await queryInterface.sequelize.query(
@@ -29,7 +18,7 @@ export default {
 
     if (users.length !== 2) {
       throw new Error(
-        "Both initial staff accounts must exist before assigning them to a group.",
+        "Both initial dummy staff accounts must exist before assigning them to a group.",
       );
     }
 
@@ -53,7 +42,7 @@ export default {
 
     const userIds = users.map((user) => user.id);
 
-    // Prevent duplicate group assignments
+    // Check for existing group assignments
     const [existingAssignments] = await queryInterface.sequelize.query(
       `SELECT user_id
        FROM user_groups
@@ -67,36 +56,42 @@ export default {
       },
     );
 
-    if (existingAssignments.length > 0) {
-      throw new Error(
-        "One or more initial staff accounts are already assigned to the CUSTOMER_SERVICE_AGENT group.",
-      );
+    const assignedUserIds = new Set(
+      existingAssignments.map((assignment) => assignment.user_id),
+    );
+
+    // Assign only staff accounts that are not already members
+    const newAssignments = users.filter(
+      (user) => !assignedUserIds.has(user.id),
+    );
+
+    if (newAssignments.length === 0) {
+      console.log("Both dummy staff accounts are already assigned.");
+      return;
     }
 
     const now = new Date();
 
     await queryInterface.bulkInsert(
       "user_groups",
-      users.map((user) => ({
+      newAssignments.map((user) => ({
         user_id: user.id,
         group_id: customerServiceGroup.id,
         created_at: now,
         updated_at: now,
       })),
     );
+
+    console.log(
+      `Created ${newAssignments.length} dummy staff group assignment(s).`,
+    );
   },
 
   async down(queryInterface) {
     const staffEmails = [
-      process.env.INITIAL_STAFF_1_EMAIL,
-      process.env.INITIAL_STAFF_2_EMAIL,
+      "staff1.local@example.test",
+      "staff2.local@example.test",
     ];
-
-    if (staffEmails.some((email) => !email?.trim())) {
-      throw new Error(
-        "Both initial staff email addresses must be configured before reverting the user groups seeder.",
-      );
-    }
 
     const [users] = await queryInterface.sequelize.query(
       `SELECT id
@@ -108,8 +103,6 @@ export default {
     );
 
     if (users.length === 0) return;
-
-    const userIds = users.map((user) => user.id);
 
     const [groups] = await queryInterface.sequelize.query(
       `SELECT id
@@ -125,7 +118,7 @@ export default {
     if (!groups[0]) return;
 
     await queryInterface.bulkDelete("user_groups", {
-      user_id: userIds,
+      user_id: users.map((user) => user.id),
       group_id: groups[0].id,
     });
   },
