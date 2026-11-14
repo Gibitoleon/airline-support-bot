@@ -4,7 +4,7 @@ import { Loader2, MessageCircle, Send, Star, X } from "lucide-react";
 import useChatQuery from "../../customhooks/useChatQuery.js";
 import useChatHistory from "../../customhooks/useChatHistory.js";
 import useCreateFeedback from "../../customhooks/useCreateFeedback.js";
-import FetchApi from "../../utils/fetch.js";
+import useRagHealth from "../../customhooks/useRagHealth.js";
 
 const WELCOME_MESSAGE = {
   id: "welcome",
@@ -16,9 +16,13 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([WELCOME_MESSAGE]);
 
-  /* ---------- RAG warm-up state ---------- */
-  // null = checking, false = warming, true = ready
-  const [ragReady, setRagReady] = useState(null);
+  /* ---------- RAG health (React Query) ---------- */
+  const { data: ragHealth, isLoading: ragLoading } = useRagHealth({
+    enabled: isOpen,
+  });
+
+  const ragReady = ragHealth?.services?.rag === "healthy";
+  const warming = isOpen && !ragLoading && !ragReady;
 
   /* ---------- Feedback State ---------- */
   const [feedbackMessage, setFeedbackMessage] = useState(null);
@@ -48,58 +52,6 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
     });
   }, [history]);
 
-  /* ---------- Warm-up polling (only while widget open) ---------- */
-  useEffect(() => {
-    if (!isOpen) {
-      // Reset so reopening re-checks — RAG may have slept while we were closed.
-      setRagReady(null);
-      return;
-    }
-
-    let cancelled = false;
-    let intervalId = null;
-    const startedAt = Date.now();
-
-    const check = async () => {
-      if (cancelled) return "cancelled";
-      if (Date.now() - startedAt > 180_000) {
-        // 3-minute bailout — RAG isn't coming up.
-        if (intervalId) clearInterval(intervalId);
-        return "timeout";
-      }
-      try {
-        const data = await FetchApi("/health/gethealth", "GET");
-        if (cancelled) return "cancelled";
-        if (data.services?.rag === "healthy") {
-          setRagReady(true);
-          if (intervalId) clearInterval(intervalId);
-          return "ready";
-        }
-        setRagReady(false);
-        return "not-ready";
-      } catch {
-        if (cancelled) return "cancelled";
-        setRagReady(false);
-        return "not-ready";
-      }
-    };
-
-    (async () => {
-      const result = await check();
-      if (cancelled || result === "ready" || result === "cancelled") return;
-      // Not ready yet — start polling every 5s until healthy.
-      intervalId = setInterval(async () => {
-        const r = await check();
-        if (r === "ready" && intervalId) clearInterval(intervalId);
-      }, 5000);
-    })();
-
-    return () => {
-      cancelled = true;
-      if (intervalId) clearInterval(intervalId);
-    };
-  }, [isOpen]);
-
   /* ---------- Send new queries ---------- */
   const { sendQuery, isPending } = useChatQuery({
     onSuccess: (data) => {
@@ -128,8 +80,7 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
 
   const handleSend = (e) => {
     e.preventDefault();
-    // Guard: don't send while RAG is warming or a request is in flight.
-    if (isPending || feedbackMessage || ragReady !== true) return;
+    if (isPending || feedbackMessage || !ragReady) return;
 
     const text = input.trim();
     if (!text) return;
@@ -158,19 +109,17 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
   };
 
   /* ---------- Header status helpers ---------- */
-  const statusDot =
-    ragReady === true
-      ? "bg-emerald-400"
-      : ragReady === false
-        ? "bg-amber-400"
-        : "bg-gray-400";
+  const statusDot = ragReady
+    ? "bg-emerald-400"
+    : warming
+      ? "bg-amber-400"
+      : "bg-gray-400";
 
-  const statusLabel =
-    ragReady === true
-      ? "Online"
-      : ragReady === false
-        ? "Warming up…"
-        : "Connecting…";
+  const statusLabel = ragReady
+    ? "Online"
+    : warming
+      ? "Warming up…"
+      : "Connecting…";
 
   return (
     <>
@@ -344,11 +293,11 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
               </div>
 
               {/* Warm-up banner (only when not ready) */}
-              {ragReady !== true && (
+              {!ragReady && (
                 <div className="flex items-center gap-2 border-t border-border bg-amber-50/60 px-4 py-2.5 text-xs text-amber-700">
                   <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin" />
                   <span>
-                    {ragReady === false
+                    {warming
                       ? "Warming up the assistant — this can take up to a minute on first use."
                       : "Connecting…"}
                   </span>
@@ -364,15 +313,13 @@ const ChatWidget = ({ isOpen, onOpenChange }) => {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  disabled={isPending || ragReady !== true}
-                  placeholder={
-                    ragReady === true ? "Ask a question..." : "Warming up…"
-                  }
+                  disabled={isPending || !ragReady}
+                  placeholder={ragReady ? "Ask a question..." : "Warming up…"}
                   className="min-w-0 flex-1 rounded-lg border border-border bg-elevated px-3 py-2.5 text-sm text-text outline-none transition placeholder:text-muted focus:border-primary/50 focus:ring-2 focus:ring-ring/30 disabled:cursor-not-allowed disabled:opacity-60"
                 />
                 <button
                   type="submit"
-                  disabled={isPending || !input.trim() || ragReady !== true}
+                  disabled={isPending || !input.trim() || !ragReady}
                   aria-label="Send"
                   className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
                 >
