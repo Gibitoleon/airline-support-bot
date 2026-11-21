@@ -86,7 +86,7 @@ The project aims to:
 
 ## System Architecture
 
-The application consists of five containerised services:
+The local development application consists of five containerised services:
 
 | Service             | Responsibility                                                           |
 | ------------------- | ------------------------------------------------------------------------ |
@@ -107,6 +107,24 @@ The application uses Supabase PostgreSQL and cloud-hosted Redis for its external
 **Access the deployed application:**
 
 https://airline-support-frontend.onrender.com/
+
+## Evaluation Access
+
+The deployed application provides evaluation accounts for testing staff and knowledge base administration functionality.
+
+| Role                         | Email                       |
+| ---------------------------- | --------------------------- |
+| Staff                        | `staff1.local@example.test` |
+| Staff                        | `staff2.local@example.test` |
+| Knowledge Base Administrator | `kba.local@example.test`    |
+
+All three evaluation accounts share the same initial password, which is provided separately to authorised evaluators.
+
+**Staff and Administrator Login Portal:**
+
+https://airline-support-frontend.onrender.com/login
+
+These accounts are intended for project evaluation purposes only.
 
 ## Local Development and Setup
 
